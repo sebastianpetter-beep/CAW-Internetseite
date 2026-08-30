@@ -807,3 +807,102 @@ html[data-view="mobile"] body.view-mobile .session-hero-overlay{left:20px!import
 html[data-view="mobile"] body.view-mobile .session-hero-overlay h1{font-size:44px!important}
 html[data-view="mobile"] body.view-mobile .photo-mosaic{grid-template-columns:1fr!important;grid-auto-rows:auto!important}
 html[data-view="mobile"] body.view-mobile .photo-mosaic img{height:auto!important;aspect-ratio:4/3}
+
+/* ===== Session 2026/27 · Anke I. & Jörg II. ===== */
+.royal2627-page{background:#fff;color:#2a1114}
+.royal2627-wrap{width:min(1180px,calc(100% - 48px));margin:0 auto}
+.royal2627-hero{position:relative;min-height:760px;height:calc(100vh - 116px);max-height:900px;overflow:hidden;background:#7b1016}
+.royal2627-hero>img{width:100%;height:100%;object-fit:cover;object-position:center 38%;display:block}
+.royal2627-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(44,4,8,.86) 0%,rgba(44,4,8,.58) 37%,rgba(44,4,8,.08) 68%),linear-gradient(0deg,rgba(44,4,8,.36),transparent 45%)}
+.royal2627-hero-copy{position:absolute;left:max(5vw,48px);bottom:11%;width:min(720px,60vw);color:#fff}
+.royal2627-hero-copy h1{font-family:Georgia,serif;font-size:clamp(56px,6vw,94px);line-height:.98;margin:14px 0 14px;text-shadow:0 4px 24px rgba(0,0,0,.2)}
+.royal2627-motto{font-size:28px;margin:0 0 26px;color:#f4cf64;font-weight:700}
+.royal2627-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.royal2627-primary,.royal2627-secondary{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border-radius:999px;font-weight:800;transition:.2s ease}
+.royal2627-primary{padding:14px 20px;background:linear-gradient(135deg,#f1bd32,#ffe48a);color:#4e0a12;box-shadow:0 12px 30px rgba(0,0,0,.14)}
+.royal2627-primary:hover{transform:translateY(-2px)}
+.royal2627-secondary{padding:13px 18px;background:rgba(255,255,255,.94);color:#711223}
+.royal2627-intro,.royal2627-people,.royal2627-photo-feature,.royal2627-hofstaat,.royal2627-music,.royal2627-gallery{padding:84px 0}
+.royal2627-intro{background:#fffaf4}
+.royal2627-intro-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:58px;align-items:center}
+.royal2627-intro h2,.royal2627-heading h2,.royal2627-photo-feature h2,.royal2627-luc h2,.royal2627-music h2,.royal2627-gallery h2,.royal2627-ending h2{font-family:Georgia,serif;color:#6f0f1b;font-size:clamp(38px,4vw,62px);line-height:1.03;margin:10px 0 24px}
+.royal2627-lead{font-size:22px;line-height:1.65}
+.royal2627-intro p,.royal2627-photo-feature p,.royal2627-hof-copy p,.royal2627-luc p,.royal2627-music p{font-size:17px;line-height:1.75}
+.royal2627-quote-card{background:#7b1016;color:#fff;padding:36px;border-radius:28px;box-shadow:0 24px 55px rgba(83,8,19,.18)}
+.royal2627-quote-card>span{color:#f4cf64;text-transform:uppercase;letter-spacing:.16em;font-size:12px;font-weight:800}
+.royal2627-quote-card blockquote{font-family:Georgia,serif;font-size:30px;line-height:1.25;margin:18px 0}
+.royal2627-quote-card p{color:#f9eaea;line-height:1.65}
+.royal2627-people{background:#fff}
+.royal2627-heading{text-align:center;max-width:840px;margin:0 auto 42px}
+.royal2627-person-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.royal2627-person-card{background:#fffaf5;border:1px solid #efddd1;border-radius:26px;padding:34px;box-shadow:0 14px 42px rgba(80,16,22,.06)}
+.royal2627-person-name small{display:block;color:#b17d17;font-weight:900;text-transform:uppercase;letter-spacing:.15em}
+.royal2627-person-name h3,.royal2627-hof-copy h3{font-family:Georgia,serif;color:#74101d;font-size:38px;margin:5px 0 18px}
+.royal2627-person-card p{font-size:17px;line-height:1.75}
+.royal2627-photo-feature{background:#f6ede7}
+.royal2627-photo-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:50px;align-items:center}
+.royal2627-photo-grid img{width:100%;border-radius:30px;box-shadow:0 22px 55px rgba(44,5,10,.16)}
+.royal2627-hofstaat{background:#fff}
+.royal2627-hof-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.royal2627-hof-grid article{overflow:hidden;border:1px solid #eadbd3;border-radius:28px;background:#fff;box-shadow:0 15px 48px rgba(62,10,17,.08)}
+.royal2627-hof-grid article>img{width:100%;height:430px;object-fit:cover;object-position:center 22%;display:block}
+.royal2627-hof-grid article:nth-child(1)>img{object-position:30% 25%}
+.royal2627-hof-grid article:nth-child(2)>img{object-position:78% 25%}
+.royal2627-hof-copy{padding:30px}
+.royal2627-luc{padding:84px 0;background:#7b1016;color:#fff}
+.royal2627-luc-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center}
+.royal2627-luc-grid img{width:100%;border-radius:30px;box-shadow:0 25px 60px rgba(0,0,0,.22)}
+.royal2627-luc h2{color:#fff}
+.royal2627-luc p{color:#fbeff0}
+.royal2627-luc a{color:#f6cc62;font-weight:800;text-decoration:none}
+.royal2627-music{background:#fff8ea}
+.royal2627-music-card{display:grid;grid-template-columns:150px 1fr;gap:38px;align-items:center;background:#fff;border:1px solid #eedab3;border-radius:30px;padding:44px;box-shadow:0 18px 55px rgba(93,50,6,.08)}
+.royal2627-note{width:130px;height:130px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#7b1016,#a91f34);color:#f8d46f;font-size:62px;box-shadow:0 20px 40px rgba(85,8,18,.2)}
+.royal2627-gallery{background:#fff}
+.royal2627-gallery-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:30px}
+.royal2627-gallery-grid img{width:100%;height:480px;object-fit:cover;border-radius:22px;display:block}
+.royal2627-gallery-grid img:nth-child(1),.royal2627-gallery-grid img:nth-child(4){object-position:center 28%}
+.royal2627-ending{padding:84px 0;text-align:center;background:linear-gradient(135deg,#5c0812,#8d1425);color:#fff}
+.royal2627-ending span{color:#f3cb61;text-transform:uppercase;letter-spacing:.18em;font-weight:800}
+.royal2627-ending h2{color:#fff;font-size:clamp(50px,6vw,86px);margin-bottom:15px}
+.royal2627-ending p{font-size:21px;margin-bottom:28px}
+.royal2627-actions-center{justify-content:center}
+.royal2627-secondary.light-border{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.55)}
+
+@media(max-width:760px){
+  .royal2627-wrap{width:min(100% - 28px,680px)}
+  .royal2627-hero{height:690px;min-height:690px;max-height:none}
+  .royal2627-hero>img{object-position:58% 30%}
+  .royal2627-shade{background:linear-gradient(0deg,rgba(45,4,9,.94) 0%,rgba(45,4,9,.66) 44%,rgba(45,4,9,.08) 75%)}
+  .royal2627-hero-copy{left:20px;right:20px;bottom:48px;width:auto}
+  .royal2627-hero-copy h1{font-size:clamp(38px,11vw,50px);line-height:1.01}
+  .royal2627-motto{font-size:20px;margin-bottom:18px}
+  .royal2627-primary,.royal2627-secondary{font-size:13px;padding:11px 14px}
+  .royal2627-intro,.royal2627-people,.royal2627-photo-feature,.royal2627-hofstaat,.royal2627-luc,.royal2627-music,.royal2627-gallery,.royal2627-ending{padding:52px 0}
+  .royal2627-intro-grid,.royal2627-person-grid,.royal2627-photo-grid,.royal2627-hof-grid,.royal2627-luc-grid,.royal2627-music-card,.royal2627-gallery-grid{grid-template-columns:1fr;gap:20px}
+  .royal2627-intro h2,.royal2627-heading h2,.royal2627-photo-feature h2,.royal2627-luc h2,.royal2627-music h2,.royal2627-gallery h2{font-size:clamp(31px,9vw,42px)}
+  .royal2627-lead{font-size:18px}
+  .royal2627-quote-card,.royal2627-person-card,.royal2627-hof-copy{padding:24px}
+  .royal2627-quote-card blockquote{font-size:25px}
+  .royal2627-person-name h3,.royal2627-hof-copy h3{font-size:31px}
+  .royal2627-photo-grid img,.royal2627-luc-grid img{border-radius:20px}
+  .royal2627-hof-grid article>img{height:390px}
+  .royal2627-music-card{padding:26px;text-align:center}
+  .royal2627-note{width:90px;height:90px;font-size:42px;margin:0 auto}
+  .royal2627-gallery-grid img{height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:16px}
+  .royal2627-gallery-grid img:first-child{aspect-ratio:3/4;object-position:center 25%}
+  .royal2627-ending h2{font-size:48px}
+}
+
+html[data-view="mobile"] body.view-mobile .royal2627-wrap{width:calc(100% - 28px)}
+html[data-view="mobile"] body.view-mobile .royal2627-hero{height:690px;min-height:690px}
+html[data-view="mobile"] body.view-mobile .royal2627-hero>img{object-position:58% 30%}
+html[data-view="mobile"] body.view-mobile .royal2627-hero-copy{left:20px;right:20px;bottom:48px;width:auto}
+html[data-view="mobile"] body.view-mobile .royal2627-hero-copy h1{font-size:44px}
+html[data-view="mobile"] body.view-mobile .royal2627-intro-grid,
+html[data-view="mobile"] body.view-mobile .royal2627-person-grid,
+html[data-view="mobile"] body.view-mobile .royal2627-photo-grid,
+html[data-view="mobile"] body.view-mobile .royal2627-hof-grid,
+html[data-view="mobile"] body.view-mobile .royal2627-luc-grid,
+html[data-view="mobile"] body.view-mobile .royal2627-music-card,
+html[data-view="mobile"] body.view-mobile .royal2627-gallery-grid{grid-template-columns:1fr}
