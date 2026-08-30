@@ -2,13 +2,14 @@
 <html lang="de">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><script>(function(){try{var v=localStorage.getItem('caw-view');var m=document.querySelector('meta[name="viewport"]');if(!v){v=window.matchMedia&&window.matchMedia('(max-width: 760px)').matches?'mobile':'desktop';}document.documentElement.dataset.view=v;if(v==='desktop'&&m){m.setAttribute('content','width=1280');}else if(m){m.setAttribute('content','width=device-width,initial-scale=1');}}catch(e){}})();</script>
   <meta name="theme-color" content="#7b1016">
   <title>Carnevals-Ausschuss Wesel e.V.</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-  <header class="site-header modern-header">
+  <div class="view-switcher" role="group" aria-label="Darstellung wählen"><span>Ansicht</span><button type="button" data-view-mode="mobile">Mobil</button><button type="button" data-view-mode="desktop">Desktop</button></div>
+<header class="site-header modern-header">
   <div class="top-stripe"></div>
   <div class="header-inner">
     <a class="brand" href="index.html#start" aria-label="CAW Startseite">
@@ -21,7 +22,7 @@
       <a href="#historie">Historie</a><a href="#rosenmontag">Rosenmontag</a><a href="#kinderkarneval">Kinderkarneval</a>
       <a href="#downloads">Downloads</a><a href="#kontakt">Kontakt</a>
     </nav>
-    <a class="facebook-top" href="https://www.facebook.com/cawwesel" target="_blank" rel="noopener" aria-label="CAW Wesel auf Facebook">f</a>
+    <button class="menu-toggle" type="button" aria-label="Menü öffnen" aria-expanded="false">☰</button><a class="facebook-top" href="https://www.facebook.com/cawwesel" target="_blank" rel="noopener" aria-label="CAW Wesel auf Facebook">f</a>
   </div>
 </header>
 
