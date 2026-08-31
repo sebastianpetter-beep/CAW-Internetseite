@@ -973,3 +973,8 @@ html[data-view="mobile"] body.view-mobile .royal2627-hero>img{width:100%;height:
 .royal2627-hero>img{object-fit:cover;object-position:center 8%}
 @media(max-width:800px){.royal2627-hero>img{object-position:center 7%}}
 html[data-view="mobile"] body.view-mobile .royal2627-hero>img{object-position:center 7%}
+
+/* V20.5 – Anke & Jörg: Personen im Hero etwas höher positionieren */
+.royal2627-hero>img{object-position:center 16%!important}
+@media(max-width:800px){.royal2627-hero>img{object-position:center 14%!important}}
+html[data-view="mobile"] body.view-mobile .royal2627-hero>img{object-position:center 14%!important}
