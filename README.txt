@@ -33,7 +33,7 @@ V11 Gesamtstand:
 - Termin 13.11.2026 entfernt
 - Prinzenproklamation 20.11.2026: nicht öffentlich, Reservierung nur per Geschäftsführer-Mail
 - separater Hinweis für Einladungen des designierten Prinzenpaares 2026/27
-- Vorstand mit aktuellen Fotos von Jens Tenbergen, Lukas Berge, Jörg Müller, Anke Quinders und Luc Eben
+- Vorstand mit aktuellen Fotos von Jens Tenbergen, Lukas Berge, Jörg Müller, Anke Müller und Luc Eben
 - LRN- und BDK-Mitgliedschaft mit Logos
 
 V12:
