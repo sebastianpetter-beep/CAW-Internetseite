@@ -993,3 +993,24 @@ html[data-view="mobile"] body.view-mobile .royal2627-hero>img{object-position:ce
   .portrait-story img{object-position:center 18%}
   .anke-private-photo img{height:auto!important;max-height:none!important}
 }
+
+/* Rückblick Session 2025/2026 – Thronfoto vollständig zeigen */
+.photo-mosaic img[src$="07-thron.jpeg"]{
+  object-fit:contain !important;
+  object-position:center top !important;
+  background:#fffaf5;
+}
+@media(max-width:800px){
+  .photo-mosaic img[src$="07-thron.jpeg"]{
+    height:auto !important;
+    aspect-ratio:auto !important;
+    object-fit:contain !important;
+    object-position:center top !important;
+  }
+}
+html[data-view="mobile"] body.view-mobile .photo-mosaic img[src$="07-thron.jpeg"]{
+  height:auto !important;
+  aspect-ratio:auto !important;
+  object-fit:contain !important;
+  object-position:center top !important;
+}
