@@ -1014,3 +1014,29 @@ html[data-view="mobile"] body.view-mobile .photo-mosaic img[src$="07-thron.jpeg"
   object-fit:contain !important;
   object-position:center top !important;
 }
+
+/* Rückblick Session 2025/2026 – Thronfoto im Querformat, Gesichter sichtbar */
+.photo-mosaic img[src$="07-thron.jpeg"]{
+  width:100% !important;
+  height:100% !important;
+  aspect-ratio:auto !important;
+  object-fit:cover !important;
+  object-position:center 18% !important;
+  background:transparent !important;
+}
+@media(max-width:800px){
+  .photo-mosaic img[src$="07-thron.jpeg"]{
+    width:100% !important;
+    height:auto !important;
+    aspect-ratio:4/3 !important;
+    object-fit:cover !important;
+    object-position:center 18% !important;
+  }
+}
+html[data-view="mobile"] body.view-mobile .photo-mosaic img[src$="07-thron.jpeg"]{
+  width:100% !important;
+  height:auto !important;
+  aspect-ratio:4/3 !important;
+  object-fit:cover !important;
+  object-position:center 18% !important;
+}
