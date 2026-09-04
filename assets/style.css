@@ -1040,3 +1040,33 @@ html[data-view="mobile"] body.view-mobile .photo-mosaic img[src$="07-thron.jpeg"
   object-fit:cover !important;
   object-position:center 18% !important;
 }
+
+
+/* ================================================================
+   V20.7 – HEADER AUF MOBIL IMMER DIREKT AM OBEREN BILDSCHIRMRAND
+   Die frühere 38px-Reserve gehörte zu einem separaten View-Switcher,
+   der nicht mehr oberhalb des Headers existiert.
+   ================================================================ */
+.modern-header{
+  top:0 !important;
+}
+
+@media(max-width:760px){
+  .modern-header{
+    position:sticky !important;
+    top:0 !important;
+    z-index:1300 !important;
+  }
+
+  /* Das aufgeklappte Menü beginnt direkt unter dem sichtbaren Header. */
+  .modern-header .main-nav{
+    top:78px !important;
+  }
+}
+
+/* Auch bei manuell gewählter Mobilansicht am Desktop: kein Leerraum oben. */
+html[data-view="mobile"] body.view-mobile .modern-header{
+  position:sticky !important;
+  top:0 !important;
+  z-index:1300 !important;
+}
