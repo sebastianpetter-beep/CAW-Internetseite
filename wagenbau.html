@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Wagenbau intern | Carnevals-Ausschuss Wesel e.V.</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    :root{--wb-red:#be2c24;--wb-dark:#8f1f1a;--wb-cream:#fffaf5;--wb-line:#ead8cf;--wb-text:#2b1a1a}
+    body.wagenbau-page{background:linear-gradient(180deg,#fff 0,#fffaf5 100%);color:var(--wb-text)}
+    .wb-shell{max-width:1080px;margin:0 auto;padding:38px 18px 70px}
+    .wb-head{display:grid;grid-template-columns:110px 1fr;gap:22px;align-items:center;margin-bottom:28px}
+    .wb-head img{width:100%;max-width:100px;height:auto;border-radius:18px;box-shadow:0 10px 30px rgba(70,20,15,.12)}
+    .wb-kicker{display:inline-block;color:var(--wb-red);font-weight:800;text-transform:uppercase;letter-spacing:.09em;font-size:.78rem;margin-bottom:6px}
+    .wb-head h1{margin:.1em 0;font-size:clamp(2rem,4vw,3.35rem);line-height:1}
+    .wb-head p{margin:.5em 0 0;color:#6d5b54}
+    .wb-card{background:#fff;border:1px solid var(--wb-line);border-radius:24px;padding:clamp(20px,4vw,38px);box-shadow:0 14px 40px rgba(72,31,22,.08);margin-top:18px}
+    .wb-card h2{margin-top:0;color:var(--wb-dark)}
+    .wb-login{max-width:620px;margin:28px auto 0}
+    .wb-field{display:flex;flex-direction:column;gap:7px}
+    .wb-field label{font-weight:800;font-size:.94rem}
+    .wb-field input,.wb-field select{width:100%;box-sizing:border-box;border:1px solid #d8c5bc;border-radius:12px;padding:12px 13px;background:#fff;font:inherit;color:#221815;outline:none}
+    .wb-field input:focus,.wb-field select:focus{border-color:var(--wb-red);box-shadow:0 0 0 3px rgba(190,44,36,.12)}
+    .wb-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    .wb-grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .wb-btn{appearance:none;border:0;border-radius:999px;padding:12px 18px;font:800 15px/1.2 inherit;cursor:pointer;transition:.18s ease;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+    .wb-btn.primary{background:var(--wb-red);color:#fff}
+    .wb-btn.secondary{background:#f7ebe6;color:var(--wb-dark);border:1px solid #ead2c8}
+    .wb-btn.danger{background:#fff0ee;color:#98271f;border:1px solid #efcbc7}
+    .wb-btn:hover{transform:translateY(-1px)}
+    .wb-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:18px}
+    .wb-note{background:#fff3ee;border-left:4px solid var(--wb-red);padding:14px 16px;border-radius:10px;color:#65453d;margin:16px 0}
+    .wb-status{padding:12px 14px;border-radius:12px;margin-top:14px;display:none}
+    .wb-status.show{display:block}
+    .wb-status.error{background:#fff0ef;color:#9d261f;border:1px solid #efc3be}
+    .wb-status.ok{background:#eef8ef;color:#225b2b;border:1px solid #c6e4ca}
+    .wb-hidden{display:none!important}
+    .person-list{display:grid;gap:12px;margin-top:18px}
+    .person-row{display:grid;grid-template-columns:42px 1fr 1fr 1fr auto;gap:10px;align-items:end;padding:14px;border:1px solid #ecdcd4;border-radius:16px;background:#fffdfa}
+    .person-nr{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#f3e5df;color:var(--wb-dark);font-weight:900;margin-bottom:3px}
+    .person-row .wb-field label{font-size:.82rem}
+    .remove-person{min-width:40px;height:40px;border-radius:50%;padding:0}
+    .wb-section-title{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-top:28px}
+    .wb-section-title h3{margin:0;color:var(--wb-dark)}
+    .wb-validity{display:inline-flex;align-items:center;gap:8px;background:#f7ebe6;color:var(--wb-dark);font-weight:900;padding:9px 13px;border-radius:999px}
+    .wb-check{display:flex;gap:11px;align-items:flex-start;margin-top:20px;padding:15px;border:1px solid #ead8cf;border-radius:14px;background:#fffdfa}
+    .wb-check input{margin-top:3px;transform:scale(1.18)}
+    .wb-footer-note{font-size:.86rem;color:#7b6b64;margin-top:20px}
+    .wb-topback{display:inline-flex;margin-bottom:14px;color:var(--wb-dark);font-weight:800;text-decoration:none}
+    @media(max-width:860px){
+      .person-row{grid-template-columns:38px 1fr 1fr}.person-row .plate{grid-column:2/4}.person-row .remove-person{grid-column:4;grid-row:1}
+      .wb-grid,.wb-grid.three{grid-template-columns:1fr}
+    }
+    @media(max-width:620px){
+      .wb-shell{padding:24px 12px 52px}.wb-card{border-radius:18px;padding:18px}.wb-head{grid-template-columns:72px 1fr;gap:14px}.wb-head img{max-width:72px;border-radius:14px}
+      .person-row{grid-template-columns:34px 1fr}.person-row .wb-field,.person-row .plate{grid-column:2}.person-row .remove-person{grid-column:1;grid-row:2;align-self:center}
+    }
+  </style>
+</head>
+<body class="wagenbau-page">
+<header class="site-header modern-header">
+  <div class="top-stripe"></div>
+  <div class="header-inner">
+    <a class="brand" href="index.html#start" aria-label="CAW Startseite">
+      <div class="brand-logo-wrap"><img src="assets/images/caw-logo.jpg" alt="Logo Carnevals-Ausschuss Wesel e.V."></div>
+      <div class="brand-copy"><strong>Carnevals-Ausschuss Wesel e.V.</strong><span>Gemeinsam für den Weseler Karneval</span></div>
+    </a>
+    <nav id="main-nav" class="main-nav" aria-label="Hauptnavigation">
+      <a href="index.html#start">Start</a><a href="index.html#ueber-uns">Über uns</a><a href="index.html#prinzenpaare">Prinzenpaare</a>
+      <a href="index.html#termine">Termine</a><a href="index.html#vorstand">Vorstand</a><a href="index.html#vereine">12 Gesellschaften</a>
+      <a href="index.html#historie">Historie</a><a href="index.html#rosenmontag">Rosenmontag</a><a href="index.html#kinderkarneval">Kinderkarneval</a>
+      <a href="index.html#downloads">Downloads</a><a href="wagenbau.html" aria-current="page">🔒 Wagenbau intern</a><a href="index.html#kontakt">Kontakt</a>
+    </nav>
+    <button class="menu-toggle" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="main-nav">☰</button>
+  </div>
+</header>
+
+<main class="wb-shell">
+  <a class="wb-topback" href="index.html">← Zurück zur CAW-Startseite</a>
+  <section class="wb-head">
+    <img src="assets/images/caw-logo.jpg" alt="CAW Logo">
+    <div><span class="wb-kicker">Interner Mitgliederbereich</span><h1>Wagenbau</h1><p>Anmeldung und tagesbezogene Nutzungsberechtigung für das Pilkington-Betriebsgelände.</p></div>
+  </section>
+
+  <section id="loginCard" class="wb-card wb-login">
+    <h2>Geschützter Bereich</h2>
+    <p>Dieser Bereich ist ausschließlich für Mitglieder der CAW-Mitgliedsvereine vorgesehen.</p>
+    <form id="loginForm">
+      <div class="wb-field"><label for="password">Passwort</label><input id="password" type="password" autocomplete="current-password" required></div>
+      <div class="wb-actions"><button class="wb-btn primary" type="submit">Bereich öffnen</button></div>
+      <div id="loginStatus" class="wb-status" role="status"></div>
+    </form>
+  </section>
+
+  <section id="formCard" class="wb-card wb-hidden">
+    <div class="wb-section-title">
+      <div><span class="wb-kicker">Nutzungsberechtigung</span><h2 style="margin:.15em 0 0">Anmeldung Wagenbau</h2></div>
+      <div class="wb-validity">Gültig: <span id="validDate">–</span></div>
+    </div>
+
+    <div class="wb-note"><strong>Wichtig:</strong> Die Nutzungsberechtigung gilt ausschließlich am Tag der Beantragung und nur für die eingetragenen Personen bzw. Fahrzeuge.</div>
+
+    <form id="wagenbauForm">
+      <div class="wb-grid">
+        <div class="wb-field"><label for="club">CAW-Mitgliedsverein *</label>
+          <select id="club" required>
+            <option value="">Bitte auswählen</option>
+            <option>Elferrat der Kolpingsfamilie Wesel</option>
+            <option>Fanfaren Corps – CCL – Wesel e.V.</option>
+            <option>Feldmarker Karnevals-Komitee – FKK</option>
+            <option>Förderkreis Kinderkarneval Wesel</option>
+            <option>Garde der Bürgerschützen zu Wesel e.V. / Prinzengarde der Stadt Wesel</option>
+            <option>Karneval Kunterbunt</option>
+            <option>Karnevalsgemeinschaft der Gindericher und Vereine – KGV</option>
+            <option>Närrisches Parlament der Stadt Wesel</option>
+            <option>Traditionsgemeinschaft ehemaliger Prinzenpaare und Dreigestirne</option>
+            <option>Vesalia Red Stars</option>
+            <option>Weseler Karnevals Verein – WKV</option>
+            <option>1. Dinslakener Narrenkomitee 1979 e.V. – Die Pinguine</option>
+          </select>
+        </div>
+        <div class="wb-field"><label for="creatorEmail">E-Mail des Erstellers *</label><input id="creatorEmail" type="email" autocomplete="email" required></div>
+        <div class="wb-field"><label for="creatorFirst">Vorname des Erstellers *</label><input id="creatorFirst" autocomplete="given-name" required></div>
+        <div class="wb-field"><label for="creatorLast">Nachname des Erstellers *</label><input id="creatorLast" autocomplete="family-name" required></div>
+      </div>
+
+      <div class="wb-section-title">
+        <h3>Personen auf dem Betriebsgelände</h3>
+        <span><strong id="personCount">1</strong> / 15</span>
+      </div>
+      <p>Vorname und Nachname sind für jede hinzugefügte Person Pflicht. Das KFZ-Kennzeichen ist nur erforderlich, wenn ein Fahrzeug auf das Gelände fährt.</p>
+
+      <div id="personList" class="person-list"></div>
+      <div class="wb-actions"><button id="addPerson" type="button" class="wb-btn secondary">+ Person hinzufügen</button></div>
+
+      <label class="wb-check">
+        <input id="confirm" type="checkbox" required>
+        <span>Ich bestätige, dass die Angaben vollständig und richtig sind und die genannten Personen ausschließlich zum Zweck des Wagenbaus für den angegebenen Verein angemeldet werden. Betriebliche Sicherheits- und Zutrittsanweisungen von Pilkington sind einzuhalten.</span>
+      </label>
+
+      <div class="wb-actions">
+        <button id="submitBtn" class="wb-btn primary" type="submit">PDF erstellen & versenden</button>
+        <button id="logoutBtn" class="wb-btn secondary" type="button">Abmelden</button>
+      </div>
+      <div id="sendStatus" class="wb-status" role="status"></div>
+      <div id="downloadWrap" class="wb-actions wb-hidden"><a id="downloadPdf" class="wb-btn secondary" href="#" download>PDF herunterladen</a></div>
+    </form>
+
+    <p class="wb-footer-note">Die eingegebenen Daten werden nicht im Browser dauerhaft gespeichert. Der Versand erfolgt an CAW, Pilkington und die E-Mail-Adresse des Erstellers. Die Empfängeradressen für CAW und Pilkington werden serverseitig festgelegt.</p>
+  </section>
+</main>
+
+<script src="assets/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
+<script>
+/* WICHTIG: Nach Anlegen des Render-Backends hier die echte URL eintragen, z.B.
+   const API_BASE = "https://caw-wagenbau-api.onrender.com";
+*/
+const API_BASE = "https://DEIN-WAGENBAU-BACKEND.onrender.com";
+
+const loginCard = document.getElementById("loginCard");
+const formCard = document.getElementById("formCard");
+const loginForm = document.getElementById("loginForm");
+const wagenbauForm = document.getElementById("wagenbauForm");
+const loginStatus = document.getElementById("loginStatus");
+const sendStatus = document.getElementById("sendStatus");
+const validDate = document.getElementById("validDate");
+const personList = document.getElementById("personList");
+const personCount = document.getElementById("personCount");
+const addPersonBtn = document.getElementById("addPerson");
+const submitBtn = document.getElementById("submitBtn");
+const downloadWrap = document.getElementById("downloadWrap");
+const downloadPdf = document.getElementById("downloadPdf");
+let authToken = sessionStorage.getItem("cawWagenbauToken") || "";
+let serverDate = "";
+let pdfObjectUrl = "";
+
+function showStatus(el, msg, type){
+  el.textContent = msg; el.className = "wb-status show " + type;
+}
+function clearStatus(el){ el.textContent=""; el.className="wb-status"; }
+function formatDate(iso){
+  const [y,m,d] = iso.split("-");
+  return `${d}.${m}.${y}`;
+}
+function openForm(date){
+  serverDate = date;
+  validDate.textContent = formatDate(date);
+  loginCard.classList.add("wb-hidden");
+  formCard.classList.remove("wb-hidden");
+  if(!personList.children.length) addPerson();
+}
+function logout(){
+  authToken=""; sessionStorage.removeItem("cawWagenbauToken");
+  formCard.classList.add("wb-hidden"); loginCard.classList.remove("wb-hidden");
+  document.getElementById("password").value="";
+}
+async function api(path, options={}){
+  const headers = Object.assign({"Content-Type":"application/json"}, options.headers||{});
+  if(authToken) headers.Authorization = "Bearer " + authToken;
+  return fetch(API_BASE + path, Object.assign({}, options, {headers}));
+}
+loginForm.addEventListener("submit", async e=>{
+  e.preventDefault(); clearStatus(loginStatus);
+  if(API_BASE.includes("DEIN-WAGENBAU-BACKEND")){
+    showStatus(loginStatus,"Das Backend ist noch nicht verbunden. Trage nach dem Render-Setup die Backend-URL in wagenbau.html ein.","error"); return;
+  }
+  try{
+    const res = await api("/api/login",{method:"POST",body:JSON.stringify({password:document.getElementById("password").value})});
+    const data = await res.json();
+    if(!res.ok) throw new Error(data.error||"Anmeldung fehlgeschlagen.");
+    authToken=data.token; sessionStorage.setItem("cawWagenbauToken",authToken);
+    openForm(data.applicationDate);
+  }catch(err){ showStatus(loginStatus,err.message||"Verbindung zum Server fehlgeschlagen.","error"); }
+});
+
+function addPerson(){
+  if(personList.children.length>=15) return;
+  const nr = personList.children.length+1;
+  const row = document.createElement("div");
+  row.className="person-row";
+  row.innerHTML = `
+    <div class="person-nr">${nr}</div>
+    <div class="wb-field"><label>Vorname *</label><input class="p-first" required></div>
+    <div class="wb-field"><label>Nachname *</label><input class="p-last" required></div>
+    <div class="wb-field plate"><label>KFZ-Kennzeichen</label><input class="p-plate" placeholder="z. B. WES-CA 77"></div>
+    <button type="button" class="wb-btn danger remove-person" title="Person entfernen" aria-label="Person entfernen">×</button>`;
+  row.querySelector(".remove-person").addEventListener("click",()=>{
+    if(personList.children.length===1) return;
+    row.remove(); renumberPersons();
+  });
+  personList.appendChild(row); renumberPersons();
+}
+function renumberPersons(){
+  [...personList.children].forEach((row,i)=>row.querySelector(".person-nr").textContent=i+1);
+  personCount.textContent=personList.children.length;
+  addPersonBtn.disabled=personList.children.length>=15;
+}
+addPersonBtn.addEventListener("click",addPerson);
+document.getElementById("logoutBtn").addEventListener("click",logout);
+
+function getPersons(){
+  return [...personList.children].map(row=>({
+    firstName:row.querySelector(".p-first").value.trim(),
+    lastName:row.querySelector(".p-last").value.trim(),
+    plate:row.querySelector(".p-plate").value.trim().toUpperCase()
+  }));
+}
+async function imageToDataURL(url){
+  const res=await fetch(url);
+  if(!res.ok) throw new Error("CAW-Logo konnte nicht geladen werden.");
+  const blob=await res.blob();
+  return await new Promise((resolve,reject)=>{
+    const r=new FileReader(); r.onload=()=>resolve(r.result); r.onerror=reject; r.readAsDataURL(blob);
+  });
+}
+function wrap(doc,text,x,y,maxWidth,lineHeight=5.2){
+  const lines=doc.splitTextToSize(text,maxWidth); doc.text(lines,x,y); return y+lines.length*lineHeight;
+}
+async function createPdf(payload, applicationId){
+  if(!window.jspdf) throw new Error("PDF-Modul konnte nicht geladen werden.");
+  const {jsPDF}=window.jspdf;
+  const doc=new jsPDF({unit:"mm",format:"a4"});
+  const red=[190,44,36], dark=[70,34,29];
+  let logo=null; try{logo=await imageToDataURL("assets/images/caw-logo.jpg");}catch(e){}
+  if(logo) doc.addImage(logo,"JPEG",16,12,28,28);
+  doc.setTextColor(...red); doc.setFont("helvetica","bold"); doc.setFontSize(17);
+  doc.text("CARNEVALS-AUSSCHUSS WESEL e.V.",50,20);
+  doc.setTextColor(...dark); doc.setFontSize(10); doc.setFont("helvetica","normal");
+  doc.text("Wallstraße 10 · 46483 Wesel",50,27);
+  doc.text("praesident@caw-wesel.de · 0178 3027608",50,32);
+
+  doc.setDrawColor(222,196,185); doc.line(16,44,194,44);
+  doc.setFont("helvetica","bold"); doc.setFontSize(18); doc.setTextColor(...dark);
+  doc.text("Nutzungsberechtigung – Wagenbau",16,56);
+  doc.setFontSize(11); doc.setTextColor(...red);
+  doc.text("Betreten des Betriebsgeländes",16,63);
+  doc.setTextColor(...dark); doc.setFont("helvetica","normal"); doc.setFontSize(10.5);
+  doc.text("Pilkington Automotive Deutschland GmbH",16,71);
+  doc.text("Delogstraße 32 · 46483 Wesel",16,77);
+
+  doc.setFont("helvetica","bold"); doc.text("Gültigkeit:",16,89);
+  doc.setFont("helvetica","normal"); doc.text(`${formatDate(payload.applicationDate)} – ausschließlich an diesem Tag`,43,89);
+  doc.setFont("helvetica","bold"); doc.text("Verein:",16,96);
+  doc.setFont("helvetica","normal"); 
+  let y=96; y=wrap(doc,payload.club,43,y,145);
+  y=Math.max(y+4,106);
+  doc.setFont("helvetica","bold"); doc.text("Ersteller:",16,y);
+  doc.setFont("helvetica","normal"); doc.text(`${payload.creatorFirst} ${payload.creatorLast} · ${payload.creatorEmail}`,43,y);
+  y+=9;
+  doc.setFont("helvetica","bold"); doc.text("Vorgangsnummer:",16,y);
+  doc.setFont("helvetica","normal"); doc.text(applicationId,48,y);
+  y+=11;
+
+  doc.setFont("helvetica","bold"); doc.setFontSize(11); doc.text("Berechtigte Personen",16,y); y+=6;
+  const col=[16,28,72,119,159,194];
+  doc.setFillColor(245,232,226); doc.rect(16,y,178,8,"F");
+  doc.setFontSize(9); doc.text("Nr.",18,y+5.4); doc.text("Vorname",30,y+5.4); doc.text("Nachname",74,y+5.4); doc.text("KFZ-Kennzeichen",121,y+5.4);
+  y+=8;
+  doc.setFont("helvetica","normal");
+  payload.persons.forEach((p,i)=>{
+    if(y>267){doc.addPage();y=20;}
+    doc.setDrawColor(232,216,208); doc.line(16,y+8,194,y+8);
+    doc.text(String(i+1),18,y+5.4); doc.text(p.firstName,30,y+5.4); doc.text(p.lastName,74,y+5.4); doc.text(p.plate||"–",121,y+5.4); y+=9;
+  });
+  y+=6;
+  const notice="Diese Nutzungsberechtigung gilt ausschließlich am oben genannten Tag und nur für die eingetragenen Personen bzw. Fahrzeuge zum Zweck der Wagenbauarbeiten. Betriebliche Sicherheits-, Zutritts- und Verhaltensanweisungen der Pilkington Automotive Deutschland GmbH sind jederzeit einzuhalten. Die Berechtigung begründet keine darüber hinausgehenden Zutritts- oder Nutzungsrechte.";
+  if(y>235){doc.addPage();y=20;}
+  doc.setFillColor(255,247,243); doc.roundedRect(16,y,178,31,3,3,"F");
+  doc.setTextColor(...dark); doc.setFontSize(9); doc.setFont("helvetica","normal");
+  wrap(doc,notice,20,y+7,170,4.5);
+  y+=39;
+  doc.setFont("helvetica","bold"); doc.setFontSize(10); doc.text("Herausgeber",16,y);
+  doc.setFont("helvetica","normal"); doc.setFontSize(9.5);
+  doc.text("Carnevals-Ausschuss Wesel e.V.",16,y+6);
+  doc.text("Jens Tenbergen · Wallstraße 10 · 46483 Wesel",16,y+11);
+  doc.text("Telefon 0178 3027608 · praesident@caw-wesel.de",16,y+16);
+  doc.setTextColor(110,92,84); doc.setFontSize(8);
+  doc.text(`Erstellt am ${formatDate(payload.applicationDate)} · ${applicationId}`,16,289);
+
+  return doc.output("blob");
+}
+async function blobToBase64(blob){
+  return await new Promise((resolve,reject)=>{
+    const r=new FileReader(); r.onload=()=>resolve(String(r.result).split(",")[1]); r.onerror=reject; r.readAsDataURL(blob);
+  });
+}
+
+wagenbauForm.addEventListener("submit", async e=>{
+  e.preventDefault(); clearStatus(sendStatus); downloadWrap.classList.add("wb-hidden");
+  const persons=getPersons();
+  if(persons.length<1 || persons.length>15 || persons.some(p=>!p.firstName||!p.lastName)){
+    showStatus(sendStatus,"Bitte bei jeder Person Vorname und Nachname eintragen.","error"); return;
+  }
+  const payload={
+    applicationDate:serverDate,
+    club:document.getElementById("club").value,
+    creatorFirst:document.getElementById("creatorFirst").value.trim(),
+    creatorLast:document.getElementById("creatorLast").value.trim(),
+    creatorEmail:document.getElementById("creatorEmail").value.trim(),
+    persons
+  };
+  submitBtn.disabled=true; submitBtn.textContent="Wird erstellt …";
+  try{
+    // ID is first reserved/validated by the backend, so PDF and emails use exactly the same number.
+    const reserve=await api("/api/reserve",{method:"POST",body:JSON.stringify(payload)});
+    const reservation=await reserve.json();
+    if(!reserve.ok) throw new Error(reservation.error||"Vorgang konnte nicht vorbereitet werden.");
+    const pdfBlob=await createPdf(payload,reservation.applicationId);
+    const pdfBase64=await blobToBase64(pdfBlob);
+    const send=await api("/api/submit",{method:"POST",body:JSON.stringify({...payload,applicationId:reservation.applicationId,pdfBase64})});
+    const result=await send.json();
+    if(!send.ok) throw new Error(result.error||"Versand fehlgeschlagen.");
+    if(pdfObjectUrl) URL.revokeObjectURL(pdfObjectUrl);
+    pdfObjectUrl=URL.createObjectURL(pdfBlob);
+    downloadPdf.href=pdfObjectUrl; downloadPdf.download=`CAW_Nutzungsberechtigung_Wagenbau_${serverDate}_${reservation.applicationId}.pdf`;
+    downloadWrap.classList.remove("wb-hidden");
+    showStatus(sendStatus,`Erfolgreich erstellt und versendet. Vorgangsnummer: ${reservation.applicationId}`,"ok");
+  }catch(err){
+    if((err.message||"").toLowerCase().includes("nicht angemeldet")) logout();
+    showStatus(sendStatus,err.message||"Beim Erstellen ist ein Fehler aufgetreten.","error");
+  }finally{ submitBtn.disabled=false; submitBtn.textContent="PDF erstellen & versenden"; }
+});
+</script>
+</body>
+</html>
