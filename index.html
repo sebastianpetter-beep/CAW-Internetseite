@@ -3,21 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#7b1016">
+  <meta name="theme-color" content="#be2c24">
   <title>Carnevals-Ausschuss Wesel e.V.</title>
   <link rel="stylesheet" href="assets/style.css">
 
 <style>
 /* Statuskennzeichnung Prinzenpaare */
-.card-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px}
-.card-meta .card-top{margin:0}
-.status-badge{display:inline-flex;align-items:center;justify-content:center;padding:9px 15px;border-radius:999px;font-size:.78rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;line-height:1;white-space:nowrap}
-.status-current{background:#be2c24;color:#fff;box-shadow:0 7px 18px rgba(127,16,32,.16)}
-.status-designated{background:#d7aa3e;color:#4b3100;box-shadow:0 7px 18px rgba(215,170,62,.20)}
-@media(max-width:640px){
-  .card-meta{gap:8px;margin-bottom:14px}
-  .status-badge{padding:8px 12px;font-size:.7rem}
-}
+.card-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px}.card-meta .card-top{margin:0}.status-badge{display:inline-flex;align-items:center;justify-content:center;padding:9px 15px;border-radius:999px;font-size:.78rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;line-height:1;white-space:nowrap}.status-current{background:#be2c24;color:#fff;box-shadow:0 7px 18px rgba(127,16,32,.16)}.status-designated{background:#d7aa3e;color:#4b3100;box-shadow:0 7px 18px rgba(215,170,62,.20)}@media(max-width:640px){.card-meta{gap:8px;margin-bottom:14px}.status-badge{padding:8px 12px;font-size:.7rem}}
+</style>
+
+<style>
+/* Social-Media-Links der CAW-Mitgliedsgesellschaften */
+.society-socials{display:flex;justify-content:center;align-items:center;gap:9px;flex-wrap:wrap;margin-top:12px}
+.society-social{width:36px;height:36px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;text-decoration:none!important;font:800 18px/1 Arial,sans-serif;color:#fff!important;background:#be2c24;box-shadow:0 4px 12px rgba(80,20,16,.16);transition:transform .18s ease,box-shadow .18s ease,opacity .18s ease}
+.society-social:hover,.society-social:focus-visible{transform:translateY(-2px);box-shadow:0 7px 16px rgba(80,20,16,.24);opacity:.9}
+.society-social.instagram{font-size:21px}
+.society-social.homepage{font-size:19px}
+.society-social.tiktok{font-size:19px}
+@media(max-width:760px){.society-socials{gap:8px;margin-top:10px}.society-social{width:34px;height:34px;font-size:17px}}
 </style>
 
 </head>
@@ -29,12 +32,17 @@
       <div class="brand-logo-wrap"><img src="assets/images/caw-logo.jpg" alt="Logo Carnevals-Ausschuss Wesel e.V."></div>
       <div class="brand-copy"><strong>Carnevals-Ausschuss Wesel e.V.</strong><span>Gemeinsam für den Weseler Karneval</span></div>
     </a>
-    <nav class="main-nav" aria-label="Hauptnavigation">
+    <nav id="main-nav" class="main-nav" aria-label="Hauptnavigation">
       <a href="#start">Start</a><a href="#ueber-uns">Über uns</a><a href="#prinzenpaare">Prinzenpaare</a>
       <a href="#termine">Termine</a><a href="#vorstand">Vorstand</a><a href="#vereine">12 Gesellschaften</a>
       <a href="#historie">Historie</a><a href="#rosenmontag">Rosenmontag</a><a href="#kinderkarneval">Kinderkarneval</a>
-      <a href="#downloads">Downloads</a><a href="#kontakt">Kontakt</a>
+      <a href="#downloads">Downloads</a><a href="wagenbau.html">🔒 Wagenbau intern</a><a href="#kontakt">Kontakt</a>
     </nav>
+    <button class="menu-toggle" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="main-nav">☰</button>
+    <div class="view-switch" aria-label="Ansicht wählen">
+      <button type="button" data-view="mobile">Mobil</button>
+      <button type="button" data-view="desktop">Desktop</button>
+    </div>
     <a class="facebook-top" href="https://www.facebook.com/cawwesel" target="_blank" rel="noopener" aria-label="CAW Wesel auf Facebook">f</a>
   </div>
 </header>
@@ -59,7 +67,7 @@
           <span class="eyebrow">Designiertes Prinzenpaar · Session 2026/2027</span>
           <h1>Prinzessin Anke I. &amp; Prinz Jörg II.</h1>
           <p>Karneval verbindet.</p>
-          <div class="hero-actions"><a class="hero-button" href="#prinzenpaare">Mehr erfahren</a><a class="social-button instagram" href="https://www.instagram.com/prinzenpaarwesel26_27?igsi=MnI5M2MzYng1MXFl&utm_source=qr" target="_blank" rel="noopener">Instagram</a><a class="social-button facebook" href="https://www.facebook.com/share/18t5CMaiS5/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a></div>
+          <div class="hero-actions"><a class="hero-button" href="#prinzenpaare">Mehr erfahren</a><a class="social-button instagram" href="https://www.instagram.com/prinzenpaarwesel26_27?igsi=MnI5M2MzYng1MXFl&utm_source=qr" target="_blank" rel="noopener">Instagram</a><a class="social-button facebook" href="https://www.facebook.com/profile.php?id=61593910648545" target="_blank" rel="noopener">Facebook</a></div>
         </div>
       </div>
 
@@ -112,7 +120,7 @@
           <article class="card">
             <div class="card-meta"><div class="card-top gold">2026 / 2027</div><span class="status-badge status-designated">Designiert</span></div>
             <h3>Prinzessin Anke I. &amp; Prinz Jörg II.</h3>
-            <p>Mit Pagin Eva Tenbergen, Page Oliver Heselmann und Prinzenführer Luc Eben.</p><div class="card-socials"><a class="social-link instagram" href="https://www.instagram.com/prinzenpaarwesel26_27?igsi=MnI5M2MzYng1MXFl&utm_source=qr" target="_blank" rel="noopener">Instagram</a><a class="social-link facebook" href="https://www.facebook.com/share/18t5CMaiS5/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a><a class="session-card-button" href="anke-joerg-2026-2027.html">Mehr über Anke &amp; Jörg →</a></div>
+            <p>Mit Pagin Eva Tenbergen, Page Oliver Heselmann und Prinzenführer Luc Eben.</p><div class="card-socials"><a class="social-link instagram" href="https://www.instagram.com/prinzenpaarwesel26_27?igsi=MnI5M2MzYng1MXFl&utm_source=qr" target="_blank" rel="noopener">Instagram</a><a class="social-link facebook" href="https://www.facebook.com/profile.php?id=61593910648545" target="_blank" rel="noopener">Facebook</a><a class="session-card-button" href="anke-joerg-2026-2027.html">Mehr über Anke &amp; Jörg →</a></div>
           </article>
           <article class="card">
             <div class="card-meta"><div class="card-top red">Kinderprinzenpaar 2025 / 2026</div><span class="status-badge status-current">Amtierend</span></div>
@@ -201,11 +209,11 @@
     <p class="wide-text">Der Vorstand koordiniert gemeinsam mit den Mitgliedsgesellschaften das gesamtstädtische Karnevalsgeschehen in Wesel.</p>
     <div class="board-grid board-modern">
       <article class="board-person"><div class="portrait"><img src="assets/images/vorstand/jens-tenbergen.jpg" alt="Jens Tenbergen"></div><span>Präsident</span><h3>Jens Tenbergen</h3><a href="mailto:praesident@caw-wesel.de">praesident@caw-wesel.de</a><a href="tel:+49178030207608">0178 030 207 608</a></article>
-      <article class="board-person"><div class="portrait"><img src="assets/images/vorstand/lukas-berge.jpg" alt="Lukas Berge"></div><span>Geschäftsführer</span><h3>Lukas Berge</h3><a href="mailto:geschaeftsfuehrer.caw@gmail.com">geschaeftsfuehrer.caw@gmail.com</a><a class="board-portrait-link" href="lukas-berge.html">Mehr über Lukas →</a></article>
+      <article class="board-person"><div class="portrait"><img src="assets/images/vorstand/lukas-berge.jpg" alt="Lukas Berge"></div><span>Geschäftsführer</span><h3>Lukas Berge</h3><a href="mailto:geschaeftsfuehrer.caw@gmail.com">geschaeftsfuehrer.caw@gmail.com</a><a class="luc-more" href="lukas-berge.html">Mehr über Lukas →</a></article>
       <article class="board-person"><div class="portrait"><img src="assets/images/vorstand/joerg-mueller.jpg" alt="Jörg Müller"></div><span>Schatzmeister</span><h3>Jörg Müller</h3><a href="mailto:schatzmeister@caw-wesel.de">schatzmeister@caw-wesel.de</a></article>
-      <article class="board-person"><div class="portrait"><img src="assets/images/vorstand/anke-quinders.jpg" alt="Anke Müller"></div><span>1. Beisitzerin</span><h3>Anke Müller</h3><a href="mailto:beisitzerin1@caw-wesel.de">beisitzerin1@caw-wesel.de</a><a class="board-portrait-link" href="anke-mueller.html">Mehr über Anke →</a></article>
+      <article class="board-person"><div class="portrait"><img src="assets/images/vorstand/anke-quinders.jpg" alt="Anke Müller"></div><span>1. Beisitzerin</span><h3>Anke Müller</h3><a href="mailto:beisitzerin1@caw-wesel.de">beisitzerin1@caw-wesel.de</a><a class="luc-more" href="anke-mueller.html">Mehr über Anke →</a></article>
       <article class="board-person"><div class="portrait luc"><img src="assets/images/vorstand/luc-eben.jpg" alt="Luc Eben"></div><span>Prinzenführer</span><h3>Luc Eben</h3><a href="mailto:prinzenfuehrer@caw-wesel.de">prinzenfuehrer@caw-wesel.de</a><a class="luc-more" href="luc-eben.html">Mehr über Luc →</a></article>
-      <article class="board-person vacant-person"><div class="portrait vacant-circle">?</div><span>Derzeit vakant</span><h3>Vizepräsident</h3><p>Die Position ist derzeit nicht besetzt.</p></article>
+      <article class="board-person"><div class="portrait vacant-circle">?</div><span>Vizepräsident</span><h3>Mario Pilarski</h3><p>Portrait folgt.</p></article>
       <article class="board-person vacant-person"><div class="portrait vacant-circle">?</div><span>Derzeit vakant</span><h3>2. Beisitzer/in</h3><p>Die Position ist derzeit nicht besetzt.</p></article>
     </div>
   </div>
@@ -217,18 +225,18 @@
         <h2>Unsere 12 Gesellschaften</h2>
         <p class="wide-text">Zwölf Gesellschaften bilden gemeinsam den Carnevals-Ausschuss Wesel e.V. Zehn der Gesellschaften präsentieren wir hier mit ihrem Vereinslogo; bei Gesellschaften ohne eigenes Logo verwenden wir bewusst eine neutrale CAW-Darstellung.</p>
         <div class="logo-society-grid">
-          <article class="logo-society"><div class="logo-box"><img src="assets/images/vereine/kolping.jpg" alt="Elferrat der Kolpingsfamilie Wesel"></div><h3>Elferrat der Kolpingsfamilie Wesel</h3><p>Ansprechpartnerin: Kristin Lohmann</p></article>
-          <article class="logo-society"><div class="logo-box"><img src="assets/images/vereine/fanfaren-corps-ccl.png" alt="Fanfaren Corps CCL Wesel"></div><h3>Fanfaren Corps – CCL – Wesel e.V.</h3><p>Ansprechpartner: Thomas Neuköther</p></article>
-          <article class="logo-society"><div class="logo-box"><img src="assets/images/vereine/fkk.png" alt="Feldmarker Karnevals-Komitee"></div><h3>Feldmarker Karnevals-Komitee – FKK</h3><p>Ansprechpartner: Sebastian Bassanese</p></article>
-          <article class="logo-society"><div class="logo-box"><img src="assets/images/vereine/foerderverein-kinderkarneval.jpg" alt="Förderverein Kinderkarneval Wesel"></div><h3>Förderverein Kinderkarneval Wesel</h3><p>Ansprechpartner: Andreas von Brackel</p></article>
-          <article class="logo-society"><div class="logo-box"><img src="assets/images/vereine/traditionsgemeinschaft.jpg" alt="Prinzengarde der Stadt Wesel"></div><h3>Garde der Bürgerschützen zu Wesel e.V.</h3><p>Ansprechpartner: Dirk Knopf</p></article>
-          <article class="logo-society"><div class="logo-box"><img src="assets/images/vereine/karneval-kunterbunt.jpg" alt="Karneval Kunterbunt"></div><h3>Karneval Kunterbunt</h3><p>Ansprechpartnerin: Pia Lohmann</p></article>
-          <article class="logo-society"><div class="logo-box"><img src="assets/images/vereine/kgv.jpg" alt="Karnevalsgemeinschaft der Gindericher und Vereine"></div><h3>Karnevalsgemeinschaft der Gindericher und Vereine – KGV</h3><p>Ansprechpartner: Ralph Dahmen</p></article>
-          <article class="logo-society no-logo"><div class="logo-box"><img src="assets/images/caw-logo.jpg" alt="CAW"></div><h3>Närrisches Parlament der Stadt Wesel</h3><p>Ansprechpartnerin: Ulla Hornemann</p><small>Kein eigenes Logo hinterlegt</small></article>
-          <article class="logo-society no-logo"><div class="logo-box"><img src="assets/images/caw-logo.jpg" alt="CAW"></div><h3>Traditionsgemeinschaft ehemaliger Prinzenpaare und Dreigestirne</h3><p>Ansprechpartnerin: Ingrid Laader</p><small>Kein eigenes Logo hinterlegt</small></article>
-          <article class="logo-society"><div class="logo-box"><img src="assets/images/vereine/vesalia-red-stars.jpg" alt="Vesalia Red Stars"></div><h3>Vesalia Red Stars</h3><p>Ansprechpartnerin: Anne Holtkamp</p></article>
-          <article class="logo-society"><div class="logo-box"><img src="assets/images/vereine/wkv.jpg" alt="Weseler Karnevals Verein"></div><h3>Weseler Karnevals Verein – WKV</h3><p>Ansprechpartner: Alexander Berge</p></article>
-          <article class="logo-society"><div class="logo-box"><img src="assets/images/vereine/dinslakener-narrenkomitee.jpg" alt="1. Dinslakener Narrenkomitee 1979 e.V."></div><h3>1. Dinslakener Narrenkomitee 1979 e.V. – Die Pinguine</h3><p>Ansprechpartner: Jörg Köster</p></article>
+          <article class="logo-society"><div class="logo-box"><img src="assets/images/vereine/kolping.jpg" alt="Elferrat der Kolpingsfamilie Wesel"></div><h3>Elferrat der Kolpingsfamilie Wesel</h3><p>Ansprechpartnerin: Kristin Lohmann</p><div class="society-socials"><a class="society-social facebook" href="https://www.facebook.com/elferrat.der.kolpingsfamilie.wesel" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook"><span aria-hidden="true">f</span></a><a class="society-social instagram" href="https://www.instagram.com/elferrat_kolpingsfamilie_wesel/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><span aria-hidden="true">◎</span></a><a class="society-social homepage" href="https://elferrat-kolping-wesel.de" target="_blank" rel="noopener noreferrer" aria-label="Homepage" title="Homepage"><span aria-hidden="true">⌂</span></a></div></article>
+          <article class="logo-society"><div class="logo-box"><img src="assets/images/vereine/fanfaren-corps-ccl.png" alt="Fanfaren Corps CCL Wesel"></div><h3>Fanfaren Corps – CCL – Wesel e.V.</h3><p>Ansprechpartner: Thomas Neuköther</p><div class="society-socials"><a class="society-social facebook" href="https://www.facebook.com/FanfarencorpsCCLWesel" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook"><span aria-hidden="true">f</span></a><a class="society-social instagram" href="https://www.instagram.com/fanfarencorps_ccl_wesel/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><span aria-hidden="true">◎</span></a></div></article>
+          <article class="logo-society"><div class="logo-box"><img src="assets/images/vereine/fkk.png" alt="Feldmarker Karnevals-Komitee"></div><h3>Feldmarker Karnevals-Komitee – FKK</h3><p>Ansprechpartner: Sebastian Bassanese</p><div class="society-socials"><a class="society-social facebook" href="https://www.facebook.com/profile.php?id=100064452412325" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook"><span aria-hidden="true">f</span></a><a class="society-social instagram" href="https://www.instagram.com/fkk_feldmarkerkarnevalskomitee/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><span aria-hidden="true">◎</span></a><a class="society-social homepage" href="https://www.fkkwesel.de" target="_blank" rel="noopener noreferrer" aria-label="Homepage" title="Homepage"><span aria-hidden="true">⌂</span></a></div></article>
+          <article class="logo-society"><div class="logo-box"><img src="assets/images/vereine/foerderverein-kinderkarneval.jpg" alt="Förderkreis Kinderkarneval Wesel"></div><h3>Förderkreis Kinderkarneval Wesel</h3><p>Ansprechpartner: Andreas von Brackel</p><div class="society-socials"><a class="society-social facebook" href="https://www.facebook.com/profile.php?id=61552973215629" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook"><span aria-hidden="true">f</span></a><a class="society-social instagram" href="https://www.instagram.com/kinderkarneval_wesel/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><span aria-hidden="true">◎</span></a></div></article>
+          <article class="logo-society"><div class="logo-box"><img src="assets/images/vereine/traditionsgemeinschaft.jpg" alt="Prinzengarde der Stadt Wesel"></div><h3>Prinzengarde der Stadt Wesel</h3><p>Ansprechpartner: Dirk Knopf</p><div class="society-socials"><a class="society-social facebook" href="https://www.facebook.com/PrinzengardeWesel" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook"><span aria-hidden="true">f</span></a><a class="society-social instagram" href="https://www.instagram.com/prinzengardewesel/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><span aria-hidden="true">◎</span></a></div></article>
+          <article class="logo-society"><div class="logo-box"><img src="assets/images/vereine/karneval-kunterbunt.jpg" alt="Karneval Kunterbunt"></div><h3>Karneval Kunterbunt</h3><p>Ansprechpartnerin: Pia Lohmann</p><div class="society-socials"><a class="society-social facebook" href="https://www.facebook.com/KarnevalKunterbunt" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook"><span aria-hidden="true">f</span></a><a class="society-social instagram" href="https://www.instagram.com/karnevalkunterbunt/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><span aria-hidden="true">◎</span></a></div></article>
+          <article class="logo-society"><div class="logo-box"><img src="assets/images/vereine/kgv.jpg" alt="Karnevalsgemeinschaft der Gindericher und Vereine"></div><h3>Karnevalsgemeinschaft der Gindericher und Vereine – KGV</h3><p>Ansprechpartner: Pascal Dahmen</p><div class="society-socials"><a class="society-social facebook" href="https://www.facebook.com/kgvginderich" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook"><span aria-hidden="true">f</span></a><a class="society-social instagram" href="https://www.instagram.com/kgv_ginderich/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><span aria-hidden="true">◎</span></a><a class="society-social homepage" href="https://www.kgvginderich.de" target="_blank" rel="noopener noreferrer" aria-label="Homepage" title="Homepage"><span aria-hidden="true">⌂</span></a></div></article>
+          <article class="logo-society no-logo"><div class="logo-box"><img src="assets/images/caw-logo.jpg" alt="CAW"></div><h3>Närrisches Parlament der Stadt Wesel</h3><p>Ansprechpartner: Frank Schulten</p><small>Kein eigenes Logo hinterlegt</small></article>
+          <article class="logo-society"><div class="logo-box"><img src="assets/images/vereine/traditionsgemeinschaft-wesel.jpeg" alt="Traditionsgemeinschaft Weseler Dreigestirne"></div><h3>Traditionsgemeinschaft ehemaliger Prinzenpaare und Dreigestirne</h3><p>Ansprechpartnerin: Ingrid Laader</p></article>
+          <article class="logo-society"><div class="logo-box"><img src="assets/images/vereine/vesalia-red-stars.jpg" alt="Vesalia Red Stars"></div><h3>Vesalia Red Stars</h3><p>Ansprechpartnerin: Anne Holtkamp</p><div class="society-socials"><a class="society-social facebook" href="https://www.facebook.com/profile.php?id=100064441071646" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook"><span aria-hidden="true">f</span></a><a class="society-social instagram" href="https://www.instagram.com/vesaliaredstars/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><span aria-hidden="true">◎</span></a></div></article>
+          <article class="logo-society"><div class="logo-box"><img src="assets/images/vereine/wkv.jpg" alt="Weseler Karnevals Verein"></div><h3>Weseler Karnevals Verein – WKV</h3><p>Ansprechpartner: Alexander Berge</p><div class="society-socials"><a class="society-social facebook" href="https://www.facebook.com/profile.php?id=61557743542407" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook"><span aria-hidden="true">f</span></a><a class="society-social instagram" href="https://www.instagram.com/weselerkarnevalsverein/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><span aria-hidden="true">◎</span></a><a class="society-social tiktok" href="https://www.tiktok.com/@weseler_karnevals_verein/video/7398219334717377825?_d=secCgYIASAHKAESLgosEtM7RABlMHqSU9sYLeNZ8jMVGYhxuV9gBAGUvXk5J0EOf3CFdUc4hueO92caAA%3D%3D&amp;_r=1&amp;share_app_id=1233&amp;share_item_id=7398219334717377825&amp;timestamp=1722544966&amp;u_code=d0c1f8l920l30l&amp;utm_campaign=client_share&amp;utm_source=short_fallback" target="_blank" rel="noopener noreferrer" aria-label="TikTok" title="TikTok"><span aria-hidden="true">♪</span></a></div></article>
+          <article class="logo-society"><div class="logo-box"><img src="assets/images/vereine/dinslakener-narrenkomitee.jpg" alt="1. Dinslakener Narrenkomitee 1979 e.V."></div><h3>1. Dinslakener Narrenkomitee 1979 e.V. – Die Pinguine</h3><p>Ansprechpartner: Jörg Köster</p><div class="society-socials"><a class="society-social facebook" href="https://www.facebook.com/DNK.Pinguine" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook"><span aria-hidden="true">f</span></a><a class="society-social instagram" href="https://www.instagram.com/1.dnk_die_pinguine/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><span aria-hidden="true">◎</span></a><a class="society-social homepage" href="https://dinslakener-pinguine.de" target="_blank" rel="noopener noreferrer" aria-label="Homepage" title="Homepage"><span aria-hidden="true">⌂</span></a></div></article>
         </div>
       </div>
     </section>
@@ -442,7 +450,7 @@
           <article class="legal-card">
             <h3>Technischer Ansprechpartner</h3>
             <p><strong>Lukas Berge</strong></p>
-            <p>Weimarerstraße 22<br>46483 Wesel</p>
+            <p>Weimarerstraße 15<br>46483 Wesel</p>
             <p>E-Mail: <a href="mailto:geschaeftsfuehrer.caw@gmail.com">geschaeftsfuehrer.caw@gmail.com</a></p>
           </article>
         </div>
@@ -484,7 +492,7 @@
     <img src="assets/images/caw-logo.jpg" alt="">
     <div>
       <strong>Carnevals-Ausschuss Wesel e.V.</strong>
-      <span>© 2026 · Offline-Entwurf</span>
+      <span>© 2026</span>
     </div>
   
     <div class="footer-legal-links">
