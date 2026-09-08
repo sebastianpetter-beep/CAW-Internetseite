@@ -35,6 +35,12 @@
     .wb-status.show{display:block}
     .wb-status.error{background:#fff0ef;color:#9d261f;border:1px solid #efc3be}
     .wb-status.ok{background:#eef8ef;color:#225b2b;border:1px solid #c6e4ca}
+    .wb-status.loading{display:flex;align-items:flex-start;gap:12px;background:#fff8e7;color:#6b4a12;border:1px solid #eed69a}
+    .wb-spinner{width:20px;height:20px;flex:0 0 20px;border:3px solid rgba(190,44,36,.18);border-top-color:var(--wb-red);border-radius:50%;animation:wbSpin .8s linear infinite;margin-top:1px}
+    .wb-loading-copy{display:flex;flex-direction:column;gap:2px}
+    .wb-loading-copy strong{color:var(--wb-dark)}
+    .wb-btn:disabled{cursor:wait;opacity:.72;transform:none}
+    @keyframes wbSpin{to{transform:rotate(360deg)}}
     .wb-hidden{display:none!important}
     .person-list{display:grid;gap:12px;margin-top:18px}
     .person-row{display:grid;grid-template-columns:42px 1fr 1fr 1fr auto;gap:10px;align-items:end;padding:14px;border:1px solid #ecdcd4;border-radius:16px;background:#fffdfa}
@@ -88,7 +94,7 @@
     <p>Dieser Bereich ist ausschließlich für Mitglieder der CAW-Mitgliedsvereine vorgesehen.</p>
     <form id="loginForm">
       <div class="wb-field"><label for="password">Passwort</label><input id="password" type="password" autocomplete="current-password" required></div>
-      <div class="wb-actions"><button class="wb-btn primary" type="submit">Bereich öffnen</button></div>
+      <div class="wb-actions"><button id="loginBtn" class="wb-btn primary" type="submit">Bereich öffnen</button></div>
       <div id="loginStatus" class="wb-status" role="status"></div>
     </form>
   </section>
@@ -110,7 +116,7 @@
             <option>Fanfaren Corps – CCL – Wesel e.V.</option>
             <option>Feldmarker Karnevals-Komitee – FKK</option>
             <option>Förderkreis Kinderkarneval Wesel</option>
-            <option>Garde der Bürgerschützen zu Wesel e.V. / Prinzengarde der Stadt Wesel</option>
+            <option>Prinzengarde der Stadt Wesel</option>
             <option>Karneval Kunterbunt</option>
             <option>Karnevalsgemeinschaft der Gindericher und Vereine – KGV</option>
             <option>Närrisches Parlament der Stadt Wesel</option>
@@ -164,6 +170,7 @@ const formCard = document.getElementById("formCard");
 const loginForm = document.getElementById("loginForm");
 const wagenbauForm = document.getElementById("wagenbauForm");
 const loginStatus = document.getElementById("loginStatus");
+const loginBtn = document.getElementById("loginBtn");
 const sendStatus = document.getElementById("sendStatus");
 const validDate = document.getElementById("validDate");
 const personList = document.getElementById("personList");
@@ -180,6 +187,15 @@ function showStatus(el, msg, type){
   el.textContent = msg; el.className = "wb-status show " + type;
 }
 function clearStatus(el){ el.textContent=""; el.className="wb-status"; }
+function showLoginLoading(message, detail){
+  loginStatus.innerHTML = `<span class="wb-spinner" aria-hidden="true"></span><span class="wb-loading-copy"><strong>${message}</strong><span>${detail}</span></span>`;
+  loginStatus.className = "wb-status show loading";
+}
+function setLoginBusy(busy){
+  loginBtn.disabled = busy;
+  loginBtn.textContent = busy ? "Bitte warten …" : "Bereich öffnen";
+  document.getElementById("password").disabled = busy;
+}
 function formatDate(iso){
   const [y,m,d] = iso.split("-");
   return `${d}.${m}.${y}`;
@@ -206,13 +222,32 @@ loginForm.addEventListener("submit", async e=>{
   if(API_BASE.includes("DEIN-WAGENBAU-BACKEND")){
     showStatus(loginStatus,"Das Backend ist noch nicht verbunden. Trage nach dem Render-Setup die Backend-URL in wagenbau.html ein.","error"); return;
   }
+
+  setLoginBusy(true);
+  showLoginLoading(
+    "Zugang wird geprüft …",
+    "Der geschützte Wagenbau-Bereich wird geladen. Beim ersten Aufruf kann der Server einen Moment zum Starten benötigen. Bitte warten."
+  );
+
+  const slowHint = window.setTimeout(()=>{
+    showLoginLoading(
+      "Der Server wird gerade gestartet …",
+      "Das kann beim ersten Aufruf etwas länger dauern. Bitte die Seite nicht neu laden – der Bereich öffnet sich automatisch, sobald der Server bereit ist."
+    );
+  },10000);
+
   try{
     const res = await api("/api/login",{method:"POST",body:JSON.stringify({password:document.getElementById("password").value})});
     const data = await res.json();
     if(!res.ok) throw new Error(data.error||"Anmeldung fehlgeschlagen.");
     authToken=data.token; sessionStorage.setItem("cawWagenbauToken",authToken);
     openForm(data.applicationDate);
-  }catch(err){ showStatus(loginStatus,err.message||"Verbindung zum Server fehlgeschlagen.","error"); }
+  }catch(err){
+    showStatus(loginStatus,err.message||"Verbindung zum Server fehlgeschlagen.","error");
+  }finally{
+    window.clearTimeout(slowHint);
+    setLoginBusy(false);
+  }
 });
 
 function addPerson(){
