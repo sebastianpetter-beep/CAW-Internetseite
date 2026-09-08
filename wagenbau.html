@@ -54,9 +54,21 @@
     .wb-check input{margin-top:3px;transform:scale(1.18)}
     .wb-footer-note{font-size:.86rem;color:#7b6b64;margin-top:20px}
     .wb-topback{display:inline-flex;margin-bottom:14px;color:var(--wb-dark);font-weight:800;text-decoration:none}
+    .wb-portal-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:18px}
+    .wb-portal-tile{border:1px solid var(--wb-line);border-radius:18px;padding:22px;background:#fffdfa;display:flex;flex-direction:column;gap:10px}
+    .wb-portal-tile h3{margin:0;color:var(--wb-dark);font-size:1.25rem}
+    .wb-portal-tile p{margin:0;color:#6d5b54;line-height:1.45}
+    .wb-registration-list{display:grid;gap:12px;margin-top:18px}
+    .wb-registration{border:1px solid var(--wb-line);border-radius:16px;padding:16px;background:#fffdfa}
+    .wb-registration-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+    .wb-registration h3{margin:0;color:var(--wb-dark);font-size:1.05rem}
+    .wb-registration-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;color:#6d5b54;font-size:.9rem}
+    .wb-chip{display:inline-flex;align-items:center;padding:5px 9px;border-radius:999px;background:#f7ebe6;color:var(--wb-dark);font-weight:800;font-size:.8rem}
+    .wb-codebox{margin-top:14px;padding-top:14px;border-top:1px solid var(--wb-line)}
+    .wb-empty{padding:18px;border:1px dashed #d8c5bc;border-radius:14px;background:#fffdfa;color:#6d5b54;text-align:center}
     @media(max-width:860px){
       .person-row{grid-template-columns:38px 1fr 1fr}.person-row .plate{grid-column:2/4}.person-row .remove-person{grid-column:4;grid-row:1}
-      .wb-grid,.wb-grid.three{grid-template-columns:1fr}
+      .wb-grid,.wb-grid.three,.wb-portal-grid{grid-template-columns:1fr}
     }
     @media(max-width:620px){
       .wb-shell{padding:24px 12px 52px}.wb-card{border-radius:18px;padding:18px}.wb-head{grid-template-columns:72px 1fr;gap:14px}.wb-head img{max-width:72px;border-radius:14px}
@@ -97,6 +109,29 @@
       <div class="wb-actions"><button id="loginBtn" class="wb-btn primary" type="submit">Bereich öffnen</button></div>
       <div id="loginStatus" class="wb-status" role="status"></div>
     </form>
+  </section>
+
+
+  <section id="portalCard" class="wb-card wb-hidden">
+    <div class="wb-section-title">
+      <div><span class="wb-kicker">Wagenbau-Portal</span><h2 style="margin:.15em 0 0">Was möchten Sie tun?</h2></div>
+      <div class="wb-validity">Heute: <span id="portalDate">–</span></div>
+    </div>
+    <div class="wb-portal-grid">
+      <div class="wb-portal-tile">
+        <h3>Wagenbau anmelden</h3>
+        <p>Personen und Fahrzeuge für den heutigen Wagenbau anmelden, Nutzungsberechtigung als PDF erstellen und automatisch versenden.</p>
+        <div class="wb-actions"><button id="goRegisterBtn" class="wb-btn primary" type="button">Anmeldung öffnen</button></div>
+      </div>
+      <div class="wb-portal-tile">
+        <h3>Vom Betriebsgelände abmelden</h3>
+        <p>Eine heute noch offene Wagenbau-Anmeldung auswählen und mit den letzten vier Ziffern der Vorgangsnummer abschließen.</p>
+        <div class="wb-actions"><button id="goDeregisterBtn" class="wb-btn secondary" type="button">Abmeldung öffnen</button></div>
+      </div>
+    </div>
+    <div class="wb-actions">
+      <button id="portalLogoutBtn" class="wb-btn danger" type="button">Portal verlassen</button>
+    </div>
   </section>
 
   <section id="formCard" class="wb-card wb-hidden">
@@ -147,7 +182,8 @@
 
       <div class="wb-actions">
         <button id="submitBtn" class="wb-btn primary" type="submit">PDF erstellen & versenden</button>
-        <button id="logoutBtn" class="wb-btn secondary" type="button">Abmelden</button>
+        <button id="openDeregisterBtn" class="wb-btn secondary" type="button">Vom Betriebsgelände abmelden</button>
+        <button id="backPortalBtn" class="wb-btn secondary" type="button">Zur Portal-Auswahl</button>
       </div>
       <div id="sendStatus" class="wb-status" role="status"></div>
       <div id="downloadWrap" class="wb-actions wb-hidden"><a id="downloadPdf" class="wb-btn secondary" href="#" download>PDF herunterladen</a></div>
@@ -155,18 +191,38 @@
 
     <p class="wb-footer-note">Die eingegebenen Daten werden nicht im Browser dauerhaft gespeichert. Der Versand erfolgt an CAW, Pilkington und die E-Mail-Adresse des Erstellers. Die Empfängeradressen für CAW und Pilkington werden serverseitig festgelegt.</p>
   </section>
+
+  <section id="deregisterCard" class="wb-card wb-hidden">
+    <div class="wb-section-title">
+      <div><span class="wb-kicker">Wagenbau beenden</span><h2 style="margin:.15em 0 0">Vom Betriebsgelände abmelden</h2></div>
+      <div class="wb-validity">Heute: <span id="deregisterDate">–</span></div>
+    </div>
+    <div class="wb-note"><strong>So funktioniert die Abmeldung:</strong> Wählen Sie Ihren offenen Vorgang aus und geben Sie die letzten vier Ziffern der Vorgangsnummer ein. Nach erfolgreicher Abmeldung werden CAW, Pilkington und der Antragsteller automatisch per E-Mail informiert.</div>
+
+    <div class="wb-actions">
+      <button id="refreshRegistrationsBtn" class="wb-btn secondary" type="button">Offene Vorgänge aktualisieren</button>
+      <button id="backPortalFromDeregisterBtn" class="wb-btn secondary" type="button">Zur Portal-Auswahl</button>
+    </div>
+
+    <div id="deregisterStatus" class="wb-status" role="status"></div>
+    <div id="registrationList" class="wb-registration-list"></div>
+  </section>
+
 </main>
 
 <script src="assets/script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
 <script>
-/* WICHTIG: Nach Anlegen des Render-Backends hier die echte URL eintragen, z.B.
-   const API_BASE = "https://caw-wagenbau-api.onrender.com";
-*/
 const API_BASE = "https://caw-wagenbau-backend.onrender.com";
 
 const loginCard = document.getElementById("loginCard");
 const formCard = document.getElementById("formCard");
+const portalCard = document.getElementById("portalCard");
+const deregisterCard = document.getElementById("deregisterCard");
+const portalDate = document.getElementById("portalDate");
+const deregisterDate = document.getElementById("deregisterDate");
+const registrationList = document.getElementById("registrationList");
+const deregisterStatus = document.getElementById("deregisterStatus");
 const loginForm = document.getElementById("loginForm");
 const wagenbauForm = document.getElementById("wagenbauForm");
 const loginStatus = document.getElementById("loginStatus");
@@ -200,17 +256,29 @@ function formatDate(iso){
   const [y,m,d] = iso.split("-");
   return `${d}.${m}.${y}`;
 }
-function openForm(date){
+function showOnly(card){
+  [loginCard,portalCard,formCard,deregisterCard].forEach(el=>el.classList.add("wb-hidden"));
+  card.classList.remove("wb-hidden");
+}
+function openPortal(date){
   serverDate = date;
-  validDate.textContent = formatDate(date);
-  loginCard.classList.add("wb-hidden");
-  formCard.classList.remove("wb-hidden");
+  const display = formatDate(date);
+  portalDate.textContent = display;
+  validDate.textContent = display;
+  deregisterDate.textContent = display;
+  showOnly(portalCard);
+}
+function openForm(date=serverDate){
+  serverDate = date || serverDate;
+  validDate.textContent = formatDate(serverDate);
+  showOnly(formCard);
   if(!personList.children.length) addPerson();
 }
 function logout(){
   authToken=""; sessionStorage.removeItem("cawWagenbauToken");
-  formCard.classList.add("wb-hidden"); loginCard.classList.remove("wb-hidden");
+  showOnly(loginCard);
   document.getElementById("password").value="";
+  clearStatus(loginStatus);
 }
 async function api(path, options={}){
   const headers = Object.assign({"Content-Type":"application/json"}, options.headers||{});
@@ -241,7 +309,7 @@ loginForm.addEventListener("submit", async e=>{
     const data = await res.json();
     if(!res.ok) throw new Error(data.error||"Anmeldung fehlgeschlagen.");
     authToken=data.token; sessionStorage.setItem("cawWagenbauToken",authToken);
-    openForm(data.applicationDate);
+    openPortal(data.applicationDate);
   }catch(err){
     showStatus(loginStatus,err.message||"Verbindung zum Server fehlgeschlagen.","error");
   }finally{
@@ -273,7 +341,13 @@ function renumberPersons(){
   addPersonBtn.disabled=personList.children.length>=15;
 }
 addPersonBtn.addEventListener("click",addPerson);
-document.getElementById("logoutBtn").addEventListener("click",logout);
+document.getElementById("portalLogoutBtn").addEventListener("click",logout);
+document.getElementById("goRegisterBtn").addEventListener("click",()=>openForm(serverDate));
+document.getElementById("backPortalBtn").addEventListener("click",()=>openPortal(serverDate));
+document.getElementById("goDeregisterBtn").addEventListener("click",openDeregister);
+document.getElementById("openDeregisterBtn").addEventListener("click",openDeregister);
+document.getElementById("backPortalFromDeregisterBtn").addEventListener("click",()=>openPortal(serverDate));
+document.getElementById("refreshRegistrationsBtn").addEventListener("click",loadRegistrations);
 
 function getPersons(){
   return [...personList.children].map(row=>({
@@ -282,6 +356,118 @@ function getPersons(){
     plate:row.querySelector(".p-plate").value.trim().toUpperCase()
   }));
 }
+
+function formatBerlinDateTime(value){
+  try{
+    return new Intl.DateTimeFormat("de-DE",{
+      timeZone:"Europe/Berlin",day:"2-digit",month:"2-digit",year:"numeric",
+      hour:"2-digit",minute:"2-digit"
+    }).format(new Date(value)).replace(","," ·");
+  }catch(e){ return "–"; }
+}
+async function openDeregister(){
+  showOnly(deregisterCard);
+  deregisterDate.textContent = serverDate ? formatDate(serverDate) : "–";
+  await loadRegistrations();
+}
+async function loadRegistrations(){
+  clearStatus(deregisterStatus);
+  registrationList.innerHTML = '<div class="wb-empty">Offene Vorgänge werden geladen …</div>';
+  try{
+    const res = await api("/api/registrations",{method:"GET"});
+    const data = await res.json();
+    if(!res.ok) throw new Error(data.error||"Offene Vorgänge konnten nicht geladen werden.");
+    if(data.date){
+      serverDate=data.date;
+      deregisterDate.textContent=formatDate(data.date);
+      portalDate.textContent=formatDate(data.date);
+      validDate.textContent=formatDate(data.date);
+    }
+    const regs = Array.isArray(data.registrations) ? data.registrations : [];
+    if(!regs.length){
+      registrationList.innerHTML = '<div class="wb-empty"><strong>Keine offenen Wagenbau-Anmeldungen.</strong><br>Für heute ist aktuell kein Vorgang mehr aktiv.</div>';
+      return;
+    }
+    registrationList.innerHTML="";
+    regs.forEach(reg=>{
+      const wrap=document.createElement("article");
+      wrap.className="wb-registration";
+      const club=document.createElement("h3");
+      club.textContent=reg.club||"CAW-Mitgliedsverein";
+      const head=document.createElement("div");
+      head.className="wb-registration-head";
+      const left=document.createElement("div");
+      left.appendChild(club);
+      const meta=document.createElement("div");
+      meta.className="wb-registration-meta";
+      const details=[
+        reg.applicationIdMasked || "Vorgang",
+        `${Number(reg.personCount||0)} Person${Number(reg.personCount||0)===1?"":"en"}`,
+        `angemeldet ${formatBerlinDateTime(reg.registeredAt)} Uhr`
+      ];
+      details.forEach(t=>{
+        const chip=document.createElement("span");
+        chip.className="wb-chip";
+        chip.textContent=t;
+        meta.appendChild(chip);
+      });
+      left.appendChild(meta);
+      head.appendChild(left);
+      wrap.appendChild(head);
+
+      const codeBox=document.createElement("div");
+      codeBox.className="wb-codebox";
+      codeBox.innerHTML=`
+        <div class="wb-grid">
+          <div class="wb-field">
+            <label>Letzte 4 Ziffern der Vorgangsnummer *</label>
+            <input class="deregister-code" inputmode="numeric" maxlength="4" pattern="[0-9]{4}" placeholder="z. B. 8725" autocomplete="one-time-code">
+          </div>
+          <div class="wb-field">
+            <label>&nbsp;</label>
+            <button class="wb-btn danger deregister-submit" type="button">Abmeldung bestätigen</button>
+          </div>
+        </div>
+        <div class="wb-status deregister-row-status" role="status"></div>`;
+      wrap.appendChild(codeBox);
+      const button=wrap.querySelector(".deregister-submit");
+      const input=wrap.querySelector(".deregister-code");
+      const rowStatus=wrap.querySelector(".deregister-row-status");
+      button.addEventListener("click",async()=>{
+        clearStatus(rowStatus);
+        const code=input.value.trim();
+        if(!/^\d{4}$/.test(code)){
+          showStatus(rowStatus,"Bitte genau die letzten vier Ziffern der Vorgangsnummer eingeben.","error");
+          return;
+        }
+        if(!confirm(`Soll der Wagenbauvorgang von „${reg.club}“ jetzt verbindlich abgemeldet werden?`)) return;
+        button.disabled=true;
+        button.textContent="Abmeldung wird versendet …";
+        try{
+          const response=await api("/api/deregister",{
+            method:"POST",
+            body:JSON.stringify({id:String(reg.id),code})
+          });
+          const result=await response.json();
+          if(!response.ok) throw new Error(result.error||"Abmeldung fehlgeschlagen.");
+          showStatus(deregisterStatus,`Erfolgreich abgemeldet. Vorgangsnummer: ${result.applicationId}. CAW, Pilkington und der Antragsteller wurden informiert.`,"ok");
+          await loadRegistrations();
+        }catch(err){
+          showStatus(rowStatus,err.message||"Die Abmeldung konnte nicht durchgeführt werden.","error");
+        }finally{
+          button.disabled=false;
+          button.textContent="Abmeldung bestätigen";
+        }
+      });
+      registrationList.appendChild(wrap);
+    });
+  }catch(err){
+    registrationList.innerHTML="";
+    if((err.message||"").toLowerCase().includes("nicht angemeldet")) logout();
+    else showStatus(deregisterStatus,err.message||"Offene Vorgänge konnten nicht geladen werden.","error");
+  }
+}
+
 async function imageToDataURL(url){
   const res=await fetch(url);
   if(!res.ok) throw new Error("CAW-Logo konnte nicht geladen werden.");
@@ -391,7 +577,7 @@ wagenbauForm.addEventListener("submit", async e=>{
     pdfObjectUrl=URL.createObjectURL(pdfBlob);
     downloadPdf.href=pdfObjectUrl; downloadPdf.download=`CAW_Nutzungsberechtigung_Wagenbau_${serverDate}_${reservation.applicationId}.pdf`;
     downloadWrap.classList.remove("wb-hidden");
-    showStatus(sendStatus,`Erfolgreich erstellt und versendet. Vorgangsnummer: ${reservation.applicationId}`,"ok");
+    showStatus(sendStatus,`Erfolgreich erstellt und versendet. Vorgangsnummer: ${reservation.applicationId}. Die letzten vier Ziffern dienen später als Abmeldecode.`,"ok");
   }catch(err){
     if((err.message||"").toLowerCase().includes("nicht angemeldet")) logout();
     showStatus(sendStatus,err.message||"Beim Erstellen ist ein Fehler aufgetreten.","error");
