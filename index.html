@@ -23,6 +23,38 @@
 @media(max-width:760px){.society-socials{gap:8px;margin-top:10px}.society-social{width:34px;height:34px;font-size:17px}}
 </style>
 
+
+<style>
+/* Aufgeräumte Hauptnavigation 2026/27 */
+.main-nav .nav-highlight{background:#d9a62e;color:#3b2600!important;padding:10px 14px;border-radius:999px;font-weight:900}
+.nav-more{position:relative}
+.nav-more>summary{list-style:none;cursor:pointer;font-weight:800;color:inherit;padding:8px 4px}
+.nav-more>summary::-webkit-details-marker{display:none}
+.nav-more>summary:after{content:" ▾";font-size:.75em}
+.nav-more-menu{position:absolute;right:0;top:calc(100% + 10px);min-width:230px;background:#fff;border:1px solid #ead8cf;border-radius:16px;padding:10px;box-shadow:0 16px 45px rgba(60,20,20,.18);z-index:30}
+.nav-more-menu a{display:block!important;color:#6d201d!important;padding:10px 12px!important;border-radius:10px;white-space:nowrap}
+.nav-more-menu a:hover{background:#fff5ef}
+.prok-cta{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;font-weight:900;border-radius:999px;padding:12px 18px;background:#d9a62e;color:#3b2600;box-shadow:0 8px 20px rgba(130,85,0,.15)}
+.prok-cta:hover{transform:translateY(-1px)}
+.hero-actions .prok-cta{background:#d9a62e;color:#3b2600}
+.prok-event-link{display:inline-flex;margin-top:12px;text-decoration:none;font-weight:900;background:#be2c24;color:#fff;padding:10px 15px;border-radius:999px}
+@media(max-width:1050px){
+  .main-nav{align-items:stretch}
+  .main-nav>a,.main-nav .nav-more{width:100%}
+  .main-nav>a{display:block!important}
+  .main-nav .nav-highlight{order:-20;text-align:center;margin-bottom:5px}
+  .main-nav a[href="#termine"]{order:-19}
+  .main-nav a[href="#prinzenpaare"]{order:-18}
+  .main-nav a[href="#rosenmontag"]{order:-17}
+  .main-nav a[href="#kinderkarneval"]{order:-16}
+  .main-nav a[href="#aktuelles"]{order:-15}
+  .main-nav a[href="#start"]{order:-14}
+  .nav-more{order:20}
+  .nav-more>summary{display:none}
+  .nav-more-menu,.nav-more:not([open]) .nav-more-menu{display:block!important;position:static;min-width:0;background:transparent;border:0;box-shadow:none;padding:2px 0 0}
+  .nav-more-menu a{color:inherit!important;padding:11px 16px!important;white-space:normal}
+}
+</style>
 </head>
 <body>
   <header class="site-header modern-header">
@@ -33,10 +65,25 @@
       <div class="brand-copy"><strong>Carnevals-Ausschuss Wesel e.V.</strong><span>Gemeinsam für den Weseler Karneval</span></div>
     </a>
     <nav id="main-nav" class="main-nav" aria-label="Hauptnavigation">
-      <a href="#start">Start</a><a href="#ueber-uns">Über uns</a><a href="#prinzenpaare">Prinzenpaare</a>
-      <a href="#termine">Termine</a><a href="#vorstand">Vorstand</a><a href="#vereine">12 Gesellschaften</a>
-      <a href="#historie">Historie</a><a href="#rosenmontag">Rosenmontag</a><a href="#kinderkarneval">Kinderkarneval</a>
-      <a href="#downloads">Downloads</a><a href="wagenbau.html">🔒 Wagenbau intern</a><a href="#kontakt">Kontakt</a>
+      <a class="nav-highlight" href="proklamation.html">🎟️ Prinzenproklamation</a>
+      <a href="#termine">Termine</a>
+      <a href="#prinzenpaare">Prinzenpaare</a>
+      <a href="#rosenmontag">Rosenmontag</a>
+      <a href="#kinderkarneval">Kinderkarneval</a>
+      <a href="#aktuelles">Aktuelles</a>
+      <a href="#start">Start</a>
+      <details class="nav-more">
+        <summary>Mehr</summary>
+        <div class="nav-more-menu">
+          <a href="#ueber-uns">Über uns</a>
+          <a href="#vorstand">Vorstand</a>
+          <a href="#vereine">12 Gesellschaften</a>
+          <a href="#historie">Historie</a>
+          <a href="#downloads">Downloads</a>
+          <a href="wagenbau.html">🔒 Wagenbau intern</a>
+          <a href="#kontakt">Kontakt</a>
+        </div>
+      </details>
     </nav>
     <button class="menu-toggle" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="main-nav">☰</button>
     <div class="view-switch" aria-label="Ansicht wählen">
@@ -67,7 +114,7 @@
           <span class="eyebrow">Designiertes Prinzenpaar · Session 2026/2027</span>
           <h1>Prinzessin Anke I. &amp; Prinz Jörg II.</h1>
           <p>Karneval verbindet.</p>
-          <div class="hero-actions"><a class="hero-button" href="#prinzenpaare">Mehr erfahren</a><a class="social-button instagram" href="https://www.instagram.com/prinzenpaarwesel26_27?igsi=MnI5M2MzYng1MXFl&utm_source=qr" target="_blank" rel="noopener">Instagram</a><a class="social-button facebook" href="https://www.facebook.com/profile.php?id=61593910648545" target="_blank" rel="noopener">Facebook</a></div>
+          <div class="hero-actions"><a class="hero-button" href="#prinzenpaare">Mehr erfahren</a><a class="prok-cta" href="proklamation.html">Jetzt Anfrage zur Prinzenproklamation</a><a class="social-button instagram" href="https://www.instagram.com/prinzenpaarwesel26_27?igsi=MnI5M2MzYng1MXFl&utm_source=qr" target="_blank" rel="noopener">Instagram</a><a class="social-button facebook" href="https://www.facebook.com/profile.php?id=61593910648545" target="_blank" rel="noopener">Facebook</a></div>
         </div>
       </div>
 
@@ -100,6 +147,7 @@
           <h2>Karneval in Wesel hat ein Zuhause.</h2>
           <p>Der Carnevals-Ausschuss Wesel e.V. verbindet die Weseler Karnevalsvereine, begleitet das Prinzenpaar der Stadt und steht für Tradition, Gemeinschaft und die Freude am närrischen Brauchtum.</p>
           <p>Diese Seite wächst Schritt für Schritt zu unserem neuen digitalen Zuhause.</p>
+          <p><a class="prok-cta" href="proklamation.html">Zur Prinzenproklamation 2026/27 →</a></p>
         </div>
         <div class="logo-card">
           <img src="assets/images/caw-logo.jpg" alt="CAW Wesel">
@@ -120,7 +168,7 @@
           <article class="card">
             <div class="card-meta"><div class="card-top gold">2026 / 2027</div><span class="status-badge status-designated">Designiert</span></div>
             <h3>Prinzessin Anke I. &amp; Prinz Jörg II.</h3>
-            <p>Mit Pagin Eva Tenbergen, Page Oliver Heselmann und Prinzenführer Luc Eben.</p><div class="card-socials"><a class="social-link instagram" href="https://www.instagram.com/prinzenpaarwesel26_27?igsi=MnI5M2MzYng1MXFl&utm_source=qr" target="_blank" rel="noopener">Instagram</a><a class="social-link facebook" href="https://www.facebook.com/profile.php?id=61593910648545" target="_blank" rel="noopener">Facebook</a><a class="session-card-button" href="anke-joerg-2026-2027.html">Mehr über Anke &amp; Jörg →</a></div>
+            <p>Mit Pagin Eva Tenbergen, Page Oliver Heselmann und Prinzenführer Luc Eben.</p><div class="card-socials"><a class="prok-cta" href="proklamation.html">Teilnahmeanfrage zur Proklamation</a><a class="social-link instagram" href="https://www.instagram.com/prinzenpaarwesel26_27?igsi=MnI5M2MzYng1MXFl&utm_source=qr" target="_blank" rel="noopener">Instagram</a><a class="social-link facebook" href="https://www.facebook.com/profile.php?id=61593910648545" target="_blank" rel="noopener">Facebook</a><a class="session-card-button" href="anke-joerg-2026-2027.html">Mehr über Anke &amp; Jörg →</a></div>
           </article>
           <article class="card">
             <div class="card-meta"><div class="card-top red">Kinderprinzenpaar 2025 / 2026</div><span class="status-badge status-current">Amtierend</span></div>
@@ -195,8 +243,8 @@
           <article class="event-card"><div class="date"><b>14</b><span>NOV 2026</span></div><div><h3>Proklamation Kinderprinzessin Elia I.</h3><p>Proklamation der designierten Kinderprinzessin Elia I. für die Session 2026/27.</p><small>Einlass 10:00 Uhr · Beginn 11:11 Uhr</small></div></article>
           <article class="event-card important-event"><div class="date"><b>20</b><span>NOV 2026</span></div><div>
 <h3>Prinzenproklamation</h3><p>Proklamation der Weseler Tollitäten für die Session 2026/27.</p>
-<div class="event-notice"><strong>Keine öffentliche Veranstaltung.</strong><br>Eine Teilnahme ist ausschließlich nach vorheriger Reservierung per E-Mail möglich.<br>
-<a href="mailto:geschaeftsfuehrer.caw@gmail.com">geschaeftsfuehrer.caw@gmail.com</a></div></div></article>
+<div class="event-notice"><strong>Teilnahme nur nach bestätigter Anfrage.</strong><br>Die Teilnahme wird über unser persönliches Anfrage- und Ticketsystem organisiert.<br>
+<a class="prok-event-link" href="proklamation.html">Jetzt Teilnahmeanfrage stellen →</a></div></div></article>
           <article class="event-card"><div class="date"><b>03</b><span>JAN 2027</span></div><div><h3>Niederrheinisches Prinzentreffen</h3><p>Treffen der Tollitäten aus der Region.</p></div></article>
         </div>
       </div>
@@ -276,7 +324,7 @@
         </div>
 
         <span class="section-kicker">Tradition seit Jahrzehnten</span>
-        <h2>Die Geschichte des CAW</h2>
+        <h2>Meilensteine unserer Geschichte</h2>
         <div class="timeline">
           <article><div>1966</div><section><h3>Der Weseler Rosenmontagszug entsteht</h3><p>Jecken der Kolpingsfamilie und der Elferrat der Bürgerschützen ziehen gemeinsam durch Wesel. Aus kleinen Wagen und wenigen Fußgruppen entwickelt sich eine feste Weseler Tradition.</p></section></article>
           <article><div>1967</div><section><h3>Gründung des CAW</h3><p>Die Weseler Karnevalsvereine schließen sich in einer Dachorganisation zusammen, um den gesamtstädtischen Karneval gemeinsam zu gestalten.</p></section></article>

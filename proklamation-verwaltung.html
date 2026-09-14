@@ -17,11 +17,12 @@
     .admin-btn{appearance:none;border:0;border-radius:999px;padding:12px 18px;font:900 14px/1.2 inherit;cursor:pointer;transition:.18s;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--prok-red);color:#fff}.admin-btn:hover{transform:translateY(-1px)}.admin-btn.secondary{background:#f7ebe6;color:var(--prok-dark);border:1px solid #ead2c8}.admin-btn.green{background:#287a3e}.admin-btn.blue{background:#245c9c}.admin-btn.gray{background:#666}.admin-btn:disabled{cursor:wait;opacity:.68;transform:none}.admin-actions{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-top:16px}
     .admin-status{padding:12px 14px;border-radius:12px;margin-top:14px;display:none}.admin-status.show{display:block}.admin-status.error{background:#fff0ef;color:#9d261f;border:1px solid #efc3be}.admin-status.ok{background:#eef8ef;color:#225b2b;border:1px solid #c6e4ca}.admin-status.loading{display:flex;align-items:flex-start;gap:12px;background:#fff8e7;color:#6b4a12;border:1px solid #eed69a}.admin-spinner{width:20px;height:20px;flex:0 0 20px;border:3px solid rgba(190,44,36,.18);border-top-color:var(--prok-red);border-radius:50%;animation:adminSpin .8s linear infinite;margin-top:1px}@keyframes adminSpin{to{transform:rotate(360deg)}}.admin-loading-copy{display:flex;flex-direction:column;gap:2px}.admin-loading-copy strong{color:var(--prok-dark)}
     .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}.stat{background:#fffaf4;border:1px solid #ecd8ca;border-radius:16px;padding:17px}.stat b{display:block;font:700 2rem Georgia,serif;color:var(--prok-dark);line-height:1}.stat span{display:block;margin-top:6px;color:var(--prok-muted);font-size:.9rem}
+    .filter-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:16px 0 4px}.filter-card{appearance:none;border:1px solid #ead8cf;background:#fff;border-radius:16px;padding:15px;text-align:left;cursor:pointer;transition:.18s;color:#3e302b}.filter-card:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(72,31,22,.08)}.filter-card.active{border-color:var(--prok-red);box-shadow:0 0 0 3px rgba(190,44,36,.10);background:#fff9f6}.filter-card b{display:block;font:700 1.7rem Georgia,serif;color:var(--prok-dark)}.filter-card span{font-size:.88rem;color:var(--prok-muted)}.filter-card.cancelled.active{border-color:#7a6b63;background:#f7f4f2;box-shadow:0 0 0 3px rgba(90,80,75,.08)}
     .admin-toolbar{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:16px}.admin-toolbar h2{margin:0}
     .table-wrap{overflow:auto;border:1px solid #eee1d8;border-radius:16px}.admin-table{width:100%;border-collapse:collapse;min-width:980px}.admin-table th{background:#fff7ef;color:var(--prok-dark);font-size:.78rem;text-transform:uppercase;letter-spacing:.04em}.admin-table th,.admin-table td{padding:12px 11px;border-bottom:1px solid #eee1d8;text-align:left;vertical-align:top}.admin-table tr:last-child td{border-bottom:0}.admin-table small{color:#786b63}.admin-row-actions{display:flex;gap:6px;flex-wrap:wrap}.admin-row-actions .admin-btn{padding:8px 10px;font-size:.75rem}.pill{display:inline-flex;padding:5px 9px;border-radius:999px;background:#f1ece8;color:#5d514a;font-size:.77rem;font-weight:800}.names{font-size:.83rem;color:#655c56;margin-top:6px;line-height:1.45}
     .admin-hidden{display:none!important}
     .scan-overlay{position:fixed;inset:0;background:rgba(25,15,12,.76);z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px}.scan-box{width:min(620px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:24px;padding:22px;box-shadow:0 24px 80px rgba(0,0,0,.3)}.scan-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.scan-head h2{margin:0;font:700 1.8rem Georgia,serif;color:var(--prok-dark)}.scan-close{border:0;background:#f2e9e4;color:#6d5148;width:38px;height:38px;border-radius:50%;font-size:22px;cursor:pointer}.scan-stage{position:relative;margin-top:16px;background:#111;border-radius:18px;overflow:hidden;aspect-ratio:4/3}.scan-stage video{width:100%;height:100%;object-fit:cover;display:block}.scan-frame{position:absolute;inset:17%;border:3px solid #f2cf68;border-radius:18px;box-shadow:0 0 0 999px rgba(0,0,0,.16)}.scan-result{margin-top:16px;border-radius:16px;padding:18px;line-height:1.6}.scan-result.wait{background:#fff8e7;border:1px solid #eed69a;color:#6b4a12}.scan-result.good{background:#eef8ef;border:1px solid #c6e4ca;color:#225b2b}.scan-result.bad{background:#fff0ef;border:1px solid #efc3be;color:#9d261f}.scan-guests{margin-top:10px;padding-top:10px;border-top:1px solid currentColor;opacity:.9}.scan-guests div{font-weight:700}.scan-hint{font-size:.88rem;color:var(--prok-muted);line-height:1.55;margin-top:10px}
-    @media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:900px){.stats,.filter-grid{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:620px){.admin-shell{padding:24px 12px 54px}.admin-head{grid-template-columns:64px 1fr;gap:13px}.admin-head img{width:64px;height:64px}.admin-card{border-radius:18px;padding:18px}.stats{grid-template-columns:1fr 1fr}.admin-toolbar{align-items:flex-start}.admin-toolbar .admin-actions{margin-top:0}}
   </style>
 </head>
@@ -58,7 +59,7 @@
   </section>
 
   <div id="adminApp" class="admin-hidden">
-    <section class="admin-card"><div id="stats" class="stats"></div></section>
+    <section class="admin-card"><div id="stats" class="stats"></div><div id="filters" class="filter-grid" aria-label="Anfragen filtern"></div></section>
     <section class="admin-card">
       <div class="admin-toolbar">
         <div><span class="admin-kicker">Gästeverwaltung</span><h2>Anfragen & Einlass</h2></div>
@@ -96,7 +97,10 @@ const password=document.getElementById('password');
 const loginBtn=document.getElementById('loginBtn');
 const loginStatus=document.getElementById('loginStatus');
 const stats=document.getElementById('stats');
+const filters=document.getElementById('filters');
 const rows=document.getElementById('rows');
+let allItems=[];
+let activeFilter='open';
 const adminStatus=document.getElementById('adminStatus');
 
 function showLoginLoading(message,detail){
@@ -137,19 +141,16 @@ async function load(){
     if(!r.ok)throw new Error(j.error||('Serverfehler beim Laden der Anfragen (HTTP '+r.status+').'));
     if(!j.summary || !Array.isArray(j.items))throw new Error('Die Antwort des Servers hat ein unerwartetes Format. Bitte Backend-Version prüfen.');
     const sum=j.summary;
+    allItems=j.items;
     stats.innerHTML=`<div class="stat"><b>${Number(sum.totalSeats)||0}</b><span>reservierte Plätze</span></div><div class="stat"><b>${Number(sum.paidSeats)||0}</b><span>bezahlt / Ticket</span></div><div class="stat"><b>${Number(sum.checkedInSeats)||0}</b><span>eingecheckt</span></div><div class="stat"><b>${Math.max(0,(Number(sum.capacity)||450)-(Number(sum.totalSeats)||0))}</b><span>noch verfügbar</span></div>`;
-    rows.innerHTML=j.items.map(x=>{
-      let gs=x.guest_names;
-      if(typeof gs==='string'){try{gs=JSON.parse(gs)}catch(e){gs=[]}}
-      if(!Array.isArray(gs))gs=[];
-      const names=gs.map(g=>esc(((g.firstName||g.first_name||'')+' '+(g.lastName||g.last_name||'')).trim())).filter(Boolean).join('<br>');
-      let acts='';
-      if(x.status==='payment_pending')acts=`<button class="admin-btn green" onclick="act('${x.id}','paid')">Zahlung eingegangen</button><button class="admin-btn gray" onclick="act('${x.id}','cancelled')">Stornieren</button>`;
-      if(x.status==='ticket_sent')acts=`<button class="admin-btn blue" onclick="act('${x.id}','checkin')">Einchecken</button><button class="admin-btn" onclick="act('${x.id}','resend')">Ticket erneut senden</button><button class="admin-btn gray" onclick="act('${x.id}','cancelled')">Stornieren</button>`;
-      if(x.status==='waitlist')acts=`<button class="admin-btn green" onclick="act('${x.id}','approve_waitlist')">Freigeben</button><button class="admin-btn gray" onclick="act('${x.id}','cancelled')">Ablehnen</button>`;
-      return `<tr><td><strong>${esc(x.reference||'—')}</strong></td><td>${esc(((x.first_name||'')+' '+(x.last_name||'')).trim())}<br><small>${esc(x.email||'')}</small><div class="names">${names}</div></td><td>${esc(x.club||'—')}</td><td>${Number(x.seats)||0}</td><td><span class="pill">${labels[x.status]||esc(x.status||'—')}</span></td><td>${x.payment_deadline?new Date(x.payment_deadline).toLocaleDateString('de-DE'):'—'}</td><td><div class="admin-row-actions">${acts}</div></td></tr>`;
-    }).join('');
-    if(!j.items.length) rows.innerHTML='<tr><td colspan="7" style="text-align:center;padding:28px">Zurzeit sind keine Anfragen in der Datenbank vorhanden.</td></tr>';
+    const c=sum.statusCounts||{};
+    filters.innerHTML=`
+      <button class="filter-card ${activeFilter==='open'?'active':''}" data-filter="open"><b>${Number(c.open)||0}</b><span>Offen</span></button>
+      <button class="filter-card ${activeFilter==='approved'?'active':''}" data-filter="approved"><b>${Number(c.approved)||0}</b><span>Freigegeben</span></button>
+      <button class="filter-card cancelled ${activeFilter==='cancelled'?'active':''}" data-filter="cancelled"><b>${Number(c.cancelled)||0}</b><span>Storniert</span></button>
+      <button class="filter-card ${activeFilter==='all'?'active':''}" data-filter="all"><b>${Number(c.all ?? j.items.length)||0}</b><span>Alle</span></button>`;
+    filters.querySelectorAll('[data-filter]').forEach(btn=>btn.addEventListener('click',()=>{activeFilter=btn.dataset.filter;renderRows();filters.querySelectorAll('.filter-card').forEach(b=>b.classList.toggle('active',b.dataset.filter===activeFilter));}));
+    renderRows();
     adminStatus.textContent=`${j.items.length} Anfrage${j.items.length===1?'':'n'} erfolgreich geladen.`;
     adminStatus.className='admin-status show ok';
   }catch(err){
@@ -158,8 +159,28 @@ async function load(){
     adminStatus.className='admin-status show error';
   }finally{document.getElementById('refreshBtn').disabled=false;}
 }
+function renderRows(){
+  const groups={open:['pending','payment_pending','waitlist'],approved:['paid','ticket_sent','checked_in'],cancelled:['cancelled']};
+  const items=activeFilter==='all'?allItems:allItems.filter(x=>(groups[activeFilter]||[]).includes(x.status));
+  rows.innerHTML=items.map(x=>{
+    let gs=x.guest_names;if(typeof gs==='string'){try{gs=JSON.parse(gs)}catch(e){gs=[]}}if(!Array.isArray(gs))gs=[];
+    const names=gs.map(g=>esc(((g.firstName||g.first_name||'')+' '+(g.lastName||g.last_name||'')).trim())).filter(Boolean).join('<br>');
+    let acts='';
+    if(x.status==='payment_pending')acts=`<button class="admin-btn green" onclick="act('${x.id}','paid')">Zahlung eingegangen</button><button class="admin-btn gray" onclick="act('${x.id}','cancelled')">Stornieren</button>`;
+    if(x.status==='ticket_sent')acts=`<button class="admin-btn blue" onclick="act('${x.id}','checkin')">Einchecken</button><button class="admin-btn" onclick="act('${x.id}','resend')">Ticket erneut senden</button><button class="admin-btn gray" onclick="act('${x.id}','cancelled')">Stornieren</button>`;
+    if(x.status==='checked_in')acts=`<button class="admin-btn" onclick="act('${x.id}','resend')">Ticket erneut senden</button><button class="admin-btn gray" onclick="act('${x.id}','cancelled')">Stornieren</button>`;
+    if(x.status==='waitlist')acts=`<button class="admin-btn green" onclick="act('${x.id}','approve_waitlist')">Freigeben</button><button class="admin-btn gray" onclick="act('${x.id}','cancelled')">Ablehnen</button>`;
+    if(x.status==='cancelled')acts=`<button class="admin-btn gray" onclick="act('${x.id}','delete')">Endgültig löschen</button>`;
+    return `<tr><td><strong>${esc(x.reference||'—')}</strong></td><td>${esc(((x.first_name||'')+' '+(x.last_name||'')).trim())}<br><small>${esc(x.email||'')}</small><div class="names">${names}</div></td><td>${esc(x.club||'—')}</td><td>${Number(x.seats)||0}</td><td><span class="pill">${labels[x.status]||esc(x.status||'—')}</span></td><td>${x.payment_deadline?new Date(x.payment_deadline).toLocaleDateString('de-DE'):'—'}</td><td><div class="admin-row-actions">${acts}</div></td></tr>`;
+  }).join('');
+  if(!items.length) rows.innerHTML='<tr><td colspan="7" style="text-align:center;padding:28px">In diesem Bereich sind derzeit keine Vorgänge vorhanden.</td></tr>';
+  adminStatus.textContent=`${items.length} Vorgang${items.length===1?'':'e'} in dieser Ansicht · ${allItems.length} insgesamt.`;
+  adminStatus.className='admin-status show ok';
+}
+
 async function act(id,action){
-  if(!confirm('Aktion wirklich ausführen?'))return;
+  const msg=action==='delete'?'Diesen stornierten Vorgang wirklich endgültig löschen? Das kann nicht rückgängig gemacht werden.':'Aktion wirklich ausführen?';
+  if(!confirm(msg))return;
   const r=await fetch(API+'/api/admin/action',{method:'POST',headers:{authorization:'Bearer '+token,'content-type':'application/json'},body:JSON.stringify({id,action})});
   const j=await r.json();if(!r.ok)alert(j.error||'Fehler');else load();
 }
