@@ -65,7 +65,7 @@
         <div><span class="admin-kicker">Gästeverwaltung</span><h2>Anfragen & Einlass</h2></div>
         <div class="admin-actions"><button id="scanBtn" class="admin-btn blue" type="button">📷 QR-Code scannen</button><button id="refreshBtn" class="admin-btn secondary" type="button">Aktualisieren</button><button id="guestlistBtn" class="admin-btn gray" type="button">PDF-Gästeliste</button><button id="logoutBtn" class="admin-btn secondary" type="button">Abmelden</button></div>
       </div>
-      <div class="table-wrap"><table class="admin-table"><thead><tr><th>Vorgang</th><th>Kontakt / Gäste</th><th>Verein</th><th>Plätze</th><th>Status</th><th>Frist</th><th>Aktion</th></tr></thead><tbody id="rows"></tbody></table></div>
+      <div class="table-wrap"><table class="admin-table"><thead><tr><th>Vorgang</th><th>Kontakt / Gäste</th><th>Verein</th><th>Plätze</th><th>Betrag</th><th>Status</th><th>Frist</th><th>Aktion</th></tr></thead><tbody id="rows"></tbody></table></div>
       <div id="adminStatus" class="admin-status" role="status"></div>
     </section>
   </div>
@@ -171,9 +171,9 @@ function renderRows(){
     if(x.status==='checked_in')acts=`<button class="admin-btn" onclick="act('${x.id}','resend')">Ticket erneut senden</button><button class="admin-btn gray" onclick="act('${x.id}','cancelled')">Stornieren</button>`;
     if(x.status==='waitlist')acts=`<button class="admin-btn green" onclick="act('${x.id}','approve_waitlist')">Freigeben</button><button class="admin-btn gray" onclick="act('${x.id}','cancelled')">Ablehnen</button>`;
     if(x.status==='cancelled')acts=`<button class="admin-btn gray" onclick="act('${x.id}','delete')">Endgültig löschen</button>`;
-    return `<tr><td><strong>${esc(x.reference||'—')}</strong></td><td>${esc(((x.first_name||'')+' '+(x.last_name||'')).trim())}<br><small>${esc(x.email||'')}</small><div class="names">${names}</div></td><td>${esc(x.club||'—')}</td><td>${Number(x.seats)||0}</td><td><span class="pill">${labels[x.status]||esc(x.status||'—')}</span></td><td>${x.payment_deadline?new Date(x.payment_deadline).toLocaleDateString('de-DE'):'—'}</td><td><div class="admin-row-actions">${acts}</div></td></tr>`;
+    return `<tr><td><strong>${esc(x.reference||'—')}</strong></td><td>${esc(((x.first_name||'')+' '+(x.last_name||'')).trim())}<br><small>${esc(x.email||'')}</small><div class="names">${names}</div></td><td>${esc(x.club||'—')}</td><td>${Number(x.seats)||0}</td><td>${Number.isFinite(Number(x.total_cents))?(Number(x.total_cents)/100).toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €':'—'}</td><td><span class="pill">${labels[x.status]||esc(x.status||'—')}</span></td><td>${x.payment_deadline?new Date(x.payment_deadline).toLocaleDateString('de-DE'):'—'}</td><td><div class="admin-row-actions">${acts}</div></td></tr>`;
   }).join('');
-  if(!items.length) rows.innerHTML='<tr><td colspan="7" style="text-align:center;padding:28px">In diesem Bereich sind derzeit keine Vorgänge vorhanden.</td></tr>';
+  if(!items.length) rows.innerHTML='<tr><td colspan="8" style="text-align:center;padding:28px">In diesem Bereich sind derzeit keine Vorgänge vorhanden.</td></tr>';
   adminStatus.textContent=`${items.length} Vorgang${items.length===1?'':'e'} in dieser Ansicht · ${allItems.length} insgesamt.`;
   adminStatus.className='admin-status show ok';
 }

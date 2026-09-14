@@ -29,14 +29,15 @@
     .prok-field{display:flex;flex-direction:column;gap:7px;margin-top:15px}.prok-field label{font-weight:800;font-size:.94rem}.prok-field input,.prok-field select,.prok-field textarea{width:100%;border:1px solid #d8c5bc;border-radius:12px;padding:12px 13px;background:#fff;font:inherit;color:#221815;outline:none}.prok-field input:focus,.prok-field select:focus,.prok-field textarea:focus{border-color:var(--prok-red);box-shadow:0 0 0 3px rgba(190,44,36,.12)}
     .prok-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
     .prok-muted{color:#7b6b64;font-size:.9rem}
-    .guest-list{display:grid;gap:10px;margin-top:8px}.guest{display:grid;grid-template-columns:46px 1fr 1fr;gap:10px;align-items:center;padding:12px;border:1px solid #eadbd2;border-radius:14px;background:#fffdfa}.guest strong{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:#f4e7df;color:var(--prok-dark)}.guest input{width:100%;border:1px solid #d8c5bc;border-radius:10px;padding:11px;font:inherit}.guest input:focus{outline:none;border-color:var(--prok-red);box-shadow:0 0 0 3px rgba(190,44,36,.10)}
+    .guest-list{display:grid;gap:10px;margin-top:8px}.guest{display:grid;grid-template-columns:46px 1fr 1fr 190px;gap:10px;align-items:center;padding:12px;border:1px solid #eadbd2;border-radius:14px;background:#fffdfa}.guest strong{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:#f4e7df;color:var(--prok-dark)}.guest input,.guest select{width:100%;border:1px solid #d8c5bc;border-radius:10px;padding:11px;font:inherit;background:#fff}.guest input:focus,.guest select:focus{outline:none;border-color:var(--prok-red);box-shadow:0 0 0 3px rgba(190,44,36,.10)}
     .prok-check{display:flex;gap:11px;align-items:flex-start;margin-top:20px;padding:15px;border:1px solid var(--prok-line);border-radius:14px;background:#fffdfa;color:#5f514a;line-height:1.5}.prok-check input{width:auto;margin-top:4px;transform:scale(1.15)}
     .prok-btn{appearance:none;border:0;border-radius:999px;padding:13px 19px;font:900 15px/1.2 inherit;cursor:pointer;transition:.18s;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;background:var(--prok-red);color:#fff}.prok-btn:hover{transform:translateY(-1px);background:var(--prok-dark)}.prok-btn:disabled{cursor:wait;opacity:.7;transform:none}
     .prok-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:18px}
     .prok-status{display:none;margin-top:15px;padding:13px 15px;border-radius:12px;line-height:1.55}.prok-status.show{display:block}.prok-status.ok{background:#eef8ef;color:#225b2b;border:1px solid #c6e4ca}.prok-status.error{background:#fff0ef;color:#9d261f;border:1px solid #efc3be}.prok-status.loading{display:flex;align-items:flex-start;gap:12px;background:#fff8e7;color:#6b4a12;border:1px solid #eed69a}.prok-spinner{width:20px;height:20px;flex:0 0 20px;border:3px solid rgba(190,44,36,.18);border-top-color:var(--prok-red);border-radius:50%;animation:prokSpin .8s linear infinite;margin-top:1px}@keyframes prokSpin{to{transform:rotate(360deg)}}
     .prok-footer{margin-top:28px}
     @media(max-width:900px){.prok-layout{grid-template-columns:1fr}.prok-facts{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:620px){.prok-shell{padding:26px 12px 58px}.prok-hero{border-radius:22px;padding:28px 20px}.prok-facts{grid-template-columns:1fr 1fr}.prok-grid{grid-template-columns:1fr}.guest{grid-template-columns:38px 1fr}.guest input{grid-column:2}.guest strong{grid-row:1/3}.prok-card{border-radius:18px;padding:18px}}
+    @media(max-width:760px){.guest{grid-template-columns:38px 1fr}.guest input,.guest select{grid-column:2}.guest strong{grid-row:1/4}}
+    @media(max-width:620px){.prok-shell{padding:26px 12px 58px}.prok-hero{border-radius:22px;padding:28px 20px}.prok-facts{grid-template-columns:1fr 1fr}.prok-grid{grid-template-columns:1fr}.prok-card{border-radius:18px;padding:18px}}
   </style>
 </head>
 <body class="prok-page">
@@ -68,7 +69,7 @@
       <div class="prok-fact"><b>20.11.2026</b><span>Freitag</span></div>
       <div class="prok-fact"><b>18:00 Uhr</b><span>Einlass</span></div>
       <div class="prok-fact"><b>19:11 Uhr</b><span>Beginn</span></div>
-      <div class="prok-fact"><b>25 €</b><span>pro Person</span></div>
+      <div class="prok-fact"><b>20 € / 12,50 €</b><span>ab 13 J. / Kinder bis 12 J.</span></div>
       <div class="prok-fact"><b>Reyna Palace</b><span>Voerde-Friedrichsfeld</span></div>
     </div>
   </section>
@@ -78,7 +79,7 @@
       <span class="prok-kicker" style="color:#a70e25">So funktioniert es</span>
       <h2>Interesse an einer Einladung?</h2>
       <p>Über dieses Formular können Sie Ihr Interesse an einer Teilnahme mitteilen. <strong>Das Absenden der Anfrage begründet keinen Anspruch auf Teilnahme.</strong></p>
-      <div class="prok-note"><strong>Wichtig:</strong> Bitte geben Sie alle teilnehmenden Personen namentlich an. Daraus wird später die Gästeliste für den Einlass erstellt.</div>
+      <div class="prok-note"><strong>Wichtig:</strong> Bitte geben Sie alle teilnehmenden Personen namentlich an und wählen Sie je Person die passende Preisgruppe. Erwachsene bzw. Gäste ab 13 Jahren zahlen <strong>20,00 €</strong>, Kinder bis einschließlich 12 Jahre <strong>12,50 €</strong>.</div>
       <div class="prok-note" style="margin-top:12px"><strong>E-Mail-Hinweis:</strong> Bitte prüfen Sie nach dem Absenden auch Ihren Spam-/Junk-Ordner. Unsere Rückmeldung kann dort einsortiert werden.</div>
       <div class="prok-flow">
         <div><b>1</b><span>Teilnahmeanfrage mit allen Gästen absenden.</span></div>
@@ -103,7 +104,7 @@
 
         <div class="prok-field"><label for="seats">Gewünschte Plätze *</label><select id="seats" name="seats" required><option value="1">1 Person</option><option value="2">2 Personen</option><option value="3">3 Personen</option><option value="4">4 Personen</option><option value="5">5 Personen</option><option value="6">6 Personen</option><option value="7">7 Personen</option><option value="8">8 Personen</option><option value="9">9 Personen</option><option value="10">10 Personen</option><option value="11">11 Personen</option><option value="12">12 Personen</option><option value="13">13 Personen</option><option value="14">14 Personen</option><option value="15">15 Personen</option><option value="16">16 Personen</option><option value="17">17 Personen</option><option value="18">18 Personen</option><option value="19">19 Personen</option><option value="20">20 Personen</option><option value="21">21 Personen</option><option value="22">22 Personen</option><option value="23">23 Personen</option><option value="24">24 Personen</option><option value="25">25 Personen</option><option value="26">26 Personen</option><option value="27">27 Personen</option><option value="28">28 Personen</option><option value="29">29 Personen</option><option value="30">30 Personen</option></select></div>
 
-        <div class="prok-field"><label>Namen aller teilnehmenden Personen *</label><div id="guests" class="guest-list"></div><span class="prok-muted">Die Gästeliste am Einlass wird aus diesen Namen erstellt.</span></div>
+        <div class="prok-field"><label>Namen und Preisgruppe aller teilnehmenden Personen *</label><div id="guests" class="guest-list"></div><span class="prok-muted">Erwachsene / ab 13 Jahre: 20,00 € · Kinder bis einschließlich 12 Jahre: 12,50 €.</span><div id="pricePreview" class="prok-note" style="margin-top:12px"><strong>Gesamtbetrag:</strong> 20,00 €</div></div>
 
         <div class="prok-field"><label for="note">Bemerkung <span class="prok-muted">(optional)</span></label><textarea id="note" name="note" rows="3" maxlength="600"></textarea></div>
 
@@ -131,15 +132,23 @@ const firstName=document.getElementById('firstName');
 const lastName=document.getElementById('lastName');
 const submitBtn=document.getElementById('submitBtn');
 const requestStatus=document.getElementById('requestStatus');
+const pricePreview=document.getElementById('pricePreview');
 
 function drawGuests(){
   const n=Number(seats.value); guests.innerHTML='';
   for(let i=0;i<n;i++){
     const d=document.createElement('div'); d.className='guest';
-    d.innerHTML=`<strong>${i+1}</strong><input class="gfn" required maxlength="80" placeholder="Vorname"><input class="gln" required maxlength="80" placeholder="Nachname">`;
+    d.innerHTML=`<strong>${i+1}</strong><input class="gfn" required maxlength="80" placeholder="Vorname"><input class="gln" required maxlength="80" placeholder="Nachname"><select class="gtype" required aria-label="Preisgruppe Person ${i+1}"><option value="adult">Ab 13 Jahre · 20,00 €</option><option value="child">Kind bis 12 Jahre · 12,50 €</option></select>`;
     guests.appendChild(d);
   }
   syncFirst();
+  updatePrice();
+}
+function updatePrice(){
+  const types=[...document.querySelectorAll('.gtype')].map(x=>x.value);
+  const adults=types.filter(x=>x==='adult').length, children=types.filter(x=>x==='child').length;
+  const total=adults*20+children*12.5;
+  pricePreview.innerHTML=`<strong>Gesamtbetrag:</strong> ${total.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})} € <span class="prok-muted">(${adults} × 20,00 €${children?` + ${children} × 12,50 €`:``})</span>`;
 }
 function syncFirst(){
   const fn=document.querySelector('.gfn'),ln=document.querySelector('.gln');
@@ -148,7 +157,7 @@ function syncFirst(){
 }
 function showStatus(message,type){requestStatus.innerHTML=message;requestStatus.className='prok-status show '+type;}
 function setBusy(busy){submitBtn.disabled=busy;submitBtn.textContent=busy?'Anfrage wird übermittelt …':'Teilnahmeanfrage absenden';}
-seats.addEventListener('change',drawGuests);firstName.addEventListener('blur',syncFirst);lastName.addEventListener('blur',syncFirst);drawGuests();
+seats.addEventListener('change',drawGuests);guests.addEventListener('change',e=>{if(e.target.classList.contains('gtype'))updatePrice();});firstName.addEventListener('blur',syncFirst);lastName.addEventListener('blur',syncFirst);drawGuests();
 
 requestForm.addEventListener('submit',async e=>{
   e.preventDefault(); setBusy(true);
@@ -156,7 +165,7 @@ requestForm.addEventListener('submit',async e=>{
   try{
     const data=Object.fromEntries(new FormData(requestForm));
     data.seats=Number(data.seats);
-    data.guests=[...document.querySelectorAll('.guest')].map(x=>({firstName:x.querySelector('.gfn').value.trim(),lastName:x.querySelector('.gln').value.trim()}));
+    data.guests=[...document.querySelectorAll('.guest')].map(x=>({firstName:x.querySelector('.gfn').value.trim(),lastName:x.querySelector('.gln').value.trim(),priceGroup:x.querySelector('.gtype').value}));
     const r=await fetch(API+'/api/request',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(data)});
     const j=await r.json(); if(!r.ok)throw new Error(j.error||'Die Anfrage konnte nicht übermittelt werden.');
     window.location.href='proklamation-erfolgreich.html?ref='+encodeURIComponent(j.reference);

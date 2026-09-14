@@ -1,16 +1,14 @@
-CAW Update 15.09.2026
+CAW UPDATE – PREISE + TICKET-ADMIN
 
-CAW-Internetseite (Hauptverzeichnis):
-- index.html ersetzen
-- proklamation-verwaltung.html ersetzen
+PREISE NEU:
+- Erwachsene / Gäste ab 13 Jahren: 20,00 EUR
+- Kinder bis einschließlich 12 Jahre: 12,50 EUR
 
-CAW-Proklamation-Backend (Hauptverzeichnis):
-- server.js ersetzen
-- package.json kann unverändert bleiben; liegt nur zur Vollständigkeit bei
+UPLOAD:
+1) CAW-Proklamation-Backend: backend/server.js ersetzen. package.json muss nur ersetzt werden, wenn gewünscht; es wurde nicht inhaltlich geändert.
+2) CAW-Internetseite: proklamation.html ersetzen.
+3) CAW-Internetseite: proklamation-verwaltung.html ersetzen.
+4) CAW-Internetseite: index.html ersetzen. Im Dropdown "Mehr" ist jetzt "Ticket-Admin" verlinkt.
 
-Neu:
-- Startseite: aufgeräumte Navigation, Proklamation prominent, Desktop-Rest unter „Mehr“, mobile Reihenfolge nach Wichtigkeit
-- CTA im Anke/Jörg-Hero, in der Anke/Jörg-Karte und beim Termin der Prinzenproklamation
-- Verwaltung: Filter Offen / Freigegeben / Storniert / Alle
-- Stornierte Vorgänge können manuell endgültig gelöscht werden
-- Stornierte Vorgänge werden nach 30 Tagen automatisch gelöscht
+BESTANDSDATEN:
+Alte Vorgänge bleiben erhalten. Für neue Vorgänge wird der konkrete Gesamtbetrag in total_cents gespeichert. Alte Vorgänge ohne total_cents werden weiterhin als Altbestand mit der bisherigen 25-EUR-Logik behandelt, damit bestehende Zahlungsaufforderungen nicht stillschweigend verändert werden.
