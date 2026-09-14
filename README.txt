@@ -1,14 +1,20 @@
-CAW UPDATE – PREISE + TICKET-ADMIN
+CAW – Vorschaltseite für die Prinzenproklamation
 
-PREISE NEU:
-- Erwachsene / Gäste ab 13 Jahren: 20,00 EUR
-- Kinder bis einschließlich 12 Jahre: 12,50 EUR
+WEBSITE-REPO (CAW-Internetseite):
+1. proklamation.html ersetzen
+2. proklamation-test.html neu hochladen
 
-UPLOAD:
-1) CAW-Proklamation-Backend: backend/server.js ersetzen. package.json muss nur ersetzt werden, wenn gewünscht; es wurde nicht inhaltlich geändert.
-2) CAW-Internetseite: proklamation.html ersetzen.
-3) CAW-Internetseite: proklamation-verwaltung.html ersetzen.
-4) CAW-Internetseite: index.html ersetzen. Im Dropdown "Mehr" ist jetzt "Ticket-Admin" verlinkt.
+BACKEND-REPO (CAW-Proklamation-Backend):
+3. backend/server.js als server.js ersetzen
 
-BESTANDSDATEN:
-Alte Vorgänge bleiben erhalten. Für neue Vorgänge wird der konkrete Gesamtbetrag in total_cents gespeichert. Alte Vorgänge ohne total_cents werden weiterhin als Altbestand mit der bisherigen 25-EUR-Logik behandelt, damit bestehende Zahlungsaufforderungen nicht stillschweigend verändert werden.
+Render:
+- PREVIEW_MODE=true  (solange noch nicht öffentlich)
+- Optional: PREVIEW_PASSWORD=ein separates Testpasswort
+- Wenn PREVIEW_PASSWORD nicht gesetzt ist, verwendet der Testzugang vorübergehend ADMIN_PASSWORD.
+
+Später öffentlich freischalten:
+- PREVIEW_MODE=false setzen
+- dann proklamation.html wieder durch das eigentliche Formular ersetzen (proklamation-test.html kann bestehen bleiben oder entfernt werden).
+
+Wichtig:
+Der Schutz erfolgt serverseitig: /api/request nimmt im Preview-Modus nur Anfragen mit gültigem Testzugangs-Token an.

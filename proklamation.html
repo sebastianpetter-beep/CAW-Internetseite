@@ -1,177 +1,26 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#8f1f1a">
-  <title>Teilnahmeanfrage – Prinzenproklamation 2026/27 | Carnevals-Ausschuss Wesel e.V.</title>
-  <link rel="stylesheet" href="assets/style.css">
-  <style>
-    :root{--prok-red:#be2c24;--prok-dark:#8f1f1a;--prok-gold:#d9a62e;--prok-cream:#fffaf0;--prok-line:#ead8cf;--prok-muted:#6d625e}
-    body.prok-page{background:linear-gradient(180deg,#fff 0,#fffaf5 100%)}
-    .prok-shell{max-width:1120px;margin:0 auto;padding:42px 18px 80px}
-    .prok-topback{display:inline-flex;margin-bottom:18px;color:var(--prok-dark);font-weight:800;text-decoration:none}
-    .prok-hero{position:relative;overflow:hidden;border-radius:30px;background:linear-gradient(115deg,#67101f,#9c223b);color:#fff;padding:clamp(30px,6vw,64px);box-shadow:0 20px 55px rgba(72,20,30,.16);border-bottom:5px solid var(--prok-gold)}
-    .prok-hero:after{content:"";position:absolute;width:380px;height:380px;border-radius:50%;right:-120px;top:-150px;background:rgba(217,166,46,.10);border:1px solid rgba(255,255,255,.08)}
-    .prok-hero>*{position:relative;z-index:1}
-    .prok-kicker{display:inline-block;text-transform:uppercase;letter-spacing:.13em;font-size:.76rem;font-weight:900;color:#f5d77c}
-    .prok-hero h1{font:700 clamp(2.4rem,5.8vw,5rem)/1 Georgia,'Times New Roman',serif;margin:.22em 0 .22em}
-    .prok-hero p{max-width:760px;font-size:clamp(1rem,2vw,1.24rem);line-height:1.65;color:#f9ebee;margin:0}
-    .prok-facts{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:28px}
-    .prok-fact{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:16px;backdrop-filter:blur(4px)}
-    .prok-fact b{display:block;color:#f7d779;font:700 1.15rem Georgia,serif;margin-bottom:4px}.prok-fact span{font-size:.9rem;color:#fff}
-    .prok-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:24px;margin-top:26px;align-items:start}
-    .prok-card{background:#fff;border:1px solid var(--prok-line);border-radius:24px;padding:clamp(20px,4vw,34px);box-shadow:0 12px 36px rgba(75,31,22,.07)}
-    .prok-card h2{font:700 clamp(1.75rem,3vw,2.35rem) Georgia,serif;color:var(--prok-dark);margin:0 0 14px}.prok-card h3{font:700 1.15rem Georgia,serif;color:var(--prok-dark);margin:22px 0 9px}
-    .prok-card p{color:var(--prok-muted);line-height:1.7}.prok-card p:first-of-type{margin-top:0}
-    .prok-note{padding:16px 18px;border-radius:14px;background:#fff4da;border-left:5px solid var(--prok-gold);color:#604d38;line-height:1.6;margin:18px 0}
-    .prok-flow{display:grid;gap:11px;margin-top:18px}.prok-flow div{display:grid;grid-template-columns:34px 1fr;gap:11px;align-items:start}.prok-flow b{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#f4e8df;color:var(--prok-dark)}.prok-flow span{color:#655c56;line-height:1.5;padding-top:6px}
-    .prok-field{display:flex;flex-direction:column;gap:7px;margin-top:15px}.prok-field label{font-weight:800;font-size:.94rem}.prok-field input,.prok-field select,.prok-field textarea{width:100%;border:1px solid #d8c5bc;border-radius:12px;padding:12px 13px;background:#fff;font:inherit;color:#221815;outline:none}.prok-field input:focus,.prok-field select:focus,.prok-field textarea:focus{border-color:var(--prok-red);box-shadow:0 0 0 3px rgba(190,44,36,.12)}
-    .prok-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-    .prok-muted{color:#7b6b64;font-size:.9rem}
-    .guest-list{display:grid;gap:10px;margin-top:8px}.guest{display:grid;grid-template-columns:46px 1fr 1fr 190px;gap:10px;align-items:center;padding:12px;border:1px solid #eadbd2;border-radius:14px;background:#fffdfa}.guest strong{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:#f4e7df;color:var(--prok-dark)}.guest input,.guest select{width:100%;border:1px solid #d8c5bc;border-radius:10px;padding:11px;font:inherit;background:#fff}.guest input:focus,.guest select:focus{outline:none;border-color:var(--prok-red);box-shadow:0 0 0 3px rgba(190,44,36,.10)}
-    .prok-check{display:flex;gap:11px;align-items:flex-start;margin-top:20px;padding:15px;border:1px solid var(--prok-line);border-radius:14px;background:#fffdfa;color:#5f514a;line-height:1.5}.prok-check input{width:auto;margin-top:4px;transform:scale(1.15)}
-    .prok-btn{appearance:none;border:0;border-radius:999px;padding:13px 19px;font:900 15px/1.2 inherit;cursor:pointer;transition:.18s;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;background:var(--prok-red);color:#fff}.prok-btn:hover{transform:translateY(-1px);background:var(--prok-dark)}.prok-btn:disabled{cursor:wait;opacity:.7;transform:none}
-    .prok-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:18px}
-    .prok-status{display:none;margin-top:15px;padding:13px 15px;border-radius:12px;line-height:1.55}.prok-status.show{display:block}.prok-status.ok{background:#eef8ef;color:#225b2b;border:1px solid #c6e4ca}.prok-status.error{background:#fff0ef;color:#9d261f;border:1px solid #efc3be}.prok-status.loading{display:flex;align-items:flex-start;gap:12px;background:#fff8e7;color:#6b4a12;border:1px solid #eed69a}.prok-spinner{width:20px;height:20px;flex:0 0 20px;border:3px solid rgba(190,44,36,.18);border-top-color:var(--prok-red);border-radius:50%;animation:prokSpin .8s linear infinite;margin-top:1px}@keyframes prokSpin{to{transform:rotate(360deg)}}
-    .prok-footer{margin-top:28px}
-    @media(max-width:900px){.prok-layout{grid-template-columns:1fr}.prok-facts{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:760px){.guest{grid-template-columns:38px 1fr}.guest input,.guest select{grid-column:2}.guest strong{grid-row:1/4}}
-    @media(max-width:620px){.prok-shell{padding:26px 12px 58px}.prok-hero{border-radius:22px;padding:28px 20px}.prok-facts{grid-template-columns:1fr 1fr}.prok-grid{grid-template-columns:1fr}.prok-card{border-radius:18px;padding:18px}}
-  </style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#8f1f1a">
+<title>Prinzenproklamation 2026/27 – Teilnahmeanfragen starten in Kürze | CAW Wesel</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+:root{--r:#be2c24;--d:#8f1f1a;--g:#d9a62e;--cream:#fffaf0;--line:#ead8cf}body{background:linear-gradient(180deg,#fff,#fff9f3)}
+.pre-shell{max-width:1040px;margin:0 auto;padding:50px 18px 90px}.pre-hero{border-radius:30px;background:linear-gradient(115deg,#68101f,#a12427);color:#fff;padding:clamp(32px,6vw,70px);border-bottom:6px solid var(--g);box-shadow:0 22px 58px rgba(74,20,24,.16);text-align:center}.pre-logo{width:110px;height:110px;border-radius:50%;border:4px solid #f2cf68;object-fit:cover;background:#fff}.pre-kicker{display:block;margin-top:20px;color:#f5d77c;font-weight:900;letter-spacing:.13em;text-transform:uppercase}.pre-hero h1{font:700 clamp(2.5rem,6vw,5rem)/1 Georgia,serif;margin:.22em 0}.pre-hero p{max-width:720px;margin:0 auto;font-size:clamp(1.05rem,2vw,1.3rem);line-height:1.7}.pre-facts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:28px}.pre-facts span{padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);font-weight:800}.pre-card{max-width:620px;margin:28px auto 0;background:#fff;border:1px solid var(--line);border-radius:24px;padding:28px;box-shadow:0 12px 36px rgba(75,31,22,.07)}.pre-card h2{font:700 2rem Georgia,serif;color:var(--d);margin:0 0 10px}.pre-card p{color:#6d625e;line-height:1.65}.test-toggle{background:none;border:0;color:#8a6b5e;text-decoration:underline;cursor:pointer;font:700 14px inherit;padding:6px 0}.test-box{display:none;margin-top:15px;padding-top:15px;border-top:1px solid var(--line)}.test-box.show{display:block}.test-box label{display:block;font-weight:800;margin-bottom:7px}.test-row{display:flex;gap:9px}.test-row input{flex:1;border:1px solid #d8c5bc;border-radius:12px;padding:12px 13px;font:inherit}.test-row button{border:0;border-radius:999px;padding:12px 17px;background:var(--r);color:white;font-weight:900;cursor:pointer}.msg{margin-top:10px;font-size:.92rem}.msg.err{color:#9d261f}.msg.ok{color:#226436}@media(max-width:620px){.pre-shell{padding:28px 12px 60px}.pre-hero{padding:34px 20px;border-radius:22px}.test-row{flex-direction:column}.test-row button{width:100%}}
+</style>
 </head>
-<body class="prok-page">
-<header class="site-header modern-header">
-  <div class="top-stripe"></div>
-  <div class="header-inner">
-    <a class="brand" href="index.html#start" aria-label="CAW Startseite">
-      <div class="brand-logo-wrap"><img src="assets/images/caw-logo.jpg" alt="Logo Carnevals-Ausschuss Wesel e.V."></div>
-      <div class="brand-copy"><strong>Carnevals-Ausschuss Wesel e.V.</strong><span>Gemeinsam für den Weseler Karneval</span></div>
-    </a>
-    <nav id="main-nav" class="main-nav" aria-label="Hauptnavigation">
-      <a href="index.html#start">Start</a><a href="index.html#ueber-uns">Über uns</a><a href="index.html#prinzenpaare">Prinzenpaare</a>
-      <a href="index.html#termine">Termine</a><a href="index.html#vorstand">Vorstand</a><a href="index.html#vereine">12 Gesellschaften</a>
-      <a href="index.html#historie">Historie</a><a href="index.html#rosenmontag">Rosenmontag</a><a href="index.html#kinderkarneval">Kinderkarneval</a>
-      <a href="index.html#downloads">Downloads</a><a href="wagenbau.html">🔒 Wagenbau intern</a><a href="index.html#kontakt">Kontakt</a>
-    </nav>
-    <button class="menu-toggle" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="main-nav">☰</button>
-  </div>
-</header>
-
-<main class="prok-shell">
-  <a class="prok-topback" href="index.html#termine">← Zurück zu den CAW-Terminen</a>
-
-  <section class="prok-hero">
-    <span class="prok-kicker">Session 2026 / 2027 · Persönliche Einladung</span>
-    <h1>Prinzenproklamation</h1>
-    <p>Teilnahmeanfrage zur Proklamation des designierten Weseler Prinzenpaares. Die Veranstaltung wird als geschlossene Veranstaltung mit persönlicher Einladung durchgeführt.</p>
-    <div class="prok-facts">
-      <div class="prok-fact"><b>20.11.2026</b><span>Freitag</span></div>
-      <div class="prok-fact"><b>18:00 Uhr</b><span>Einlass</span></div>
-      <div class="prok-fact"><b>19:11 Uhr</b><span>Beginn</span></div>
-      <div class="prok-fact"><b>20 € / 12,50 €</b><span>ab 13 J. / Kinder bis 12 J.</span></div>
-      <div class="prok-fact"><b>Reyna Palace</b><span>Voerde-Friedrichsfeld</span></div>
-    </div>
-  </section>
-
-  <div class="prok-layout">
-    <aside class="prok-card">
-      <span class="prok-kicker" style="color:#a70e25">So funktioniert es</span>
-      <h2>Interesse an einer Einladung?</h2>
-      <p>Über dieses Formular können Sie Ihr Interesse an einer Teilnahme mitteilen. <strong>Das Absenden der Anfrage begründet keinen Anspruch auf Teilnahme.</strong></p>
-      <div class="prok-note"><strong>Wichtig:</strong> Bitte geben Sie alle teilnehmenden Personen namentlich an und wählen Sie je Person die passende Preisgruppe. Erwachsene bzw. Gäste ab 13 Jahren zahlen <strong>20,00 €</strong>, Kinder bis einschließlich 12 Jahre <strong>12,50 €</strong>.</div>
-      <div class="prok-note" style="margin-top:12px"><strong>E-Mail-Hinweis:</strong> Bitte prüfen Sie nach dem Absenden auch Ihren Spam-/Junk-Ordner. Unsere Rückmeldung kann dort einsortiert werden.</div>
-      <div class="prok-flow">
-        <div><b>1</b><span>Teilnahmeanfrage mit allen Gästen absenden.</span></div>
-        <div><b>2</b><span>Nach positiver Prüfung erhalten Sie die Zahlungsinformationen per E-Mail.</span></div>
-        <div><b>3</b><span>Die Zahlung ist innerhalb von 5 Tagen nach Genehmigung fällig.</span></div>
-        <div><b>4</b><span>Nach bestätigtem Zahlungseingang wird das persönliche Ticket per E-Mail versendet.</span></div>
-      </div>
-      <h3>Kontakt</h3>
-      <p><a href="mailto:tickets@caw-wesel.de" style="color:#be2c24;font-weight:900;text-decoration:none">tickets@caw-wesel.de</a></p>
-    </aside>
-
-    <section class="prok-card">
-      <span class="prok-kicker" style="color:#a70e25">Teilnahmeanfrage</span>
-      <h2>Ihre Angaben</h2>
-      <form id="requestForm">
-        <div class="prok-grid">
-          <div class="prok-field"><label for="firstName">Kontaktperson – Vorname *</label><input id="firstName" name="firstName" required maxlength="80" autocomplete="given-name"></div>
-          <div class="prok-field"><label for="lastName">Kontaktperson – Nachname *</label><input id="lastName" name="lastName" required maxlength="80" autocomplete="family-name"></div>
-          <div class="prok-field"><label for="email">E-Mail-Adresse *</label><input id="email" name="email" type="email" required maxlength="160" autocomplete="email"></div>
-          <div class="prok-field"><label for="club">Verein / Gesellschaft <span class="prok-muted">(optional)</span></label><input id="club" name="club" maxlength="160"></div>
-        </div>
-
-        <div class="prok-field"><label for="seats">Gewünschte Plätze *</label><select id="seats" name="seats" required><option value="1">1 Person</option><option value="2">2 Personen</option><option value="3">3 Personen</option><option value="4">4 Personen</option><option value="5">5 Personen</option><option value="6">6 Personen</option><option value="7">7 Personen</option><option value="8">8 Personen</option><option value="9">9 Personen</option><option value="10">10 Personen</option><option value="11">11 Personen</option><option value="12">12 Personen</option><option value="13">13 Personen</option><option value="14">14 Personen</option><option value="15">15 Personen</option><option value="16">16 Personen</option><option value="17">17 Personen</option><option value="18">18 Personen</option><option value="19">19 Personen</option><option value="20">20 Personen</option><option value="21">21 Personen</option><option value="22">22 Personen</option><option value="23">23 Personen</option><option value="24">24 Personen</option><option value="25">25 Personen</option><option value="26">26 Personen</option><option value="27">27 Personen</option><option value="28">28 Personen</option><option value="29">29 Personen</option><option value="30">30 Personen</option></select></div>
-
-        <div class="prok-field"><label>Namen und Preisgruppe aller teilnehmenden Personen *</label><div id="guests" class="guest-list"></div><span class="prok-muted">Erwachsene / ab 13 Jahre: 20,00 € · Kinder bis einschließlich 12 Jahre: 12,50 €.</span><div id="pricePreview" class="prok-note" style="margin-top:12px"><strong>Gesamtbetrag:</strong> 20,00 €</div></div>
-
-        <div class="prok-field"><label for="note">Bemerkung <span class="prok-muted">(optional)</span></label><textarea id="note" name="note" rows="3" maxlength="600"></textarea></div>
-
-        <label class="prok-check"><input type="checkbox" required><span>Ich bestätige, dass meine Angaben zur Bearbeitung der Teilnahmeanfrage, Zahlungsabwicklung, Ticketbereitstellung und Gästeliste verarbeitet werden dürfen.</span></label>
-
-        <div class="prok-actions"><button id="submitBtn" class="prok-btn" type="submit">Teilnahmeanfrage absenden</button></div>
-        <div id="requestStatus" class="prok-status" role="status" aria-live="polite"></div>
-      </form>
-    </section>
-  </div>
+<body>
+<header class="site-header modern-header"><div class="top-stripe"></div><div class="header-inner"><a class="brand" href="index.html#start"><div class="brand-logo-wrap"><img src="assets/images/caw-logo.jpg" alt="CAW"></div><div class="brand-copy"><strong>Carnevals-Ausschuss Wesel e.V.</strong><span>Gemeinsam für den Weseler Karneval</span></div></a><nav id="main-nav" class="main-nav"><a href="index.html#start">Start</a><a href="index.html#termine">Termine</a><a href="index.html#prinzenpaare">Prinzenpaare</a><a href="index.html#kontakt">Kontakt</a></nav><button class="menu-toggle" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="main-nav">☰</button></div></header>
+<main class="pre-shell">
+<section class="pre-hero"><img class="pre-logo" src="assets/images/caw-logo.jpg" alt="CAW"><span class="pre-kicker">Prinzenproklamation 2026/27</span><h1>Teilnahmeanfragen starten in Kürze</h1><p>Wir bereiten derzeit unser neues digitales Anfrage- und Ticketsystem vor. In Kürze können Sie hier Ihre Teilnahmeanfrage für die Prinzenproklamation stellen.</p><div class="pre-facts"><span>20.11.2026</span><span>Einlass 18:00 Uhr</span><span>Beginn 19:11 Uhr</span><span>Reyna Palace</span></div></section>
+<section class="pre-card"><h2>Wir sind bald bereit ❤️💛</h2><p>Sobald die Teilnahmeanfrage freigeschaltet ist, können alle teilnehmenden Personen namentlich erfasst werden. Nach Bestätigung und Zahlung wird die persönliche Einladung mit QR-Code digital bereitgestellt.</p><p><strong>Bitte schauen Sie in Kürze wieder vorbei.</strong></p><button id="toggle" class="test-toggle" type="button">Interner Testzugang</button><div id="testBox" class="test-box"><label for="pw">Passwort</label><div class="test-row"><input id="pw" type="password" autocomplete="current-password"><button id="login" type="button">Testsystem öffnen</button></div><div id="msg" class="msg" role="status"></div></div></section>
 </main>
-
-<footer class="footer prok-footer">
-  <img src="assets/images/caw-logo.jpg" alt="">
-  <div><strong>Carnevals-Ausschuss Wesel e.V.</strong><span>© 2026</span></div>
-</footer>
-
+<footer class="footer"><img src="assets/images/caw-logo.jpg" alt=""><div><strong>Carnevals-Ausschuss Wesel e.V.</strong><span>© 2026</span></div></footer>
 <script src="assets/script.js"></script>
 <script>
-const API='https://caw-proklamation-backend.onrender.com';
-const requestForm=document.getElementById('requestForm');
-const seats=document.getElementById('seats');
-const guests=document.getElementById('guests');
-const firstName=document.getElementById('firstName');
-const lastName=document.getElementById('lastName');
-const submitBtn=document.getElementById('submitBtn');
-const requestStatus=document.getElementById('requestStatus');
-const pricePreview=document.getElementById('pricePreview');
-
-function drawGuests(){
-  const n=Number(seats.value); guests.innerHTML='';
-  for(let i=0;i<n;i++){
-    const d=document.createElement('div'); d.className='guest';
-    d.innerHTML=`<strong>${i+1}</strong><input class="gfn" required maxlength="80" placeholder="Vorname"><input class="gln" required maxlength="80" placeholder="Nachname"><select class="gtype" required aria-label="Preisgruppe Person ${i+1}"><option value="adult">Ab 13 Jahre · 20,00 €</option><option value="child">Kind bis 12 Jahre · 12,50 €</option></select>`;
-    guests.appendChild(d);
-  }
-  syncFirst();
-  updatePrice();
-}
-function updatePrice(){
-  const types=[...document.querySelectorAll('.gtype')].map(x=>x.value);
-  const adults=types.filter(x=>x==='adult').length, children=types.filter(x=>x==='child').length;
-  const total=adults*20+children*12.5;
-  pricePreview.innerHTML=`<strong>Gesamtbetrag:</strong> ${total.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})} € <span class="prok-muted">(${adults} × 20,00 €${children?` + ${children} × 12,50 €`:``})</span>`;
-}
-function syncFirst(){
-  const fn=document.querySelector('.gfn'),ln=document.querySelector('.gln');
-  if(fn&&!fn.value)fn.value=firstName.value;
-  if(ln&&!ln.value)ln.value=lastName.value;
-}
-function showStatus(message,type){requestStatus.innerHTML=message;requestStatus.className='prok-status show '+type;}
-function setBusy(busy){submitBtn.disabled=busy;submitBtn.textContent=busy?'Anfrage wird übermittelt …':'Teilnahmeanfrage absenden';}
-seats.addEventListener('change',drawGuests);guests.addEventListener('change',e=>{if(e.target.classList.contains('gtype'))updatePrice();});firstName.addEventListener('blur',syncFirst);lastName.addEventListener('blur',syncFirst);drawGuests();
-
-requestForm.addEventListener('submit',async e=>{
-  e.preventDefault(); setBusy(true);
-  showStatus('<span class="prok-spinner" aria-hidden="true"></span><span><strong>Anfrage wird übermittelt …</strong><br>Bitte warten Sie einen Moment.</span>','loading');
-  try{
-    const data=Object.fromEntries(new FormData(requestForm));
-    data.seats=Number(data.seats);
-    data.guests=[...document.querySelectorAll('.guest')].map(x=>({firstName:x.querySelector('.gfn').value.trim(),lastName:x.querySelector('.gln').value.trim(),priceGroup:x.querySelector('.gtype').value}));
-    const r=await fetch(API+'/api/request',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(data)});
-    const j=await r.json(); if(!r.ok)throw new Error(j.error||'Die Anfrage konnte nicht übermittelt werden.');
-    window.location.href='proklamation-erfolgreich.html?ref='+encodeURIComponent(j.reference);
-  }catch(err){showStatus(err.message||'Verbindung zum Server fehlgeschlagen.','error');}
-  finally{setBusy(false);}
-});
+const API='https://caw-proklamation-backend.onrender.com',toggle=document.getElementById('toggle'),box=document.getElementById('testBox'),pw=document.getElementById('pw'),login=document.getElementById('login'),msg=document.getElementById('msg');
+toggle.onclick=()=>{box.classList.toggle('show');if(box.classList.contains('show'))pw.focus();};
+async function go(){login.disabled=true;login.textContent='Prüfen …';msg.className='msg';msg.textContent='';try{const r=await fetch(API+'/api/preview/login',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({password:pw.value})});const j=await r.json();if(!r.ok)throw new Error(j.error||'Zugang nicht möglich.');sessionStorage.setItem('prokPreviewToken',j.token);msg.className='msg ok';msg.textContent='Zugang bestätigt.';location.href='proklamation-test.html';}catch(e){msg.className='msg err';msg.textContent=e.message;}finally{login.disabled=false;login.textContent='Testsystem öffnen';}}
+login.onclick=go;pw.addEventListener('keydown',e=>{if(e.key==='Enter')go();});
 </script>
-</body>
-</html>
+</body></html>
