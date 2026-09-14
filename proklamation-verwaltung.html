@@ -112,21 +112,38 @@ loginForm.addEventListener('submit',async e=>{
 
 async function showApp(){loginCard.classList.add('admin-hidden');adminApp.classList.remove('admin-hidden');await load();}
 async function load(){
+  adminStatus.innerHTML='<span class="admin-spinner" aria-hidden="true"></span><span class="admin-loading-copy"><strong>Daten werden geladen …</strong><span>Die Anfragen werden vom CAW-Server abgerufen.</span></span>';
+  adminStatus.className='admin-status show loading';
+  document.getElementById('refreshBtn').disabled=true;
   try{
-    const r=await fetch(API+'/api/admin/requests',{headers:{authorization:'Bearer '+token}});
-    if(r.status===401){logout();return}
-    const j=await r.json();if(!r.ok)throw new Error(j.error||'Daten konnten nicht geladen werden.');
-    stats.innerHTML=`<div class="stat"><b>${j.summary.totalSeats}</b><span>reservierte Plätze</span></div><div class="stat"><b>${j.summary.paidSeats}</b><span>bezahlt / Ticket</span></div><div class="stat"><b>${j.summary.checkedInSeats}</b><span>eingecheckt</span></div><div class="stat"><b>${j.summary.capacity-j.summary.totalSeats}</b><span>noch verfügbar</span></div>`;
+    const r=await fetch(API+'/api/admin/requests',{headers:{authorization:'Bearer '+token,'accept':'application/json'},cache:'no-store'});
+    const raw=await r.text();
+    let j;
+    try{j=raw?JSON.parse(raw):{};}catch(e){throw new Error('Der Server hat keine gültigen Verwaltungsdaten geliefert (HTTP '+r.status+').');}
+    if(r.status===401){logout();showLoginError('Die Anmeldung ist abgelaufen. Bitte erneut anmelden.');return;}
+    if(!r.ok)throw new Error(j.error||('Serverfehler beim Laden der Anfragen (HTTP '+r.status+').'));
+    if(!j.summary || !Array.isArray(j.items))throw new Error('Die Antwort des Servers hat ein unerwartetes Format. Bitte Backend-Version prüfen.');
+    const sum=j.summary;
+    stats.innerHTML=`<div class="stat"><b>${Number(sum.totalSeats)||0}</b><span>reservierte Plätze</span></div><div class="stat"><b>${Number(sum.paidSeats)||0}</b><span>bezahlt / Ticket</span></div><div class="stat"><b>${Number(sum.checkedInSeats)||0}</b><span>eingecheckt</span></div><div class="stat"><b>${Math.max(0,(Number(sum.capacity)||450)-(Number(sum.totalSeats)||0))}</b><span>noch verfügbar</span></div>`;
     rows.innerHTML=j.items.map(x=>{
-      const gs=Array.isArray(x.guest_names)?x.guest_names:[];
-      const names=gs.map(g=>esc(g.firstName+' '+g.lastName)).join('<br>');
+      let gs=x.guest_names;
+      if(typeof gs==='string'){try{gs=JSON.parse(gs)}catch(e){gs=[]}}
+      if(!Array.isArray(gs))gs=[];
+      const names=gs.map(g=>esc(((g.firstName||g.first_name||'')+' '+(g.lastName||g.last_name||'')).trim())).filter(Boolean).join('<br>');
       let acts='';
       if(x.status==='payment_pending')acts=`<button class="admin-btn green" onclick="act('${x.id}','paid')">Zahlung eingegangen</button><button class="admin-btn gray" onclick="act('${x.id}','cancelled')">Stornieren</button>`;
       if(x.status==='ticket_sent')acts=`<button class="admin-btn blue" onclick="act('${x.id}','checkin')">Einchecken</button><button class="admin-btn" onclick="act('${x.id}','resend')">Ticket erneut senden</button><button class="admin-btn gray" onclick="act('${x.id}','cancelled')">Stornieren</button>`;
       if(x.status==='waitlist')acts=`<button class="admin-btn green" onclick="act('${x.id}','approve_waitlist')">Freigeben</button><button class="admin-btn gray" onclick="act('${x.id}','cancelled')">Ablehnen</button>`;
-      return `<tr><td><strong>${esc(x.reference)}</strong></td><td>${esc(x.first_name+' '+x.last_name)}<br><small>${esc(x.email)}</small><div class="names">${names}</div></td><td>${esc(x.club||'—')}</td><td>${x.seats}</td><td><span class="pill">${labels[x.status]||esc(x.status)}</span></td><td>${x.payment_deadline?new Date(x.payment_deadline).toLocaleDateString('de-DE'):'—'}</td><td><div class="admin-row-actions">${acts}</div></td></tr>`;
+      return `<tr><td><strong>${esc(x.reference||'—')}</strong></td><td>${esc(((x.first_name||'')+' '+(x.last_name||'')).trim())}<br><small>${esc(x.email||'')}</small><div class="names">${names}</div></td><td>${esc(x.club||'—')}</td><td>${Number(x.seats)||0}</td><td><span class="pill">${labels[x.status]||esc(x.status||'—')}</span></td><td>${x.payment_deadline?new Date(x.payment_deadline).toLocaleDateString('de-DE'):'—'}</td><td><div class="admin-row-actions">${acts}</div></td></tr>`;
     }).join('');
-  }catch(err){adminStatus.textContent=err.message||'Daten konnten nicht geladen werden.';adminStatus.className='admin-status show error';}
+    if(!j.items.length) rows.innerHTML='<tr><td colspan="7" style="text-align:center;padding:28px">Zurzeit sind keine Anfragen in der Datenbank vorhanden.</td></tr>';
+    adminStatus.textContent=`${j.items.length} Anfrage${j.items.length===1?'':'n'} erfolgreich geladen.`;
+    adminStatus.className='admin-status show ok';
+  }catch(err){
+    stats.innerHTML='';rows.innerHTML='';
+    adminStatus.textContent=err.message||'Daten konnten nicht geladen werden.';
+    adminStatus.className='admin-status show error';
+  }finally{document.getElementById('refreshBtn').disabled=false;}
 }
 async function act(id,action){
   if(!confirm('Aktion wirklich ausführen?'))return;
