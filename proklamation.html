@@ -79,6 +79,7 @@
       <h2>Interesse an einer Einladung?</h2>
       <p>Über dieses Formular können Sie Ihr Interesse an einer Teilnahme mitteilen. <strong>Das Absenden der Anfrage begründet keinen Anspruch auf Teilnahme.</strong></p>
       <div class="prok-note"><strong>Wichtig:</strong> Bitte geben Sie alle teilnehmenden Personen namentlich an. Daraus wird später die Gästeliste für den Einlass erstellt.</div>
+      <div class="prok-note" style="margin-top:12px"><strong>E-Mail-Hinweis:</strong> Bitte prüfen Sie nach dem Absenden auch Ihren Spam-/Junk-Ordner. Unsere Rückmeldung kann dort einsortiert werden.</div>
       <div class="prok-flow">
         <div><b>1</b><span>Teilnahmeanfrage mit allen Gästen absenden.</span></div>
         <div><b>2</b><span>Nach positiver Prüfung erhalten Sie die Zahlungsinformationen per E-Mail.</span></div>
@@ -158,8 +159,7 @@ requestForm.addEventListener('submit',async e=>{
     data.guests=[...document.querySelectorAll('.guest')].map(x=>({firstName:x.querySelector('.gfn').value.trim(),lastName:x.querySelector('.gln').value.trim()}));
     const r=await fetch(API+'/api/request',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(data)});
     const j=await r.json(); if(!r.ok)throw new Error(j.error||'Die Anfrage konnte nicht übermittelt werden.');
-    showStatus(`<strong>Vielen Dank!</strong><br>Ihre Anfrage wurde unter <strong>${j.reference}</strong> erfasst. Eine Eingangsbestätigung wird per E-Mail versendet.`,'ok');
-    requestForm.reset(); drawGuests();
+    window.location.href='proklamation-erfolgreich.html?ref='+encodeURIComponent(j.reference);
   }catch(err){showStatus(err.message||'Verbindung zum Server fehlgeschlagen.','error');}
   finally{setBusy(false);}
 });

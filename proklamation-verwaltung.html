@@ -20,6 +20,7 @@
     .admin-toolbar{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:16px}.admin-toolbar h2{margin:0}
     .table-wrap{overflow:auto;border:1px solid #eee1d8;border-radius:16px}.admin-table{width:100%;border-collapse:collapse;min-width:980px}.admin-table th{background:#fff7ef;color:var(--prok-dark);font-size:.78rem;text-transform:uppercase;letter-spacing:.04em}.admin-table th,.admin-table td{padding:12px 11px;border-bottom:1px solid #eee1d8;text-align:left;vertical-align:top}.admin-table tr:last-child td{border-bottom:0}.admin-table small{color:#786b63}.admin-row-actions{display:flex;gap:6px;flex-wrap:wrap}.admin-row-actions .admin-btn{padding:8px 10px;font-size:.75rem}.pill{display:inline-flex;padding:5px 9px;border-radius:999px;background:#f1ece8;color:#5d514a;font-size:.77rem;font-weight:800}.names{font-size:.83rem;color:#655c56;margin-top:6px;line-height:1.45}
     .admin-hidden{display:none!important}
+    .scan-overlay{position:fixed;inset:0;background:rgba(25,15,12,.76);z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px}.scan-box{width:min(620px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:24px;padding:22px;box-shadow:0 24px 80px rgba(0,0,0,.3)}.scan-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.scan-head h2{margin:0;font:700 1.8rem Georgia,serif;color:var(--prok-dark)}.scan-close{border:0;background:#f2e9e4;color:#6d5148;width:38px;height:38px;border-radius:50%;font-size:22px;cursor:pointer}.scan-stage{position:relative;margin-top:16px;background:#111;border-radius:18px;overflow:hidden;aspect-ratio:4/3}.scan-stage video{width:100%;height:100%;object-fit:cover;display:block}.scan-frame{position:absolute;inset:17%;border:3px solid #f2cf68;border-radius:18px;box-shadow:0 0 0 999px rgba(0,0,0,.16)}.scan-result{margin-top:16px;border-radius:16px;padding:18px;line-height:1.6}.scan-result.wait{background:#fff8e7;border:1px solid #eed69a;color:#6b4a12}.scan-result.good{background:#eef8ef;border:1px solid #c6e4ca;color:#225b2b}.scan-result.bad{background:#fff0ef;border:1px solid #efc3be;color:#9d261f}.scan-guests{margin-top:10px;padding-top:10px;border-top:1px solid currentColor;opacity:.9}.scan-guests div{font-weight:700}.scan-hint{font-size:.88rem;color:var(--prok-muted);line-height:1.55;margin-top:10px}
     @media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:620px){.admin-shell{padding:24px 12px 54px}.admin-head{grid-template-columns:64px 1fr;gap:13px}.admin-head img{width:64px;height:64px}.admin-card{border-radius:18px;padding:18px}.stats{grid-template-columns:1fr 1fr}.admin-toolbar{align-items:flex-start}.admin-toolbar .admin-actions{margin-top:0}}
   </style>
@@ -61,17 +62,29 @@
     <section class="admin-card">
       <div class="admin-toolbar">
         <div><span class="admin-kicker">Gästeverwaltung</span><h2>Anfragen & Einlass</h2></div>
-        <div class="admin-actions"><button id="refreshBtn" class="admin-btn secondary" type="button">Aktualisieren</button><button id="guestlistBtn" class="admin-btn gray" type="button">PDF-Gästeliste</button><button id="logoutBtn" class="admin-btn secondary" type="button">Abmelden</button></div>
+        <div class="admin-actions"><button id="scanBtn" class="admin-btn blue" type="button">📷 QR-Code scannen</button><button id="refreshBtn" class="admin-btn secondary" type="button">Aktualisieren</button><button id="guestlistBtn" class="admin-btn gray" type="button">PDF-Gästeliste</button><button id="logoutBtn" class="admin-btn secondary" type="button">Abmelden</button></div>
       </div>
       <div class="table-wrap"><table class="admin-table"><thead><tr><th>Vorgang</th><th>Kontakt / Gäste</th><th>Verein</th><th>Plätze</th><th>Status</th><th>Frist</th><th>Aktion</th></tr></thead><tbody id="rows"></tbody></table></div>
       <div id="adminStatus" class="admin-status" role="status"></div>
     </section>
   </div>
 </main>
+<div id="scanOverlay" class="scan-overlay admin-hidden" role="dialog" aria-modal="true" aria-labelledby="scanTitle">
+  <div class="scan-box">
+    <div class="scan-head"><div><span class="admin-kicker">Einlasskontrolle</span><h2 id="scanTitle">QR-Code scannen</h2></div><button id="scanClose" class="scan-close" type="button" aria-label="Scanner schließen">×</button></div>
+    <div id="scanStage" class="scan-stage"><video id="scanVideo" playsinline muted></video><div class="scan-frame"></div></div>
+    <canvas id="scanCanvas" class="admin-hidden"></canvas>
+    <div id="scanResult" class="scan-result wait">Kamera wird gestartet … Halten Sie den QR-Code des Tickets in den markierten Bereich.</div>
+    <div class="admin-actions"><button id="scanAgain" class="admin-btn blue" type="button">Erneut scannen</button><button id="scanDone" class="admin-btn secondary" type="button">Schließen</button></div>
+    <p class="scan-hint">Der Scan prüft das Ticket direkt gegen die CAW-Datenbank. Ein gültiges Ticket wird beim ersten Scan automatisch eingecheckt. Ein erneuter Scan wird als bereits verwendet angezeigt.</p>
+  </div>
+</div>
+
 
 <footer class="footer"><img src="assets/images/caw-logo.jpg" alt=""><div><strong>Carnevals-Ausschuss Wesel e.V.</strong><span>© 2026</span></div></footer>
 
 <script src="assets/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
 <script>
 const API='https://caw-proklamation-backend.onrender.com';
 let token=sessionStorage.getItem('prokToken')||'';
@@ -150,6 +163,17 @@ async function act(id,action){
   const r=await fetch(API+'/api/admin/action',{method:'POST',headers:{authorization:'Bearer '+token,'content-type':'application/json'},body:JSON.stringify({id,action})});
   const j=await r.json();if(!r.ok)alert(j.error||'Fehler');else load();
 }
+
+const scanOverlay=document.getElementById('scanOverlay'),scanVideo=document.getElementById('scanVideo'),scanCanvas=document.getElementById('scanCanvas'),scanResult=document.getElementById('scanResult');
+let scanStream=null,scanLoop=0,scanBusy=false,barcodeDetector=null;
+async function openScanner(){scanOverlay.classList.remove('admin-hidden');scanResult.className='scan-result wait';scanResult.textContent='Kamera wird gestartet … Halten Sie den QR-Code des Tickets in den markierten Bereich.';await startScanner();}
+async function startScanner(){stopScanner();scanBusy=false;try{scanStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}},audio:false});scanVideo.srcObject=scanStream;await scanVideo.play();if('BarcodeDetector' in window){try{barcodeDetector=new BarcodeDetector({formats:['qr_code']});}catch(e){barcodeDetector=null}}scanLoop=requestAnimationFrame(scanFrame);}catch(e){scanResult.className='scan-result bad';scanResult.innerHTML='<strong>Kamera konnte nicht geöffnet werden.</strong><br>Bitte Kamerazugriff für diese Website erlauben oder die manuelle Eincheck-Funktion in der Liste verwenden.';}}
+function stopScanner(){if(scanLoop)cancelAnimationFrame(scanLoop);scanLoop=0;if(scanStream){scanStream.getTracks().forEach(t=>t.stop());scanStream=null;}scanVideo.srcObject=null;}
+async function scanFrame(){if(!scanStream||scanBusy)return;const w=scanVideo.videoWidth,h=scanVideo.videoHeight;if(w&&h){const c=scanCanvas;c.width=w;c.height=h;const ctx=c.getContext('2d',{willReadFrequently:true});ctx.drawImage(scanVideo,0,0,w,h);let value='';try{if(barcodeDetector){const found=await barcodeDetector.detect(c);value=found?.[0]?.rawValue||'';}else if(window.jsQR){const img=ctx.getImageData(0,0,w,h);const qr=jsQR(img.data,w,h,{inversionAttempts:'dontInvert'});value=qr?.data||'';}}catch(e){}if(value){scanBusy=true;stopScanner();await checkinQr(value);return;}}scanLoop=requestAnimationFrame(scanFrame);}
+async function checkinQr(payload){scanResult.className='scan-result wait';scanResult.textContent='Ticket wird geprüft …';try{const r=await fetch(API+'/api/admin/checkin-qr',{method:'POST',headers:{authorization:'Bearer '+token,'content-type':'application/json'},body:JSON.stringify({payload})});const j=await r.json();const gs=Array.isArray(j.guests)?j.guests:[];const names=gs.map(g=>`<div>${esc((g.lastName||'')+', '+(g.firstName||''))}</div>`).join('');if(r.ok){scanResult.className='scan-result good';scanResult.innerHTML=`<strong>✓ EINLASS FREIGEGEBEN</strong><br>${esc(j.reference)} · ${Number(j.seats)||0} Person${Number(j.seats)===1?'':'en'}${j.club?'<br>'+esc(j.club):''}<div class="scan-guests">${names}</div>`;await load();}else{scanResult.className='scan-result bad';scanResult.innerHTML=`<strong>${j.code==='already_checked_in'?'✕ BEREITS EINGECHECKT':'✕ TICKET NICHT GÜLTIG'}</strong><br>${esc(j.error||'Prüfung fehlgeschlagen.')}${j.reference?'<br>'+esc(j.reference):''}<div class="scan-guests">${names}</div>`;}}catch(e){scanResult.className='scan-result bad';scanResult.textContent='Verbindung zum Server fehlgeschlagen.';}}
+function closeScanner(){stopScanner();scanOverlay.classList.add('admin-hidden');}
+document.getElementById('scanBtn').addEventListener('click',openScanner);document.getElementById('scanClose').addEventListener('click',closeScanner);document.getElementById('scanDone').addEventListener('click',closeScanner);document.getElementById('scanAgain').addEventListener('click',startScanner);scanOverlay.addEventListener('click',e=>{if(e.target===scanOverlay)closeScanner();});
+
 document.getElementById('refreshBtn').addEventListener('click',load);
 document.getElementById('guestlistBtn').addEventListener('click',()=>window.open(API+'/api/admin/guestlist.pdf?token='+encodeURIComponent(token),'_blank'));
 document.getElementById('logoutBtn').addEventListener('click',logout);
