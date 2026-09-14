@@ -1,1 +1,142 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Proklamation Verwaltung | CAW</title><style>:root{--r:#be2c24}*{box-sizing:border-box}body{font-family:system-ui;margin:0;background:#f4f4f4}.wrap{max-width:1250px;margin:auto;padding:20px}.card{background:white;padding:20px;border-radius:16px;margin:15px 0;box-shadow:0 5px 20px #0001}input,button{padding:11px;border-radius:9px;border:1px solid #bbb}button{background:var(--r);color:#fff;border:0;font-weight:700;cursor:pointer}.stats{display:flex;gap:10px;flex-wrap:wrap}.stat{background:#f6eeee;padding:12px;border-radius:10px;min-width:140px}table{width:100%;border-collapse:collapse;font-size:.9rem}th,td{padding:9px;border-bottom:1px solid #ddd;text-align:left;vertical-align:top}.actions button{margin:2px;font-size:.78rem}.green{background:#287a3e}.gray{background:#666}.blue{background:#245c9c}.pill{display:inline-block;padding:3px 7px;border-radius:999px;background:#eee;font-size:.78rem}.names{font-size:.82rem;color:#555;margin-top:4px}@media(max-width:800px){table{display:block;overflow:auto}}</style></head><body><main class="wrap"><h1>CAW · Proklamation Verwaltung</h1><section id="login" class="card"><h2>Geschützter Bereich</h2><input id="pw" type="password" placeholder="Passwort"><button onclick="loginNow()">Anmelden</button><p id="lm"></p></section><div id="app" hidden><section class="card stats" id="stats"></section><section class="card"><button onclick="load()">Aktualisieren</button> <button class="gray" onclick="window.open(API+'/api/admin/guestlist.pdf?token='+encodeURIComponent(token))">PDF-Gästeliste</button><div style="overflow:auto"><table><thead><tr><th>Vorgang</th><th>Kontakt / Gäste</th><th>Verein</th><th>Plätze</th><th>Status</th><th>Frist</th><th>Aktion</th></tr></thead><tbody id="rows"></tbody></table></div></section></div></main><script>const API='https://caw-proklamation-backend.onrender.com';let token=sessionStorage.prokToken||'';const labels={pending:'Prüfung läuft',payment_pending:'Zahlung offen',paid:'Bezahlt',ticket_sent:'Ticket versendet',checked_in:'Eingecheckt',cancelled:'Storniert',waitlist:'Warteliste'};async function loginNow(){let r=await fetch(API+'/api/admin/login',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({password:pw.value})}),j=await r.json();if(!r.ok){lm.textContent=j.error||'Anmeldung fehlgeschlagen';return}token=j.token;sessionStorage.prokToken=token;show()}async function show(){login.hidden=true;app.hidden=false;await load()}function esc(v=''){return String(v).replace(/[&<>"']/g,s=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]))}async function load(){let r=await fetch(API+'/api/admin/requests',{headers:{authorization:'Bearer '+token}});if(r.status===401){sessionStorage.removeItem('prokToken');location.reload();return}let j=await r.json();stats.innerHTML=`<div class=stat><b>${j.summary.totalSeats}</b><br>reservierte Plätze</div><div class=stat><b>${j.summary.paidSeats}</b><br>bezahlt / Ticket</div><div class=stat><b>${j.summary.checkedInSeats}</b><br>eingecheckt</div><div class=stat><b>${j.summary.capacity-j.summary.totalSeats}</b><br>noch verfügbar</div>`;rows.innerHTML=j.items.map(x=>{let gs=Array.isArray(x.guest_names)?x.guest_names:[];let names=gs.map(g=>esc(g.firstName+' '+g.lastName)).join('<br>');let acts='';if(x.status==='payment_pending')acts=`<button class=green onclick="act('${x.id}','paid')">Zahlung eingegangen</button><button class=gray onclick="act('${x.id}','cancelled')">Stornieren</button>`;if(x.status==='ticket_sent')acts=`<button class=blue onclick="act('${x.id}','checkin')">Einchecken</button><button onclick="act('${x.id}','resend')">Ticket erneut senden</button><button class=gray onclick="act('${x.id}','cancelled')">Stornieren</button>`;if(x.status==='waitlist')acts=`<button class=green onclick="act('${x.id}','approve_waitlist')">Freigeben</button><button class=gray onclick="act('${x.id}','cancelled')">Ablehnen</button>`;return `<tr><td>${esc(x.reference)}</td><td>${esc(x.first_name+' '+x.last_name)}<br><small>${esc(x.email)}</small><div class=names>${names}</div></td><td>${esc(x.club||'—')}</td><td>${x.seats}</td><td><span class=pill>${labels[x.status]||esc(x.status)}</span></td><td>${x.payment_deadline?new Date(x.payment_deadline).toLocaleDateString('de-DE'):'—'}</td><td class=actions>${acts}</td></tr>`}).join('')}async function act(id,a){if(!confirm('Aktion wirklich ausführen?'))return;let r=await fetch(API+'/api/admin/action',{method:'POST',headers:{authorization:'Bearer '+token,'content-type':'application/json'},body:JSON.stringify({id,action:a})}),j=await r.json();if(!r.ok)alert(j.error||'Fehler');else load()}if(token)show();</script></body></html>
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#8f1f1a">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Proklamation Verwaltung | Carnevals-Ausschuss Wesel e.V.</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    :root{--prok-red:#be2c24;--prok-dark:#8f1f1a;--prok-gold:#d9a62e;--prok-cream:#fffaf0;--prok-line:#ead8cf;--prok-muted:#6d625e}
+    body.prok-admin-page{background:linear-gradient(180deg,#fff 0,#fffaf5 100%)}
+    .admin-shell{max-width:1360px;margin:0 auto;padding:38px 18px 76px}.admin-topback{display:inline-flex;margin-bottom:16px;color:var(--prok-dark);font-weight:800;text-decoration:none}
+    .admin-head{display:grid;grid-template-columns:90px 1fr;gap:20px;align-items:center;margin-bottom:22px}.admin-head img{width:90px;height:90px;object-fit:contain;border-radius:50%;background:#fff;border:3px solid #ead7a9;box-shadow:0 9px 25px rgba(70,20,20,.09)}.admin-kicker{display:inline-block;color:var(--prok-red);font-weight:900;text-transform:uppercase;letter-spacing:.09em;font-size:.76rem}.admin-head h1{font:700 clamp(2rem,4vw,3.4rem)/1 Georgia,'Times New Roman',serif;color:var(--prok-dark);margin:.14em 0}.admin-head p{margin:.45em 0 0;color:var(--prok-muted)}
+    .admin-card{background:#fff;border:1px solid var(--prok-line);border-radius:24px;padding:clamp(20px,4vw,34px);box-shadow:0 13px 38px rgba(72,31,22,.07);margin-top:18px}.admin-login{max-width:650px;margin:26px auto 0}.admin-card h2{font:700 2rem Georgia,serif;color:var(--prok-dark);margin:0 0 12px}.admin-card p{color:var(--prok-muted);line-height:1.65}
+    .admin-field{display:flex;flex-direction:column;gap:7px}.admin-field label{font-weight:800;font-size:.94rem}.admin-field input{width:100%;border:1px solid #d8c5bc;border-radius:12px;padding:12px 13px;background:#fff;font:inherit;color:#221815;outline:none}.admin-field input:focus{border-color:var(--prok-red);box-shadow:0 0 0 3px rgba(190,44,36,.12)}
+    .admin-btn{appearance:none;border:0;border-radius:999px;padding:12px 18px;font:900 14px/1.2 inherit;cursor:pointer;transition:.18s;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--prok-red);color:#fff}.admin-btn:hover{transform:translateY(-1px)}.admin-btn.secondary{background:#f7ebe6;color:var(--prok-dark);border:1px solid #ead2c8}.admin-btn.green{background:#287a3e}.admin-btn.blue{background:#245c9c}.admin-btn.gray{background:#666}.admin-btn:disabled{cursor:wait;opacity:.68;transform:none}.admin-actions{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-top:16px}
+    .admin-status{padding:12px 14px;border-radius:12px;margin-top:14px;display:none}.admin-status.show{display:block}.admin-status.error{background:#fff0ef;color:#9d261f;border:1px solid #efc3be}.admin-status.ok{background:#eef8ef;color:#225b2b;border:1px solid #c6e4ca}.admin-status.loading{display:flex;align-items:flex-start;gap:12px;background:#fff8e7;color:#6b4a12;border:1px solid #eed69a}.admin-spinner{width:20px;height:20px;flex:0 0 20px;border:3px solid rgba(190,44,36,.18);border-top-color:var(--prok-red);border-radius:50%;animation:adminSpin .8s linear infinite;margin-top:1px}@keyframes adminSpin{to{transform:rotate(360deg)}}.admin-loading-copy{display:flex;flex-direction:column;gap:2px}.admin-loading-copy strong{color:var(--prok-dark)}
+    .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}.stat{background:#fffaf4;border:1px solid #ecd8ca;border-radius:16px;padding:17px}.stat b{display:block;font:700 2rem Georgia,serif;color:var(--prok-dark);line-height:1}.stat span{display:block;margin-top:6px;color:var(--prok-muted);font-size:.9rem}
+    .admin-toolbar{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:16px}.admin-toolbar h2{margin:0}
+    .table-wrap{overflow:auto;border:1px solid #eee1d8;border-radius:16px}.admin-table{width:100%;border-collapse:collapse;min-width:980px}.admin-table th{background:#fff7ef;color:var(--prok-dark);font-size:.78rem;text-transform:uppercase;letter-spacing:.04em}.admin-table th,.admin-table td{padding:12px 11px;border-bottom:1px solid #eee1d8;text-align:left;vertical-align:top}.admin-table tr:last-child td{border-bottom:0}.admin-table small{color:#786b63}.admin-row-actions{display:flex;gap:6px;flex-wrap:wrap}.admin-row-actions .admin-btn{padding:8px 10px;font-size:.75rem}.pill{display:inline-flex;padding:5px 9px;border-radius:999px;background:#f1ece8;color:#5d514a;font-size:.77rem;font-weight:800}.names{font-size:.83rem;color:#655c56;margin-top:6px;line-height:1.45}
+    .admin-hidden{display:none!important}
+    @media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:620px){.admin-shell{padding:24px 12px 54px}.admin-head{grid-template-columns:64px 1fr;gap:13px}.admin-head img{width:64px;height:64px}.admin-card{border-radius:18px;padding:18px}.stats{grid-template-columns:1fr 1fr}.admin-toolbar{align-items:flex-start}.admin-toolbar .admin-actions{margin-top:0}}
+  </style>
+</head>
+<body class="prok-admin-page">
+<header class="site-header modern-header">
+  <div class="top-stripe"></div>
+  <div class="header-inner">
+    <a class="brand" href="index.html#start" aria-label="CAW Startseite">
+      <div class="brand-logo-wrap"><img src="assets/images/caw-logo.jpg" alt="Logo Carnevals-Ausschuss Wesel e.V."></div>
+      <div class="brand-copy"><strong>Carnevals-Ausschuss Wesel e.V.</strong><span>Gemeinsam für den Weseler Karneval</span></div>
+    </a>
+    <nav id="main-nav" class="main-nav" aria-label="Hauptnavigation">
+      <a href="index.html#start">Start</a><a href="index.html#termine">Termine</a><a href="proklamation.html">Teilnahmeanfrage</a><a href="wagenbau.html">🔒 Wagenbau intern</a><a href="index.html#kontakt">Kontakt</a>
+    </nav>
+    <button class="menu-toggle" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="main-nav">☰</button>
+  </div>
+</header>
+
+<main class="admin-shell">
+  <a class="admin-topback" href="index.html">← Zurück zur CAW-Startseite</a>
+  <section class="admin-head">
+    <img src="assets/images/caw-logo.jpg" alt="CAW Logo">
+    <div><span class="admin-kicker">Interner Verwaltungsbereich</span><h1>Prinzenproklamation 2026/27</h1><p>Zahlungsprüfung, Ticketversand und Gästeliste für den 20.11.2026.</p></div>
+  </section>
+
+  <section id="loginCard" class="admin-card admin-login">
+    <h2>Geschützter Bereich</h2>
+    <p>Dieser Bereich ist ausschließlich für die berechtigte Verwaltung des CAW vorgesehen.</p>
+    <form id="loginForm">
+      <div class="admin-field"><label for="password">Passwort</label><input id="password" type="password" autocomplete="current-password" required></div>
+      <div class="admin-actions"><button id="loginBtn" class="admin-btn" type="submit">Verwaltung öffnen</button></div>
+      <div id="loginStatus" class="admin-status" role="status" aria-live="polite"></div>
+    </form>
+  </section>
+
+  <div id="adminApp" class="admin-hidden">
+    <section class="admin-card"><div id="stats" class="stats"></div></section>
+    <section class="admin-card">
+      <div class="admin-toolbar">
+        <div><span class="admin-kicker">Gästeverwaltung</span><h2>Anfragen & Einlass</h2></div>
+        <div class="admin-actions"><button id="refreshBtn" class="admin-btn secondary" type="button">Aktualisieren</button><button id="guestlistBtn" class="admin-btn gray" type="button">PDF-Gästeliste</button><button id="logoutBtn" class="admin-btn secondary" type="button">Abmelden</button></div>
+      </div>
+      <div class="table-wrap"><table class="admin-table"><thead><tr><th>Vorgang</th><th>Kontakt / Gäste</th><th>Verein</th><th>Plätze</th><th>Status</th><th>Frist</th><th>Aktion</th></tr></thead><tbody id="rows"></tbody></table></div>
+      <div id="adminStatus" class="admin-status" role="status"></div>
+    </section>
+  </div>
+</main>
+
+<footer class="footer"><img src="assets/images/caw-logo.jpg" alt=""><div><strong>Carnevals-Ausschuss Wesel e.V.</strong><span>© 2026</span></div></footer>
+
+<script src="assets/script.js"></script>
+<script>
+const API='https://caw-proklamation-backend.onrender.com';
+let token=sessionStorage.getItem('prokToken')||'';
+const labels={pending:'Prüfung läuft',payment_pending:'Zahlung offen',paid:'Bezahlt',ticket_sent:'Ticket versendet',checked_in:'Eingecheckt',cancelled:'Storniert',waitlist:'Warteliste'};
+const loginForm=document.getElementById('loginForm');
+const loginCard=document.getElementById('loginCard');
+const adminApp=document.getElementById('adminApp');
+const password=document.getElementById('password');
+const loginBtn=document.getElementById('loginBtn');
+const loginStatus=document.getElementById('loginStatus');
+const stats=document.getElementById('stats');
+const rows=document.getElementById('rows');
+const adminStatus=document.getElementById('adminStatus');
+
+function showLoginLoading(message,detail){
+  loginStatus.innerHTML=`<span class="admin-spinner" aria-hidden="true"></span><span class="admin-loading-copy"><strong>${message}</strong><span>${detail}</span></span>`;
+  loginStatus.className='admin-status show loading';
+}
+function setLoginBusy(busy){loginBtn.disabled=busy;password.disabled=busy;loginBtn.textContent=busy?'Bitte warten …':'Verwaltung öffnen';}
+function showLoginError(msg){loginStatus.textContent=msg;loginStatus.className='admin-status show error';}
+function clearLoginStatus(){loginStatus.textContent='';loginStatus.className='admin-status';}
+function esc(v=''){return String(v).replace(/[&<>"']/g,s=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]))}
+function logout(){token='';sessionStorage.removeItem('prokToken');adminApp.classList.add('admin-hidden');loginCard.classList.remove('admin-hidden');password.value='';clearLoginStatus();}
+
+loginForm.addEventListener('submit',async e=>{
+  e.preventDefault();clearLoginStatus();setLoginBusy(true);
+  showLoginLoading('Kontakt zum Server wird aufgenommen …','Der geschützte CAW-Verwaltungsbereich wird geladen. Beim ersten Aufruf kann der Server einen Moment zum Starten benötigen. Bitte warten.');
+  const slowHint=window.setTimeout(()=>{
+    showLoginLoading('Der Server wird gerade gestartet …','Das kann beim kostenlosen Server beim ersten Aufruf etwas länger dauern. Bitte die Seite nicht neu laden – die Anmeldung läuft automatisch weiter.');
+  },10000);
+  try{
+    const r=await fetch(API+'/api/admin/login',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({password:password.value})});
+    const j=await r.json();if(!r.ok)throw new Error(j.error||'Anmeldung fehlgeschlagen.');
+    token=j.token;sessionStorage.setItem('prokToken',token);await showApp();
+  }catch(err){showLoginError(err.message||'Verbindung zum Server fehlgeschlagen.');}
+  finally{window.clearTimeout(slowHint);setLoginBusy(false);}
+});
+
+async function showApp(){loginCard.classList.add('admin-hidden');adminApp.classList.remove('admin-hidden');await load();}
+async function load(){
+  try{
+    const r=await fetch(API+'/api/admin/requests',{headers:{authorization:'Bearer '+token}});
+    if(r.status===401){logout();return}
+    const j=await r.json();if(!r.ok)throw new Error(j.error||'Daten konnten nicht geladen werden.');
+    stats.innerHTML=`<div class="stat"><b>${j.summary.totalSeats}</b><span>reservierte Plätze</span></div><div class="stat"><b>${j.summary.paidSeats}</b><span>bezahlt / Ticket</span></div><div class="stat"><b>${j.summary.checkedInSeats}</b><span>eingecheckt</span></div><div class="stat"><b>${j.summary.capacity-j.summary.totalSeats}</b><span>noch verfügbar</span></div>`;
+    rows.innerHTML=j.items.map(x=>{
+      const gs=Array.isArray(x.guest_names)?x.guest_names:[];
+      const names=gs.map(g=>esc(g.firstName+' '+g.lastName)).join('<br>');
+      let acts='';
+      if(x.status==='payment_pending')acts=`<button class="admin-btn green" onclick="act('${x.id}','paid')">Zahlung eingegangen</button><button class="admin-btn gray" onclick="act('${x.id}','cancelled')">Stornieren</button>`;
+      if(x.status==='ticket_sent')acts=`<button class="admin-btn blue" onclick="act('${x.id}','checkin')">Einchecken</button><button class="admin-btn" onclick="act('${x.id}','resend')">Ticket erneut senden</button><button class="admin-btn gray" onclick="act('${x.id}','cancelled')">Stornieren</button>`;
+      if(x.status==='waitlist')acts=`<button class="admin-btn green" onclick="act('${x.id}','approve_waitlist')">Freigeben</button><button class="admin-btn gray" onclick="act('${x.id}','cancelled')">Ablehnen</button>`;
+      return `<tr><td><strong>${esc(x.reference)}</strong></td><td>${esc(x.first_name+' '+x.last_name)}<br><small>${esc(x.email)}</small><div class="names">${names}</div></td><td>${esc(x.club||'—')}</td><td>${x.seats}</td><td><span class="pill">${labels[x.status]||esc(x.status)}</span></td><td>${x.payment_deadline?new Date(x.payment_deadline).toLocaleDateString('de-DE'):'—'}</td><td><div class="admin-row-actions">${acts}</div></td></tr>`;
+    }).join('');
+  }catch(err){adminStatus.textContent=err.message||'Daten konnten nicht geladen werden.';adminStatus.className='admin-status show error';}
+}
+async function act(id,action){
+  if(!confirm('Aktion wirklich ausführen?'))return;
+  const r=await fetch(API+'/api/admin/action',{method:'POST',headers:{authorization:'Bearer '+token,'content-type':'application/json'},body:JSON.stringify({id,action})});
+  const j=await r.json();if(!r.ok)alert(j.error||'Fehler');else load();
+}
+document.getElementById('refreshBtn').addEventListener('click',load);
+document.getElementById('guestlistBtn').addEventListener('click',()=>window.open(API+'/api/admin/guestlist.pdf?token='+encodeURIComponent(token),'_blank'));
+document.getElementById('logoutBtn').addEventListener('click',logout);
+if(token)showApp();
+</script>
+</body>
+</html>
