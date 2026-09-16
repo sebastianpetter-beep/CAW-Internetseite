@@ -145,6 +145,142 @@ body { padding-top: 0 !important; }
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://caw-wesel.de/prinzentreffen-2027-whatsapp.png">
+
+<style>
+/* ===== MOBILE FINAL FIX =====
+   Desktop: Header scrollt normal weg.
+   Mobil: roter CAW-Header bleibt oben sichtbar.
+*/
+@media (min-width: 801px){
+  .modern-header{
+    position:relative !important;
+    top:auto !important;
+  }
+}
+
+@media (max-width: 800px){
+  .modern-header{
+    position:sticky !important;
+    top:0 !important;
+    z-index:9999 !important;
+    width:100% !important;
+    transform:none !important;
+  }
+
+  /* Sprungmarken verschwinden nicht unter dem festen Header */
+  #ablauf,#zeitplan,#tickets,#rueckblick,#anreise{
+    scroll-margin-top:105px;
+  }
+
+  /* Hero komplett innerhalb des Handy-Displays */
+  .pt-hero{
+    height:auto !important;
+    min-height:760px !important;
+    overflow:hidden !important;
+  }
+  .pt-hero-copy{
+    left:16px !important;
+    right:16px !important;
+    width:auto !important;
+    max-width:none !important;
+    padding:22px 18px !important;
+    box-sizing:border-box !important;
+    overflow:hidden !important;
+  }
+
+  /* Exakt 3 Zeilen – aber vollständig lesbar */
+  .pt-hero h1{
+    font-size:clamp(25px,7vw,36px) !important;
+    line-height:1.02 !important;
+    letter-spacing:-0.035em !important;
+    max-width:100% !important;
+    overflow:visible !important;
+    hyphens:none !important;
+    word-break:normal !important;
+    overflow-wrap:normal !important;
+  }
+  .pt-hero h1 span{
+    display:block !important;
+    white-space:nowrap !important;
+    max-width:100% !important;
+  }
+
+  .pt-badge{
+    font-size:10px !important;
+    letter-spacing:.09em !important;
+    max-width:100% !important;
+    box-sizing:border-box !important;
+  }
+  .pt-hero .claim{
+    font-size:clamp(19px,5.5vw,25px) !important;
+    line-height:1.18 !important;
+  }
+  .pt-hero p{
+    font-size:16px !important;
+    line-height:1.55 !important;
+  }
+
+  /* Eventfrog-Bereich: keine abgeschnittenen Texte */
+  .pt-ticket-info,
+  .pt-eventfrog-box,
+  .pt-embed{
+    min-width:0 !important;
+    width:100% !important;
+    box-sizing:border-box !important;
+  }
+  .pt-eventfrog-box h3{
+    font-size:clamp(29px,9vw,43px) !important;
+    line-height:1.05 !important;
+    overflow-wrap:break-word !important;
+  }
+  .pt-eventfrog-box p{
+    overflow-wrap:anywhere !important;
+  }
+  .pt-buy-wrap iframe{
+    max-width:100% !important;
+  }
+
+  /* Der Ticket-Schnellbutton bleibt erreichbar, verdeckt aber nicht mehr
+     die komplette Seitenbreite. */
+  .pt-float-ticket{
+    left:auto !important;
+    right:12px !important;
+    bottom:14px !important;
+    width:auto !important;
+    max-width:210px !important;
+    padding:12px 16px !important;
+    font-size:13px !important;
+    white-space:nowrap !important;
+    z-index:9998 !important;
+  }
+
+  /* Musikknopf kompakt unten links */
+  .pt-music{
+    left:12px !important;
+    bottom:12px !important;
+    z-index:9998 !important;
+  }
+  .pt-music .music-copy{display:none !important;}
+
+  /* Genug Luft am Seitenende für die beiden schwebenden Buttons */
+  .pt-page{padding-bottom:78px !important;}
+}
+
+@media (max-width: 390px){
+  .pt-hero h1{
+    font-size:clamp(23px,6.8vw,28px) !important;
+  }
+  .pt-hero-copy{
+    left:12px !important;
+    right:12px !important;
+    padding:20px 14px !important;
+  }
+  .pt-float-ticket{
+    max-width:185px !important;
+    font-size:12px !important;
+  }
+}
+</style>
 </head><body class="pt-page">
 <header class="modern-header"><div class="top-stripe"></div><div class="header-inner"><a class="brand" href="index.html"><div class="brand-logo-wrap"><img src="caw-logo-original.jpg" alt="CAW Logo"></div><div class="brand-copy"><strong>Carnevals-Ausschuss Wesel e.V.</strong><span>Gemeinsam für den Weseler Karneval</span></div></a><button class="menu-toggle" aria-label="Menü öffnen">☰</button><nav class="main-nav"><a href="index.html">Startseite</a><a href="#ablauf">Ablauf</a><a href="#tickets" class="nav-highlight">Tickets</a><a href="#rueckblick">Rückblick 2026</a><a href="#anreise">Anreise</a></nav></div></header>
 <main>
