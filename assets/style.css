@@ -49,12 +49,12 @@ body{
 .hero-image.current{
   background-image:
     linear-gradient(135deg,rgba(190,44,36,.2),rgba(0,0,0,.05)),
-    url("images/prinzenpaar-2025-26.jpg");
+    url("images/prinzenpaar-2025-26.webp");
 }
 .hero-image.designated{
   background-image:
     linear-gradient(135deg,rgba(190,44,36,.2),rgba(0,0,0,.05)),
-    url("images/prinzenpaar-2026-27.jpg");
+    url("images/prinzenpaar-2026-27.webp");
 }
 .hero-image.children{
   background-image:
@@ -373,12 +373,12 @@ body{
 .hero-image.current{
   background-image:
     linear-gradient(135deg,rgba(190,44,36,.2),rgba(0,0,0,.05)),
-    url("images/prinzenpaar-2025-26.jpg");
+    url("images/prinzenpaar-2025-26.webp");
 }
 .hero-image.designated{
   background-image:
     linear-gradient(135deg,rgba(190,44,36,.2),rgba(0,0,0,.05)),
-    url("images/prinzenpaar-2026-27.jpg");
+    url("images/prinzenpaar-2026-27.webp");
 }
 .hero-image.children{
   background-image:
