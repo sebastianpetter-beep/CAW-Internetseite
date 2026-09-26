@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#be2c24">
+<title>Ticket-Admin · CAW Wesel</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+:root{--red:#be2c24;--dark:#6d201d;--gold:#d9a62e;--cream:#fffaf0}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(145deg,#fffaf0,#f6e9e3);color:#341817;font-family:Arial,sans-serif;min-height:100vh}
+.admin-head{background:linear-gradient(135deg,#64111b,#9b1e27);border-bottom:5px solid var(--gold);color:#fff}
+.admin-head-inner{max-width:1120px;margin:auto;padding:22px 28px;display:flex;align-items:center;gap:18px}
+.admin-head img{width:74px;height:74px;object-fit:cover;border-radius:50%;border:3px solid #e8bd4a}
+.admin-head strong{display:block;font-family:Georgia,serif;font-size:1.45rem}
+.admin-head span{opacity:.86}
+main{max-width:1120px;margin:auto;padding:64px 28px 80px}
+.kicker{display:inline-block;color:var(--red);font-weight:900;letter-spacing:.08em;text-transform:uppercase;font-size:.78rem}
+h1{font-family:Georgia,serif;color:#651c1a;font-size:clamp(2.3rem,5vw,4.2rem);margin:10px 0 12px;line-height:1}
+.intro{font-size:1.08rem;line-height:1.65;max-width:760px;color:#65413d;margin-bottom:34px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.card{position:relative;overflow:hidden;background:#fff;border:1px solid #ead7cd;border-radius:24px;padding:32px;box-shadow:0 18px 45px rgba(74,28,24,.10);text-decoration:none;color:inherit;transition:.2s}
+.card:hover{transform:translateY(-4px);box-shadow:0 24px 55px rgba(74,28,24,.16)}
+.card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--red)}
+.card.gold:before{background:var(--gold)}
+.icon{font-size:2.4rem;margin-bottom:18px}
+.card h2{font-family:Georgia,serif;color:#70221f;font-size:1.75rem;margin:0 0 10px}
+.card p{line-height:1.55;color:#694943;margin:0 0 22px}
+.go{display:inline-flex;background:var(--red);color:#fff;padding:11px 16px;border-radius:999px;font-weight:900}
+.card.gold .go{background:var(--gold);color:#3b2600}
+.back{display:inline-block;margin-top:34px;color:#762520;font-weight:800;text-decoration:none}
+.note{margin-top:28px;padding:18px 20px;border-radius:16px;background:#fff4d7;border:1px solid #eed188;color:#60440b;line-height:1.5}
+@media(max-width:720px){main{padding:42px 18px 60px}.grid{grid-template-columns:1fr}.admin-head-inner{padding:16px 18px}.admin-head img{width:60px;height:60px}}
+</style>
+</head>
+<body>
+<header class="admin-head">
+  <div class="admin-head-inner">
+    <img src="assets/images/caw-logo.jpg" alt="CAW Wesel">
+    <div><strong>Carnevals-Ausschuss Wesel e.V.</strong><span>Interne Veranstaltungsverwaltung</span></div>
+  </div>
+</header>
+<main>
+  <span class="kicker">Interner Bereich</span>
+  <h1>Ticket-Admin</h1>
+  <p class="intro">Welche Veranstaltung möchtest du verwalten? Wähle den entsprechenden Bereich. Die eigentlichen Verwaltungsseiten bleiben weiterhin geschützt.</p>
+  <div class="grid">
+    <a class="card" href="proklamation-verwaltung.html">
+      <div class="icon">👑</div>
+      <h2>Prinzenproklamation 2026/27</h2>
+      <p>Teilnahmeanfragen, Freigaben, Tickets, Gästeliste und Einlass für die Prinzenproklamation verwalten.</p>
+      <span class="go">Proklamation öffnen →</span>
+    </a>
+    <a class="card gold" href="kasernensturm-verwaltung.html">
+      <div class="icon">🪖</div>
+      <h2>Kasernensturm 2026</h2>
+      <p>Anmeldungen und Teilnehmerliste für den Kasernensturm am 12. November 2026 verwalten.</p>
+      <span class="go">Kasernensturm öffnen →</span>
+    </a>
+  </div>
+  <div class="note"><strong>Hinweis:</strong> Dieser Bereich ist ausschließlich für die interne Organisation des CAW vorgesehen.</div>
+  <a class="back" href="index.html">← Zurück zur CAW-Startseite</a>
+</main>
+</body>
+</html>
