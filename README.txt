@@ -1,20 +1,20 @@
-CAW – Vorschaltseite für die Prinzenproklamation
+CAW Kasernensturm Update – 26.09.2026
 
-WEBSITE-REPO (CAW-Internetseite):
-1. proklamation.html ersetzen
-2. proklamation-test.html neu hochladen
+WEBSITE-REPO (Root):
+- index.html ERSETZEN
+- veranstaltungen.html NEU
+- kasernensturm.html NEU
+- kasernensturm-verwaltung.html NEU
 
-BACKEND-REPO (CAW-Proklamation-Backend):
-3. backend/server.js als server.js ersetzen
+BACKEND:
+Die Frontend-Seiten erwarten die neuen /api/kasernensturm/* Endpunkte. Backend-Erweiterung separat einspielen.
 
-Render:
-- PREVIEW_MODE=true  (solange noch nicht öffentlich)
-- Optional: PREVIEW_PASSWORD=ein separates Testpasswort
-- Wenn PREVIEW_PASSWORD nicht gesetzt ist, verwendet der Testzugang vorübergehend ADMIN_PASSWORD.
-
-Später öffentlich freischalten:
-- PREVIEW_MODE=false setzen
-- dann proklamation.html wieder durch das eigentliche Formular ersetzen (proklamation-test.html kann bestehen bleiben oder entfernt werden).
-
-Wichtig:
-Der Schutz erfolgt serverseitig: /api/request nimmt im Preview-Modus nur Anfragen mit gültigem Testzugangs-Token an.
+Festgelegt:
+- Schillkaserne, Strauchheide 11, 46499 Wesel
+- 12.11.2026, Beginn 18:00 Uhr
+- Anmeldeschluss 11.11.2026 18:00 Uhr
+- Einzelperson oder Verein/Gruppe bis 40 Personen
+- Personendaten: Nachname, Vorname, Ausweisnummer, Staatsangehörigkeit
+- A-Z nach Nachname, dann Vorname; fortlaufende Nummerierung
+- Zwischenlisten klar als NICHT FINAL markieren
+- finale Liste nach Anmeldeschluss klar als FINAL markieren
