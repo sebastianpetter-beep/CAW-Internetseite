@@ -119,6 +119,58 @@
 }
 </style>
 
+
+<style>
+/* Zentrales CAW-Veranstaltungsportal auf der Startseite */
+.event-portal-home{
+  margin-top:28px;
+  max-width:900px;
+  padding:26px;
+  border:1px solid rgba(217,166,46,.55);
+  border-radius:24px;
+  background:
+    radial-gradient(circle at 92% 8%,rgba(217,166,46,.18),transparent 26%),
+    linear-gradient(135deg,#fffaf0 0%,#fff 62%,#fff8e6 100%);
+  box-shadow:0 18px 45px rgba(83,34,24,.10);
+}
+.event-portal-label{
+  display:inline-flex;align-items:center;gap:8px;
+  color:#8f1f1a;font-weight:900;letter-spacing:.08em;
+  text-transform:uppercase;font-size:.8rem;
+}
+.event-portal-home h3{
+  margin:9px 0 8px;color:#7b211d;
+  font:800 clamp(1.6rem,3vw,2.35rem)/1.08 Georgia,serif;
+}
+.event-portal-home>p{margin:0 0 19px;line-height:1.55;color:#65504b}
+.event-portal-events{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;margin:0 0 20px;
+}
+.event-portal-event{
+  padding:14px;border-radius:15px;background:#fff;
+  border:1px solid #eeded5;box-shadow:0 5px 15px rgba(80,30,25,.05);
+}
+.event-portal-event strong{display:block;color:#76231f;font-size:.96rem;margin-bottom:5px}
+.event-portal-event span{display:block;color:#735d56;font-size:.83rem;line-height:1.4}
+.event-portal-button{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  width:100%;padding:16px 20px;border-radius:999px;
+  background:linear-gradient(135deg,#d9a62e,#efc44d);
+  color:#352200!important;text-decoration:none!important;
+  font-weight:950;font-size:1.06rem;
+  box-shadow:0 10px 25px rgba(171,118,0,.20);
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+.event-portal-button:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(171,118,0,.27)}
+.event-portal-button small{font-weight:700;opacity:.82}
+@media(max-width:760px){
+  .event-portal-home{padding:20px;margin-top:22px}
+  .event-portal-events{grid-template-columns:1fr}
+  .event-portal-button{border-radius:18px;flex-direction:column;gap:3px;text-align:center}
+}
+</style>
+
 </head>
 <body>
   <header class="site-header modern-header">
@@ -211,8 +263,20 @@
           <span class="section-kicker">Herzlich willkommen</span>
           <h2>Karneval in Wesel hat ein Zuhause.</h2>
           <p>Der Carnevals-Ausschuss Wesel e.V. verbindet die Weseler Karnevalsvereine, begleitet das Prinzenpaar der Stadt und steht für Tradition, Gemeinschaft und die Freude am närrischen Brauchtum.</p>
-          <p>Diese Seite wächst Schritt für Schritt zu unserem neuen digitalen Zuhause.</p>
-          <p><a class="prok-cta" href="veranstaltungen.html">🎟️ Veranstaltungen &amp; Anmeldung →</a></p>
+          <div class="event-portal-home">
+            <span class="event-portal-label">🎟️ Zentrales CAW-Veranstaltungsportal</span>
+            <h3>Veranstaltungen, Anmeldungen &amp; Tickets</h3>
+            <p>Hier finden Sie die aktuellen CAW-Veranstaltungen und gelangen direkt zur jeweiligen Anmeldung, Teilnahmeanfrage oder zum Ticketverkauf.</p>
+            <div class="event-portal-events">
+              <div class="event-portal-event"><strong>🪖 Kasernensturm 2026</strong><span>12.11.2026 · Anmeldung für Einzelpersonen &amp; Vereine</span></div>
+              <div class="event-portal-event"><strong>👑 Prinzenproklamation 2026/27</strong><span>20.11.2026 · Teilnahmeanfrage &amp; Ticket</span></div>
+              <div class="event-portal-event"><strong>🚢 Prinzentreffen 2027</strong><span>03.01.2027 · Tickets &amp; Informationen</span></div>
+            </div>
+            <a class="event-portal-button" href="veranstaltungen.html">
+              <span>🎟️ ZUM VERANSTALTUNGSPORTAL</span>
+              <small>Anmelden · Teilnahmeanfragen · Tickets sichern →</small>
+            </a>
+          </div>
         </div>
         <div class="logo-card">
           <img src="assets/images/caw-logo.jpg" alt="CAW Wesel" decoding="async" loading="eager">
