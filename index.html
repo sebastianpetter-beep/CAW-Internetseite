@@ -170,7 +170,32 @@
   .event-portal-button{border-radius:18px;flex-direction:column;gap:3px;text-align:center}
 }
 </style>
+<style>
+/* Vorstandsportraits – Gesichter näher im Fokus */
 
+.board-person .portrait img {
+  transform: scale(1.20);
+  transform-origin: center 35%;
+}
+
+/* Luc stärker heranzoomen */
+.board-person .portrait.luc img {
+  transform: scale(1.28);
+  transform-origin: center 36%;
+}
+
+/* Mario stärker heranzoomen */
+.board-person .portrait img[src*="Mario_Pilarski"] {
+  transform: scale(1.28);
+  transform-origin: center 36%;
+}
+
+/* Anke nur leicht heranzoomen */
+.board-person .portrait img[src*="Anke_Mueller"] {
+  transform: scale(1.14);
+  transform-origin: center 35%;
+}
+</style>
 </head>
 <body>
   <header class="site-header modern-header">
