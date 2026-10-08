@@ -171,12 +171,13 @@
 }
 </style>
 <style>
-/* Vorstandsportraits – Gesicht und Ornat ausgewogen sichtbar */
-.board-person .portrait img[src*="Lukas_Berge"]{transform:scale(1.16)!important;transform-origin:50% 50%!important}
-.board-person .portrait img[src*="Joerg_Mueller"]{transform:scale(1.16)!important;transform-origin:50% 50%!important}
-.board-person .portrait img[src*="Anke_Mueller"]{transform:scale(1.10)!important;transform-origin:50% 48%!important}
-.board-person .portrait img[src*="Luc_Eben"]{transform:scale(1.15)!important;transform-origin:50% 48%!important}
-.board-person .portrait img[src*="Mario_Pilarski"]{transform:scale(1.15)!important;transform-origin:50% 48%!important}
+/* Vorstandsportraits: individuelle Bildausschnitte statt Zoom */
+.board-person .portrait img{transform:none!important;transform-origin:center!important;object-fit:cover!important}
+.board-person .portrait img[src*="Lukas_Berge"]{object-position:50% 42%!important}
+.board-person .portrait img[src*="Joerg_Mueller"]{object-position:50% 43%!important}
+.board-person .portrait img[src*="Anke_Mueller"]{object-position:50% 32%!important}
+.board-person .portrait img[src*="Luc_Eben"]{object-position:50% 47%!important}
+.board-person .portrait img[src*="Mario_Pilarski"]{object-position:50% 46%!important}
 </style>
 </head>
 <body>
