@@ -180,17 +180,13 @@
 .board-person .portrait img[src*="Mario_Pilarski"]{object-position:50% 46%!important}
 </style>
 <style>
-/* Kinderprinzessin Elia: gesamtes Gruppenfoto ohne abgeschnittene Köpfe */
+/* Elia: wie alle anderen Slides vollflächig, aber am oberen Bildrand ausgerichtet */
 .elia-hero-image{
-  background-color:#7b1825;
-  background-size:auto 100%;
+  background-size:cover;
   background-repeat:no-repeat;
-  background-position: right 7% center;
+  background-position:center top;
 }
-.hero-slide.active .elia-hero-image{transform:none}
-@media(max-width:700px){
-  .elia-hero-image{background-size:auto 100%;background-position:65% center}
-}
+.hero-slide.active .elia-hero-image{transform:scale(1.02);transform-origin:center top}
 </style>
 </head>
 <body>
