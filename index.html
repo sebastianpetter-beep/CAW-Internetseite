@@ -187,9 +187,13 @@
 .elia-hero-image{
   background-size:cover;
   background-repeat:no-repeat;
-  background-position:center 60%;
+  background-position:center 14%;
+  transform-origin:center top;
 }
-.hero-slide.active .elia-hero-image{transform:scale(1.02);transform-origin:center center}
+.hero-slide.active .elia-hero-image{transform:scale(1.08);transform-origin:center top}
+@media(max-width:700px){
+  .elia-hero-image{background-position:50% 12%}
+}
 </style>
 </head>
 <body>
