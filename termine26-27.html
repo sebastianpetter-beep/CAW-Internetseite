@@ -13,7 +13,7 @@ let token=sessionStorage.getItem('cawTermineToken')||'',events=[],editing=null;
 const $=s=>document.querySelector(s);
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function msg(s){$('#msg').textContent=s;}
-async function request(path,options={}){const r=await fetch(API+path,{...options,headers:{'Content-Type':'application/json',Authorization:'Bearer '+token,...options.headers}});let data=await r.json().catch(()=>({}));if(!r.ok){if(r.status===401)logout();throw Error(data.error||'Serverfehler '+r.status);}return data;}
+async function request(path,options={}){const r=await fetch(API+path,{...options,headers:{...(options.body!==undefined?{'Content-Type':'application/json'}:{}),Authorization:'Bearer '+token,...options.headers}});let data=await r.json().catch(()=>({}));if(!r.ok){if(r.status===401)logout();throw Error(data.error||'Serverfehler '+r.status);}return data;}
 function logout(){token='';sessionStorage.removeItem('cawTermineToken');$('#app').classList.add('hidden');$('#loginPanel').classList.remove('hidden');}
 async function load(){const data=await request('/api/admin/termine');events=data.termine||[];$('#loginPanel').classList.add('hidden');$('#app').classList.remove('hidden');render();}
 $('#loginForm').onsubmit=async e=>{e.preventDefault();msg('');try{const r=await fetch(API+'/api/admin/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:$('#password').value})});if(!r.ok)throw Error('Passwort falsch oder Server nicht erreichbar.');token=(await r.json()).token;sessionStorage.setItem('cawTermineToken',token);$('#password').value='';await load();}catch(err){msg(err.message);}};
