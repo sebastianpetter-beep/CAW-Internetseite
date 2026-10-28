@@ -70,6 +70,15 @@
     </section>
   </div>
 </main>
+<div id="freeOverlay" class="scan-overlay admin-hidden" role="dialog" aria-modal="true" aria-labelledby="freeTitle">
+  <div class="scan-box">
+    <div class="scan-head"><div><span class="admin-kicker">Eintrittskarten</span><h2 id="freeTitle">Freikarten auswählen</h2></div><button class="scan-close" type="button" onclick="closeFree()" aria-label="Schließen">×</button></div>
+    <p>Bitte nur die Gäste auswählen, die kostenlos teilnehmen. Alle übrigen bleiben regulär kostenpflichtig.</p>
+    <div id="freeGuests" style="display:grid;gap:10px;max-height:48vh;overflow:auto;margin:16px 0"></div>
+    <p id="freeTotal" style="font-weight:800"></p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="admin-btn green" type="button" onclick="saveFree()">Freikarten speichern</button><button class="admin-btn secondary" type="button" onclick="closeFree()">Abbrechen</button></div>
+  </div>
+</div>
 <div id="scanOverlay" class="scan-overlay admin-hidden" role="dialog" aria-modal="true" aria-labelledby="scanTitle">
   <div class="scan-box">
     <div class="scan-head"><div><span class="admin-kicker">Einlasskontrolle</span><h2 id="scanTitle">QR-Code scannen</h2></div><button id="scanClose" class="scan-close" type="button" aria-label="Scanner schließen">×</button></div>
@@ -164,13 +173,17 @@ function renderRows(){
   const items=activeFilter==='all'?allItems:allItems.filter(x=>(groups[activeFilter]||[]).includes(x.status));
   rows.innerHTML=items.map(x=>{
     let gs=x.guest_names;if(typeof gs==='string'){try{gs=JSON.parse(gs)}catch(e){gs=[]}}if(!Array.isArray(gs))gs=[];
-    const names=gs.map(g=>esc(((g.firstName||g.first_name||'')+' '+(g.lastName||g.last_name||'')).trim())).filter(Boolean).join('<br>');
+    const freeNumbers=new Set(Array.isArray(x.free_ticket_numbers)?x.free_ticket_numbers:[]);
+    const names=gs.map((g,i)=>{const name=esc(((g.firstName||g.first_name||'')+' '+(g.lastName||g.last_name||'')).trim());return name+(freeNumbers.has(i+1)?' <strong style="color:#2f7d45">(Freikarte)</strong>':'');}).filter(Boolean).join('<br>');
     let acts='';
-    if(x.status==='payment_pending')acts=`<button class="admin-btn green" onclick="act('${x.id}','paid')">Zahlung eingegangen</button><button class="admin-btn gray" onclick="act('${x.id}','cancelled')">Stornieren</button>`;
-    if(x.status==='ticket_sent')acts=`<button class="admin-btn blue" onclick="act('${x.id}','checkin')">Einchecken</button><button class="admin-btn" onclick="act('${x.id}','resend')">Ticket erneut senden</button><button class="admin-btn gray" onclick="act('${x.id}','cancelled')">Stornieren</button>`;
-    if(x.status==='checked_in')acts=`<button class="admin-btn" onclick="act('${x.id}','resend')">Ticket erneut senden</button><button class="admin-btn gray" onclick="act('${x.id}','cancelled')">Stornieren</button>`;
+    if(x.status==='payment_pending')acts=`${Number(x.total_cents)>0?`<button class="admin-btn green" onclick="act('${x.id}','paid')">Zahlung eingegangen</button>`:''}<button class="admin-btn gray" onclick="act('${x.id}','cancelled')">Stornieren</button>`;
+    if(x.status==='payment_pending' && Number(x.total_cents)===0 && Array.isArray(x.free_ticket_numbers) && x.free_ticket_numbers.length===Number(x.seats))acts=`<button class="admin-btn green" onclick="act('${x.id}','send_free')">Freikarten versenden</button>`+acts;
+    if(x.status==='paid')acts=`<button class="admin-btn green" onclick="act('${x.id}','paid')">Ticketversand erneut versuchen</button>`;
+    if(x.status==='ticket_sent')acts=`<button class="admin-btn blue" onclick="act('${x.id}','checkin')">Einchecken</button><button class="admin-btn" onclick="act('${x.id}','resend')">Ticket erneut senden</button>`;
+    if(x.status==='checked_in')acts=`<button class="admin-btn" onclick="act('${x.id}','resend')">Ticket erneut senden</button>`;
     if(x.status==='waitlist')acts=`<button class="admin-btn green" onclick="act('${x.id}','approve_waitlist')">Freigeben</button><button class="admin-btn gray" onclick="act('${x.id}','cancelled')">Ablehnen</button>`;
     if(x.status==='cancelled')acts=`<button class="admin-btn gray" onclick="act('${x.id}','delete')">Endgültig löschen</button>`;
+    if(x.status==='payment_pending')acts=`<button class="admin-btn secondary" onclick="editFree('${x.id}')">Freikarten bearbeiten</button>`+acts;
     return `<tr><td><strong>${esc(x.reference||'—')}</strong></td><td>${esc(((x.first_name||'')+' '+(x.last_name||'')).trim())}<br><small>${esc(x.email||'')}</small><div class="names">${names}</div></td><td>${esc(x.club||'—')}</td><td>${Number(x.seats)||0}</td><td>${Number.isFinite(Number(x.total_cents))?(Number(x.total_cents)/100).toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €':'—'}</td><td><span class="pill">${labels[x.status]||esc(x.status||'—')}</span></td><td>${x.payment_deadline?new Date(x.payment_deadline).toLocaleDateString('de-DE'):'—'}</td><td><div class="admin-row-actions">${acts}</div></td></tr>`;
   }).join('');
   if(!items.length) rows.innerHTML='<tr><td colspan="8" style="text-align:center;padding:28px">In diesem Bereich sind derzeit keine Vorgänge vorhanden.</td></tr>';
@@ -178,11 +191,55 @@ function renderRows(){
   adminStatus.className='admin-status show ok';
 }
 
+let freeEditingId=null;
+function closeFree(){document.getElementById('freeOverlay').classList.add('admin-hidden');freeEditingId=null;}
+function freeSelection(){
+  return [...document.querySelectorAll('#freeGuests input[data-ticket]')].filter(e=>e.checked).map(e=>Number(e.dataset.ticket));
+}
+function updateFreeTotal(){
+  const x=allItems.find(item=>String(item.id)===String(freeEditingId));
+  if(!x)return;
+  const gs=typeof x.guest_names==='string'?JSON.parse(x.guest_names):x.guest_names;
+  const chosen=new Set(freeSelection());
+  const cents=gs.reduce((sum,g,i)=>sum+(chosen.has(i+1)?0:g.priceGroup==='child'?1250:2000),0);
+  document.getElementById('freeTotal').textContent=chosen.size+' Freikarten von '+gs.length+' Gästen · Neuer Gesamtbetrag: '+(cents/100).toLocaleString('de-DE',{style:'currency',currency:'EUR'});
+}
+function editFree(id){
+  const x=allItems.find(item=>String(item.id)===String(id));
+  if(!x)return alert('Anmeldung nicht gefunden.');
+  let gs=x.guest_names;
+  if(typeof gs==='string'){try{gs=JSON.parse(gs)}catch(e){gs=[]}}
+  if(!Array.isArray(gs)||gs.length!==Number(x.seats)||gs.some(g=>!['adult','child'].includes(g.priceGroup)))return alert('Teilnehmerdaten oder Einzelpreise müssen zuerst geprüft werden.');
+  freeEditingId=id;
+  const existing=new Set(Array.isArray(x.free_ticket_numbers)?x.free_ticket_numbers:[]);
+  document.getElementById('freeGuests').innerHTML=gs.map((g,i)=>'<label style="display:flex;gap:12px;align-items:center;border:1px solid #ead8cf;padding:12px;border-radius:12px;cursor:pointer"><input type="checkbox" data-ticket="'+(i+1)+'" '+(existing.has(i+1)?'checked':'')+' onchange="updateFreeTotal()" style="width:20px;height:20px"><span><strong>'+esc([g.firstName,g.lastName].filter(Boolean).join(' '))+'</strong> · '+(g.priceGroup==='child'?'Kind (12,50 €)':'Erwachsen (20,00 €)')+'</span></label>').join('');
+  document.getElementById('freeOverlay').classList.remove('admin-hidden');
+  updateFreeTotal();
+}
+async function saveFree(){
+  if(freeEditingId===null)return;
+  const id=freeEditingId,selected=freeSelection();
+  if(!confirm('Diese Freikartenauswahl verbindlich speichern?'))return;
+  try{
+    const response=await fetch(API+'/api/admin/free-tickets',{method:'POST',headers:{authorization:'Bearer '+token,'content-type':'application/json'},body:JSON.stringify({id:Number(id),ticketNumbers:selected})});
+    const data=await response.json();
+    if(!response.ok)throw new Error(data.error||'Speichern fehlgeschlagen');
+    closeFree();
+    await load();
+  }catch(err){alert(err.message||'Verbindung fehlgeschlagen.');}
+}
+
 async function act(id,action){
   const msg=action==='delete'?'Diesen stornierten Vorgang wirklich endgültig löschen? Das kann nicht rückgängig gemacht werden.':'Aktion wirklich ausführen?';
   if(!confirm(msg))return;
-  const r=await fetch(API+'/api/admin/action',{method:'POST',headers:{authorization:'Bearer '+token,'content-type':'application/json'},body:JSON.stringify({id,action})});
-  const j=await r.json();if(!r.ok)alert(j.error||'Fehler');else load();
+  try {
+    const r=await fetch(API+'/api/admin/action',{method:'POST',headers:{authorization:'Bearer '+token,'content-type':'application/json'},body:JSON.stringify({id,action})});
+    const j=await r.json();
+    if(!r.ok)throw new Error(j.error||'Aktion fehlgeschlagen.');
+    await load();
+  } catch(err) {
+    alert(err.message||'Verbindung fehlgeschlagen. Bitte erneut versuchen.');
+  }
 }
 
 const scanOverlay=document.getElementById('scanOverlay'),scanVideo=document.getElementById('scanVideo'),scanCanvas=document.getElementById('scanCanvas'),scanResult=document.getElementById('scanResult');
