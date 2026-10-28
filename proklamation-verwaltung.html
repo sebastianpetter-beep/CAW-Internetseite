@@ -171,11 +171,36 @@ function renderRows(){
     if(x.status==='checked_in')acts=`<button class="admin-btn" onclick="act('${x.id}','resend')">Ticket erneut senden</button><button class="admin-btn gray" onclick="act('${x.id}','cancelled')">Stornieren</button>`;
     if(x.status==='waitlist')acts=`<button class="admin-btn green" onclick="act('${x.id}','approve_waitlist')">Freigeben</button><button class="admin-btn gray" onclick="act('${x.id}','cancelled')">Ablehnen</button>`;
     if(x.status==='cancelled')acts=`<button class="admin-btn gray" onclick="act('${x.id}','delete')">Endgültig löschen</button>`;
+    if(x.status==='payment_pending')acts=`<button class="admin-btn secondary" onclick="editFree('${x.id}')">Freikarten bearbeiten</button>`+acts;
     return `<tr><td><strong>${esc(x.reference||'—')}</strong></td><td>${esc(((x.first_name||'')+' '+(x.last_name||'')).trim())}<br><small>${esc(x.email||'')}</small><div class="names">${names}</div></td><td>${esc(x.club||'—')}</td><td>${Number(x.seats)||0}</td><td>${Number.isFinite(Number(x.total_cents))?(Number(x.total_cents)/100).toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €':'—'}</td><td><span class="pill">${labels[x.status]||esc(x.status||'—')}</span></td><td>${x.payment_deadline?new Date(x.payment_deadline).toLocaleDateString('de-DE'):'—'}</td><td><div class="admin-row-actions">${acts}</div></td></tr>`;
   }).join('');
   if(!items.length) rows.innerHTML='<tr><td colspan="8" style="text-align:center;padding:28px">In diesem Bereich sind derzeit keine Vorgänge vorhanden.</td></tr>';
   adminStatus.textContent=`${items.length} Vorgang${items.length===1?'':'e'} in dieser Ansicht · ${allItems.length} insgesamt.`;
   adminStatus.className='admin-status show ok';
+}
+
+async function editFree(id){
+  const x=allItems.find(item=>String(item.id)===String(id));
+  if(!x)return alert('Anmeldung nicht gefunden.');
+  let gs=x.guest_names;
+  if(typeof gs==='string'){try{gs=JSON.parse(gs)}catch(e){gs=[]}}
+  if(!Array.isArray(gs)||gs.length!==Number(x.seats))return alert('Teilnehmerdaten müssen zuerst geprüft werden.');
+  const existing=Array.isArray(x.free_ticket_numbers)?x.free_ticket_numbers:[];
+  const selected=[];
+  for(let i=0;i<gs.length;i++){
+    const g=gs[i], name=[g.firstName,g.lastName].filter(Boolean).join(' ');
+    if(!['adult','child'].includes(g.priceGroup))return alert('Bestandsbuchung mit unklarem Einzelpreis. Bitte erst prüfen.');
+    if(confirm('Freikarte für '+name+'?\\nOK = Freikarte, Abbrechen = regulärer Eintritt.\\n'+(existing.includes(i+1)?'Bisher: Freikarte':'Bisher: regulär'))){selected.push(i+1);}
+  }
+  const amount=gs.reduce((sum,g,i)=>sum+(selected.includes(i+1)?0:g.priceGroup==='child'?1250:2000),0);
+  if(!confirm('Freikarten: '+selected.length+' von '+gs.length+'\\nNeuer Rechnungsbetrag: '+(amount/100).toLocaleString('de-DE',{style:'currency',currency:'EUR'})+'\\n\\nÄnderung verbindlich speichern?'))return;
+  try{
+    const response=await fetch(API+'/api/admin/free-tickets',{method:'POST',headers:{authorization:'Bearer '+token,'content-type':'application/json'},body:JSON.stringify({id:Number(id),ticketNumbers:selected})});
+    const data=await response.json();
+    if(!response.ok)throw new Error(data.error||'Speichern fehlgeschlagen');
+    alert('Freikarten gespeichert. Gästeliste wird aktualisiert.');
+    await load();
+  }catch(err){alert(err.message||'Verbindung fehlgeschlagen.');}
 }
 
 async function act(id,action){
