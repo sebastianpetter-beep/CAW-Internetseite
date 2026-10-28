@@ -20,7 +20,7 @@ jobs:
           import fs from 'node:fs';
           import vm from 'node:vm';
           const html = fs.readFileSync('proklamation-verwaltung.html', 'utf8');
-          const scripts = [...html.matchAll(/<script(?:\\s[^>]*)?>([\\s\\S]*?)<\\/script>/g)];
+          const scripts = [...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)];
           if (!scripts.length) throw new Error('Kein Inline-Script gefunden');
           for (const [i, match] of scripts.entries()) new vm.Script(match[1], {filename: 'admin-inline-'+i+'.js'});
           console.log(scripts.length + ' Script(s) syntaktisch korrekt');
