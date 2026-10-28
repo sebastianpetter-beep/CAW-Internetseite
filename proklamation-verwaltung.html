@@ -167,6 +167,7 @@ function renderRows(){
     const names=gs.map(g=>esc(((g.firstName||g.first_name||'')+' '+(g.lastName||g.last_name||'')).trim())).filter(Boolean).join('<br>');
     let acts='';
     if(x.status==='payment_pending')acts=`<button class="admin-btn green" onclick="act('${x.id}','paid')">Zahlung eingegangen</button><button class="admin-btn gray" onclick="act('${x.id}','cancelled')">Stornieren</button>`;
+    if(x.status==='payment_pending' && Number(x.total_cents)===0 && Array.isArray(x.free_ticket_numbers) && x.free_ticket_numbers.length===Number(x.seats))acts=`<button class="admin-btn green" onclick="act('${x.id}','send_free')">Freikarten versenden</button>`+acts;
     if(x.status==='ticket_sent')acts=`<button class="admin-btn blue" onclick="act('${x.id}','checkin')">Einchecken</button><button class="admin-btn" onclick="act('${x.id}','resend')">Ticket erneut senden</button><button class="admin-btn gray" onclick="act('${x.id}','cancelled')">Stornieren</button>`;
     if(x.status==='checked_in')acts=`<button class="admin-btn" onclick="act('${x.id}','resend')">Ticket erneut senden</button><button class="admin-btn gray" onclick="act('${x.id}','cancelled')">Stornieren</button>`;
     if(x.status==='waitlist')acts=`<button class="admin-btn green" onclick="act('${x.id}','approve_waitlist')">Freigeben</button><button class="admin-btn gray" onclick="act('${x.id}','cancelled')">Ablehnen</button>`;
