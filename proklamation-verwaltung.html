@@ -173,7 +173,8 @@ function renderRows(){
   const items=activeFilter==='all'?allItems:allItems.filter(x=>(groups[activeFilter]||[]).includes(x.status));
   rows.innerHTML=items.map(x=>{
     let gs=x.guest_names;if(typeof gs==='string'){try{gs=JSON.parse(gs)}catch(e){gs=[]}}if(!Array.isArray(gs))gs=[];
-    const names=gs.map(g=>esc(((g.firstName||g.first_name||'')+' '+(g.lastName||g.last_name||'')).trim())).filter(Boolean).join('<br>');
+    const freeNumbers=new Set(Array.isArray(x.free_ticket_numbers)?x.free_ticket_numbers:[]);
+    const names=gs.map((g,i)=>{const name=esc(((g.firstName||g.first_name||'')+' '+(g.lastName||g.last_name||'')).trim());return name+(freeNumbers.has(i+1)?' <strong style="color:#2f7d45">(Freikarte)</strong>':'');}).filter(Boolean).join('<br>');
     let acts='';
     if(x.status==='payment_pending')acts=`${Number(x.total_cents)>0?`<button class="admin-btn green" onclick="act('${x.id}','paid')">Zahlung eingegangen</button>`:''}<button class="admin-btn gray" onclick="act('${x.id}','cancelled')">Stornieren</button>`;
     if(x.status==='payment_pending' && Number(x.total_cents)===0 && Array.isArray(x.free_ticket_numbers) && x.free_ticket_numbers.length===Number(x.seats))acts=`<button class="admin-btn green" onclick="act('${x.id}','send_free')">Freikarten versenden</button>`+acts;
