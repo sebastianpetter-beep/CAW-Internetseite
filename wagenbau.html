@@ -536,8 +536,8 @@ async function createPdf(payload, applicationId){
   doc.setFont("helvetica","bold"); doc.setFontSize(10); doc.text("Herausgeber",16,y);
   doc.setFont("helvetica","normal"); doc.setFontSize(9.5);
   doc.text("Carnevals-Ausschuss Wesel e.V.",16,y+6);
-  doc.text("Jens Tenbergen · Wallstraße 10 · 46483 Wesel",16,y+11);
-  doc.text("Telefon 0178 3027608 · praesident@caw-wesel.de",16,y+16);
+  doc.text("Lukas Berge · Weimarer Straße 15 · 46483 Wesel",16,y+11);
+  doc.text("geschaeftsfuehrer@caw-wesel.de",16,y+16);
   doc.setTextColor(110,92,84); doc.setFontSize(8);
   doc.text(`Erstellt am ${formatDate(payload.applicationDate)} · ${applicationId}`,16,289);
 
