@@ -195,6 +195,19 @@
   .elia-hero-image{background-position:50% 12%}
 }
 </style>
+<script>
+/* Automatischer Amtswechsel am 21.11.2026, 00:00 Uhr Europe/Berlin */
+(function(){
+  const berlinDate = new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Berlin',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+  if(berlinDate >= '2026-11-21') document.documentElement.classList.add('caw-new-princes');
+})();
+</script>
+<style>
+.caw-new-princes .outgoing-princes{display:none!important}
+.caw-new-princes .new-princes .status-designated{background:#be2c24;color:#fff;box-shadow:0 7px 18px rgba(127,16,32,.16)}
+.caw-new-princes .new-princes .card-top.gold{background:#f3e3e2;color:#a52925}
+.caw-new-princes .new-princes .prok-cta{display:none!important}
+</style>
 </head>
 <body>
   <header class="site-header modern-header">
@@ -237,7 +250,7 @@
 
   <main id="start">
     <section class="hero" aria-label="Prinzenpaar Banner">
-      <div class="hero-slide active" data-slide="0">
+      <div class="hero-slide active outgoing-princes" data-slide="0">
         <div class="hero-image current"></div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
@@ -248,11 +261,11 @@
         </div>
       </div>
 
-      <div class="hero-slide" data-slide="1">
+      <div class="hero-slide new-princes" data-slide="1">
         <div class="hero-image designated"></div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
-          <span class="eyebrow">Designiertes Prinzenpaar · Session 2026/2027</span>
+          <span class="eyebrow" id="new-princes-hero-status">Designiertes Prinzenpaar · Session 2026/2027</span>
           <h1>Prinzessin Anke I. &amp; Prinz Jörg II.</h1>
           <p>Karneval verbindet.</p>
           <div class="hero-actions"><a class="hero-button" href="#prinzenpaare">Mehr erfahren</a><a class="prok-cta" href="proklamation.html">Jetzt Anfrage zur Prinzenproklamation</a><a class="social-button instagram" href="https://www.instagram.com/prinzenpaarwesel26_27?igsi=MnI5M2MzYng1MXFl&utm_source=qr" target="_blank" rel="noopener">Instagram</a><a class="social-button facebook" href="https://www.facebook.com/profile.php?id=61593910648545" target="_blank" rel="noopener">Facebook</a></div>
@@ -334,13 +347,13 @@
         <span class="section-kicker">Wesels Tollitäten</span>
         <h2>Unsere Prinzenpaare</h2>
         <div class="cards">
-          <article class="card">
+          <article class="card outgoing-princes">
             <div class="card-meta"><div class="card-top red">2025 / 2026</div><span class="status-badge status-current">Amtierend</span></div>
             <h3>Prinz Sebastian I. &amp; Prinz Tim I.</h3>
             <p>Mit Pagin Silvana Fuschetto, Pagin Nicole Wienköp und Prinzenführer Luc Eben.</p><div class="card-socials"><a class="social-link instagram" href="https://www.instagram.com/prinzenpaarderstadtwesel?igsi=MjZyb2VjMXBwMjdp" target="_blank" rel="noopener">Instagram</a><a class="social-link facebook" href="https://www.facebook.com/share/1Emb2n8ZUS/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a><a class="session-card-button" href="session-2025-2026.html">Rückblick Session 2025/26 →</a></div>
           </article>
-          <article class="card">
-            <div class="card-meta"><div class="card-top gold">2026 / 2027</div><span class="status-badge status-designated">Designiert</span></div>
+          <article class="card new-princes">
+            <div class="card-meta"><div class="card-top gold">2026 / 2027</div><span class="status-badge status-designated" id="new-princes-card-status">Designiert</span></div>
             <h3>Prinzessin Anke I. &amp; Prinz Jörg II.</h3>
             <p>Mit Pagin Eva Tenbergen, Page Oliver Heselmann und Prinzenführer Luc Eben.</p><div class="card-socials"><a class="prok-cta" href="proklamation.html">Teilnahmeanfrage zur Proklamation</a><a class="social-link instagram" href="https://www.instagram.com/prinzenpaarwesel26_27?igsi=MnI5M2MzYng1MXFl&utm_source=qr" target="_blank" rel="noopener">Instagram</a><a class="social-link facebook" href="https://www.facebook.com/profile.php?id=61593910648545" target="_blank" rel="noopener">Facebook</a><a class="session-card-button" href="anke-joerg-2026-2027.html">Mehr über Anke &amp; Jörg →</a></div>
           </article>
@@ -356,8 +369,8 @@
     <section class="session-notice">
       <div class="section-inner session-notice-inner">
         <div class="notice-icon">✉</div>
-        <div><span class="section-kicker light">Session 2026/27</span><h2>Einladungen für das designierte Prinzenpaar</h2>
-        <p>Sie möchten unser designiertes Prinzenpaar in der Session 2026/27 zu Ihrer Veranstaltung einladen? Bitte richten Sie Termin- und Einladungsanfragen zentral an die Geschäftsführung des CAW.</p>
+        <div><span class="section-kicker light">Session 2026/27</span><h2>Einladungen für das <span id="invitation-status">designierte</span> Prinzenpaar</h2>
+        <p>Sie möchten unser <span id="invitation-body-status">designiertes</span> Prinzenpaar in der Session 2026/27 zu Ihrer Veranstaltung einladen? Bitte richten Sie Termin- und Einladungsanfragen zentral an die Geschäftsführung des CAW.</p>
         <a class="notice-mail" href="mailto:geschaeftsfuehrer@caw-wesel.de">geschaeftsfuehrer@caw-wesel.de</a></div>
       </div>
     </section>
@@ -758,6 +771,23 @@
     </div>
 </footer>
 
-  <script src="assets/script.js"></script>
+  <script>
+/* Wechselt Inhalte und Slider bei jedem Seitenaufruf ab dem Stichtag. */
+(function(){
+  if(!document.documentElement.classList.contains('caw-new-princes')) return;
+  document.querySelectorAll('.outgoing-princes').forEach(el=>el.remove());
+  const hero=document.getElementById('new-princes-hero-status');
+  if(hero)hero.textContent='Amtierendes Prinzenpaar · Session 2026/2027';
+  const badge=document.getElementById('new-princes-card-status');
+  if(badge){badge.textContent='Amtierend';badge.classList.remove('status-designated');badge.classList.add('status-current')}
+  const a=document.getElementById('invitation-status'),b=document.getElementById('invitation-body-status');
+  if(a)a.textContent='amtierende';
+  if(b)b.textContent='amtierendes';
+  document.querySelectorAll('.hero-slide').forEach((slide,i)=>{slide.dataset.slide=i;slide.classList.toggle('active',i===0)});
+  document.querySelectorAll('.slider-dots .dot').forEach((dot,i)=>{if(i===0){dot.remove();return;}dot.dataset.go=i-1;dot.classList.toggle('active',i===1)});
+  const first=document.querySelector('.slider-dots .dot');if(first)first.setAttribute('aria-label','Amtierendes Prinzenpaar Jörg II. und Anke I.');
+})();
+</script>
+<script src="assets/script.js"></script>
 </body>
 </html>
